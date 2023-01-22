@@ -126,39 +126,9 @@ d3<-cleandb(d2)
 #print(d3[19,])
 colnames(d3)
 d4<-data.frame(d3$speaker,d3$token,d3$lemma,d3$sentence,d3$cat,d3$x1,d3$x2,d3$x3,d3$x4,d3$x5,d3$x6,d3$x7,d3$x8,d3$x9,d3$gilt)
-dns<-c("speaker","token","lemma","sentence","cat","x1","x2","x3","x4","x5","x6","x7","x8","x9","gilt")
+dns<-c("speaker","token","lemma","turn","cat","x1","x2","x3","x4","x5","x6","x7","x8","x9","gilt")
 colnames(d4)<-dns
 colnames(d4)
-# getdata<-function(){
-#src<-paste(datadir,"sesDB002.csv",sep = "/")
-#d<-read.csv(src,sep = ";")
-#d$pos.check.OK<-0
-#d4<-d
-# d$pos_cpt<-paste(d4$function.,d4$case,d4$num,d4$gender,d4$mode,d4$X,sep = "-")
-# dns<-c("id","speaker","token","lemma","pos","pos.check.OK","funct","cat","case","pers","num","gender","tense","mode","snr","sentence","pos_cpt")
-# d4<-d
-# #data.frame(dns[7:14])
-# ma<-matrix(dns[7:14],ncol = 8)
-# d5<-cbind(d4[,1:6],ma,d4[,13:15])
-# colnames(d5)<-dns
-# d5[,7:14]<-""
-# d3<-d5
-# #dns<-c("id","speaker","token","lemma","pos","pos.check.OK","funct","cat","case","pers","num","gender","mode","snr","sentence","pos_cpt")
-# }
-# 
-# #d3<-getdata()
-# #d4<-d3
-# #d5<-cbind(d4[,1:12],"fun",d4[,13:15])
-# #colnames(d5)<-dns
-# #ds<-d5
-# #d5<-d3
-# 
-#7:12
-#s1<-d5$pos_cpt[18]
-#correct POS tag
-#k<-5
-#d4<-d3
-#d5<-insert(d5[1,],13,"fun")
 #### new
 #set0<-d4
 get_pos<-function(set,set0){
@@ -197,17 +167,6 @@ return(ns_g2)
 ns_g2<-get_pos(d4,d1)
 ##################
 
-#k<-5
-# d5<-d3
-# r<-21
-#PoS CORRECTION LOOP
-#for (k in 1:length(d4$id)){
-# ma<-array()
-# s3<-"-"
-# s4<-s2
-# s4<-array()
-# la<-length(ns_g2$cor)
-# sx<-getarray(12)
 ######################
 getarray<-function(set,r){
 d5<-set
@@ -216,7 +175,7 @@ s1<-d4$cat[r]
 #s1<-d4$cat[119]
 
 s1
-mxcolumns<-grep("x",colnames(d4))
+#mxcolumns<-grep("x",colnames(d4))
 s2<-stri_split_regex(s1,"\\.",simplify = T)
 a<-c(s2)
 s2<-a
@@ -225,14 +184,10 @@ s2[rstar==T]<-"-"
 print(s2)
 return(s2)
 }
-#getarray(d4,21)
-# for (top in 1:length(s2)){
-# top_sub<-top_array(s2,top)
-# }
-# top<-2
 #############################
-# NEW:
+# NEW: ######################
 # get codes cpt, grep value of useable values in code, output to useable value standard position
+#############################
 #d5<-getdata()
 d5<-d4
 #r<-11
@@ -243,6 +198,8 @@ d6<-d5
 #d6<-matrix(nrow = length(d5$id),ncol = 8)
 #top<-1
 #l<-2
+##########################
+# this is a 5 minute loop!
 for (r in 1:length(d5$cat)){
 #s2<- d5$pos_cpt[r]
 s2<-getarray(d4,r)
@@ -261,19 +218,25 @@ print(r)
 }
 #d6[pos,1:8]<-ma
 } # end POS position correction
+###############################
 head(d6)
 d6safe<-d6
+getwd()
+write.csv(d6,"sesDB009_d6safe.csv")
 ###### finalise
 colnames(d6)
 
 dns_x<-c("pos","category","funct","case","pers","num","gender","tense","mode")
 mxcolumns<-grep("x",colnames(d6))
 dns_o<-colnames(d6)
-pos_ok<-"PoS_ok_check"
+pos_ok<-"PoS_ok"
 dns_n<-c(dns_o[1:5],pos_ok,dns_x,dns_o[length(dns_o)])
 dns_o
 dns_n
-d7<-data.frame(d6$speaker,d6$token,d6$lemma,d6$sentence,d6$cat,PoS_ok_check=1,d6$x1,d6$x2,d6$x3,d6$x4,d6$x5,d6$x6,d6$x7,d6$x8,d6$x9,d6$gilt)
+############################################################### !!!!!!!#######
+d6[,pos_ok]<-1
+dim(d6)
+d7<-data.frame(d6$speaker,d6$token,d6$lemma,d6$turn,d6$cat,d6$PoS_ok,d6$x1,d6$x2,d6$x3,d6$x4,d6$x5,d6$x6,d6$x7,d6$x8,d6$x9,d6$gilt)
 head(d7)
 # dns_n<-c(1:length(dns_o))
 # dns_n[1:mxcolumns[1]-1]<-dns_o[1:mxcolumns[1]-1]
@@ -304,7 +267,7 @@ d8<-d7
  # first define 0 values to columns!
  d8$interview<-0
  d8$part_L1<-0
- d8$part_gender<-0
+ d8$part_sex<-0
  d8$part_age<-0
  
 for (l in 1:length(m6)){
@@ -321,7 +284,7 @@ for (l in 1:length(m6)){
     d8$interview[li]<-m1[2]
     m2<-stri_split_boundaries(m1[,2],type="character",simplify = T)
     d8$part_L1[li]<-m2[1]
-    d8$part_gender[li]<-m1[3]
+    d8$part_sex[li]<-m1[3]
     d8$part_age[li]<-m1[4]
     #}
   }
@@ -336,7 +299,7 @@ for (l in 1:length(m6)){
    d8$lemma[m]<-"---"
    d8$sentence[m]<-"---"
    d8$cat[m]<-"---"
-   d8$PoS_ok_check[m]<-"---"
+   d8$PoS_ok[m]<-"---"
    d8$pos[m]<-"---"
    d8$category[m]<-"---"
    d8$funct[m]<-"---"
@@ -349,6 +312,7 @@ for (l in 1:length(m6)){
    d8$gilt[m]<-"---"
    #m_end_c[r]<-m  
    tail(d8)
+### clean lemma entry
    lemma_a<-stri_split_boundaries(d8$lemma,type="word")
    ll<-list()
    x<-lapply(lemma_a,unlist)
@@ -356,19 +320,14 @@ for (l in 1:length(m6)){
      ll[k]<-x[[k]][1]
    }
    lemmalist<-unlist(ll)
-   m<-grep("[^A-Za-z]",lemmalist)
+   m<-grep("[^A-Za-züöä]",lemmalist)
    lemmalist[m]<-""
    #lemma_c<-gsub("[^A-Za-z]","",d8$lemma)
    #length(lemmalist)
    #lemmalist[7]
    d8$lemma_c<-lemmalist
-   #   x<-lemma_a[[1:length(d8$lemma)]][1]
-   # c<-c(1:10)
-   #    d8$lemma_c[1:length(d8$lemma),]<-lemma_a[[1:length(d8$lemma),]][1]
-
-      
-   #    
-   #       write.csv(d8,"20230111(14.15)_SES_database_by_tokens+PoS_check_column.csv")
+   
+   # write.csv(d8,"20230111(14.15)_SES_database_by_tokens+PoS_check_column.csv")
    # write.csv(d8,"sesDB008.csv")
    #wks.
    
@@ -376,7 +335,7 @@ for (l in 1:length(m6)){
 ##############################
    ############## TODO:
    # add coded feature columns
-   ms2<-grep("(#[A-Z]{3})",d8$sentence,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
+   ms2<-grep("(#[A-Z]{3})",d8$turn,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
    spk<-unique(ms2)
    spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
    spk_array2<-paste0("#",spk_array)
@@ -388,9 +347,9 @@ for (l in 1:length(m6)){
    #spk
    # grep codes
    grepc<-paste0("(")
-   ms4<-grep("(#[A-Z]{3})",d8$sentence,value = T)
+   ms4<-grep("(#[A-Z]{3})",d8$turn,value = T)
    # simple: delete speaker codes in sentence to grep only coded features
-   sent1<-gsub(spk_grep3,"%000%",d8$sentence)
+   sent1<-gsub(spk_grep3,"%000%",d8$turn)
    sent1[3000]
    ms5<-grep("(#[A-Z]{3,3}|0[A-Z]{1,2})",sent1)
 ms6<-head(unique(ms5))
@@ -403,15 +362,22 @@ codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
    #ms7<-lapply(ms6, codef)
    ms7<-lapply(sent1, codef)
   # unlist(head(ms7[ms5][]))
-   d8[,22:34]<-"---"
-   #codem<-matrix(ms7[ms5])
+   ##########################
+  # d8[,22:34]<-"---"
+   codecolumns<-grep("V",colnames(d8))
+   d8[,codecolumns]<-"---"
+   ########################## NOT CHECKED!
+    #codem<-matrix(ms7[ms5])
    r<-115
    repl<-unlist(ms7[[r]])
    for (r in 1:length(sent1)){
      repl<-unlist(ms7[[r]])
      l<-length(repl)
-     le<-22+l-1
-     d8[r,22:le]<-repl
+     #codecolumns<-mxcolumns
+     codestart<-codecolumns[1]
+     le<-codestart+l-1
+     print(r)
+     d8[r,codestart:le]<-repl
    }
    ms8<-grep("([A-Z]{3,3})",sent1,value=T)
    ms8<-grepl("([A-Z]{3,3})",sent1)
@@ -419,15 +385,17 @@ codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
 #   unique(sent1[ms8])
 #   sent1[95]
    # 13024.
-mna<-is.na(d8[])
+mna<-is.na(d8[]) #global NA remove
 d8[mna]<-"---"
-lns<-length(d8[1,])-22
-dns_code<-paste0("C",1:lns)
-colnames(d8)[22:37]<-dns_code
+#codecolumns<-grep("V",colnames(d8))
+#lns<-length(d8[1,])-22
+dns_code<-paste0("C",codecolumns)
+colnames(d8)[codecolumns]<-dns_code
 # TODO: sort columns priority
 # sentence preceding interviewer line
 # transcript lines references column, thus numbering lines in transkript
 ###
+write.csv(d8,"sesDB009_d8safe.csv")
 #################
 # preceding line:
 ###
@@ -453,11 +421,12 @@ postprocess_precede<-function(set){
   sp_sentence<-array()
   sp_sentence_cn<-array()
   sp_s_cn<-array()
-  #k<-25
+  line_precede<-""
+    #k<-25
   ms<-ms3
   #d$sentence_temp<-"---"
   #d$speaker<-"---"
-  d$line_precede<-""
+  d$turn_precede<-line_precede
   k<-2
   ### output sentence
   for (k in 1:length(ms)){
@@ -473,16 +442,17 @@ postprocess_precede<-function(set){
     sp_p2<-ms[k+1]-1
     spk_c<-d$speaker[sp_s]
     if (spk_c!="#INT"){
-    line_precede<-d$sentence[sp_s-1]
+    line_precede<-d$turn[sp_s-1]
     }
-    d$line_precede[sp_s:sp_e]<-line_precede
+    d$turn_precede[sp_s:sp_e]<-line_precede
     #sp_s_cn<-paste(d$token[sp_s:sp_e],collapse = " ")
     #d$sentence_temp[sp_s:sp_e]<-sp_s_cn
     #d$speaker[sp_s:sp_e]<-sp_ns  
-  } #end sentence loop
+  print(k)
+    } #end sentence loop
   ################ wks.
   #library(stringi)
-  d$line_precede[d$speaker=="#INT"]<-""
+  d$turn_precede[d$speaker=="#INT"]<-""
   
   return(d)
 } # end preprocess_precede
@@ -490,9 +460,13 @@ postprocess_precede<-function(set){
 #d$checkline<-d$sentence
 #apply:
 d9<-postprocess_precede(d8)
-d8$lemma_c<-""
-write.csv(d9,"20230111(19.46)_SES_database_by_tokens+PoS_check_column.csv")
-write.csv(d9,"sesDB009.csv")
+#d8$lemma_c<-""
+#sort DB
+coldb<-colnames(d9)
+colcodes<-grep("C",colnames(d9))
+d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt,V38=d9$V38)
+write.csv(d9b,"20230118(14.16)_SES_database_by_tokens+PoS_check_column.csv")
+write.csv(d9b,"sesDB010.csv")
 #typeof(lemmalist)
 ##############################################################################
 # DB created above, read DB from .csv to make queries and concordances
@@ -503,63 +477,119 @@ write.csv(d9,"sesDB009.csv")
 #sampleq$id[k]
 #query[1,1]
 #k<-1
+query<-q3
+query$token
+k<-2
+set<-d9
+d9$lemma[k]
+m2
 q_sub<-function(set,k,query){
   #m1<-set
   #set<-d7
   m1<-set
+
  # colnames(m1)
  # m1<-subset(set,grepl(query$id[k],set[,1]))
   m2<-subset(m1,grepl(query$speaker[k],m1$speaker)) ### NOT with logical but grep, match etc.
-  ifelse(query$token!="",
-  m3<-subset(m2,query$token[k]==m2$token),
-  m3<-subset(m2,grepl(query$token[k],m2$token)))
+  ifelse(query$token[k]==""|is.na(query$token[k]),
+         m3<-m2,#subset(m2,grepl(query$token[k],m2$token)),
+         m3<-subset(m2,query$token[k]==m2$token))
   m4<-subset(m3,grepl(query$lemma[k],m3$lemma))
+  m4<-subset(m4,grepl(query$lemma_c[k],m4$lemma_c))
   m5<-subset(m4,grepl(query$pos[k],m4$pos))
- # m6<-subset(m5,grepl(query$pos.check.OK[k],m5[,6]))
+  #m6<-subset(m5,grepl(query$pos.check.OK[k],m5[,6]))
   m7<-subset(m5,grepl(query$funct[k],m5$funct))
   m8<-subset(m7,grepl(query$case[k],m7$case))
   m9<-subset(m8,grepl(query$num[k],m8$num))
   m10<-subset(m9,grepl(query$gender[k],m9$gender))
   m11<-subset(m10,grepl(query$mode[k],m10$mode))
-  m12<-subset(m11,grepl(query$regex[k],m11$sentence))
+  m12<-subset(m11,grepl(query$regex[k],m11$turn))
   m13<-subset(m12,grepl(query$tense[k],m12$tense))
   m14<-subset(m13,grepl(query$pers[k],m13$pers))
   m15<-subset(m14,grepl(query$category[k],m14$category))
-#  m16<-subset(m15,grepl(query$tense[k],m12$tense))
-  }
+  m16<-subset(m15,grepl(query$part_L1[k],m15$part_L1))
+  m17<-subset(m16,grepl(query$part_sex[k],m16$part_sex))
+  m18<-subset(m17,grepl(query$part_age[k],m17$part_age))
+  m19<-subset(m18,grepl(query$regex_turn_precede[k],m18$turn_precede))
+  # sampleframe<-m19%in%m1
+}
 # RUN: #############
 #query declaration:
 tempfun_query<-function(){
-sampleq<-data.frame(speaker=0,token=0,lemma=0,category=0,pos=0,funct=0,case=0,pers=0,num=0,gender=0,tense=0,mode=0,regex=0)
+sampleq<-data.frame(speaker=0,token=0,lemma=0,category=0,pos=0,funct=0,case=0,pers=0,num=0,gender=0,tense=0,mode=0,regex=0,lemma_c=0,part_age=0,part_sex=0,part_L1=0,regex_turn_precede=0)
 #sampleq$id<-          ".*"
-sampleq$speaker<-     "#TBU"
+sampleq$speaker<-     ".*"
 sampleq$token<-       ""    # has to be empty or exact match, not ".*" for empty
 sampleq$lemma<-       ".*"
-sampleq$category<-          ".*"
+sampleq$lemma_c<-     ".*"
+sampleq$category<-    ".*"
 sampleq$pos<-         ".*"
 #sampleq$pos.check.OK<-".*"
 sampleq$funct<-       ".*"
-sampleq$case<-        "Gen"
+sampleq$case<-        ".*"
 sampleq$num<-         ".*"
 sampleq$pers<-        ".*"
 sampleq$gender<-      ".*"
 sampleq$tense<-        ".*"
 sampleq$mode<-        ".*"
-#sampleq$X<-           ".*"
-#sampleq$snr<-         ".*"
-sampleq$regex<-       ".*" # is searched for in $sentence
+sampleq$part_L1<-     ".*"
+sampleq$part_age<-    ".*"
+sampleq$part_sex<-    ".*"
+sampleq$regex<-       ".*" # is searched for in $turn
+sampleq$regex_turn_precede<- "since"
+return(sampleq)
+}
 ####################
-query<-sampleq
-#query$
-m2<-q_sub(d7,1,query)
+querydf<-tempfun_query()
+write.csv(querydf,"sesDB_queryDF.csv")
+# for queries import DF and change values, use k=dataframe[k,] in subset function
+#query<-sampleq
+querydf[2:20,]<-querydf[1,]
+q3<-read.csv("sesDB_queryDF.csv",sep = ";")
+m2<-q_sub(d9,1,querydf)
+m3<-q_sub(d9,4,q3)
+unique(m3$turn)
 #set$sentence[m2]
 ####################
 # OUTPUT:
-unique(m2$sentence)
+#write.csv(unique(m2$turn),"sesDB009_exract_howLongInGermany.csv")
+write.csv(unique(m3$turn),"sesDB009_exract_familyLanguage.csv")
+
 m2$token
 m2
+##### 1st query for how-long-in-germany-since
+#add metadata columns to DB #################
+d9$part_reside[d9$interview=="GCB"]<-8 #age 11 safe
+d9$part_reside[d9$interview=="GDA"]<-2 #age 11 safe
+d9$part_reside[d9$interview=="GDB"]<-3 #8 safe
+d9$part_reside[d9$interview=="GDD"]<-4 #9 safe
+d9$part_reside[d9$interview=="GDE"]<-10 #10 safe
+d9$part_reside[d9$interview=="GDF"]<-10 #11 u.V.
+d9$part_reside[d9$interview=="TAD"]<-5 #14
+d9$part_reside[d9$interview=="TBE"]<-6 #13 
+d9$part_reside[d9$interview=="TBS"]<-9 #12
+d9$part_reside[d9$interview=="TBT"]<-1970 #13
+d9$part_reside[d9$interview=="TBU"]<-11 #13
+d9$part_reside[d9$interview=="TBV"]<-12 #14
+
+d9$part_family_language[d9$interview=="GCB"]<-"G" #age 11 safe
+d9$part_family_language[d9$interview=="GDA"]<-"D/G" #age 11 safe
+d9$part_family_language[d9$interview=="GCC"]<-"G" #age 11 safe
+d9$part_family_language[d9$interview=="GDB"]<-"G" #8 safe
+d9$part_family_language[d9$interview=="GDD"]<-"G" #9 safe
+d9$part_family_language[d9$interview=="GDE"]<-"G" #10 safe
+d9$part_family_language[d9$interview=="GDF"]<-"D/G" #11 u.V.
+d9$part_family_language[d9$interview=="TAD"]<-"T" #14
+d9$part_family_language[d9$interview=="TBE"]<-"T" #13 
+d9$part_family_language[d9$interview=="TBS"]<-"T" #12
+d9$part_family_language[d9$interview=="TBT"]<-"T" #13
+d9$part_family_language[d9$interview=="TBU"]<-"D/T" #13
+d9$part_family_language[d9$interview=="TBV"]<-"D/T" #14
+
+#############################################################
+write_csv(d9,"sesDB010")
 ##### other method subscript
-}
+#}
 ##############################################################################
 # now concordances for kids:
 # 
@@ -611,3 +641,34 @@ kw<-list()
   
 }
 GCB_c<-kidc1(GCB,t1)
+####################
+#significance testing
+lm1<-grepl(q3$regex[5],d9$turn) #0AR
+lm1LG<-grepl("G",d9$part_L1)
+lm1LFG<-grepl("G",d9$part_family_language)
+lm1LT<-grepl("T",d9$part_L1)
+lm1LFT<-grepl("T",d9$part_family_language)
+
+library(lme4)
+lm1[lm1==T]<-1
+lm1[lm1!=T]<-0
+lm1LG[lm1LG==T]<-2
+lm1LFG[lm1LFG!=T]<-0
+lm1LFG[lm1LFG==T]<-2
+lm1LG[lm1LG!=T]<-0
+
+lme1<-lmer(lm1~part_reside+(1|part_L1)+(1|part_family_language),d9)
+x<-summary(lm1)
+x
+sum(lm1)
+library(lmerTest)
+library(stats)
+le1<-lm(lm1~part_family_language-1,d9)
+le1<-lm(lm1~part_L1-1,d9)
+le1<-lm(lm1~part_reside-1,d9)
+
+summary(le1)
+#anova(le1)
+plot(le1)
+# x<-gl(3,3,201,labels = c("eins","zwei","drei"))
+# x
