@@ -24,8 +24,8 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
-datestamp<-"13052"
+scheme<-outputschemes[4]
+datestamp<-"13065"
 version<-"v2_9"
 numbered<-T
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
@@ -36,7 +36,8 @@ numbered<-T
 #setwd("~/boxHKW/UNI/21S/DH/")
 dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text")
 #codesource<-"/r-temp/codes_cpt3mod.csv"
-codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
+#codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
+codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 
 list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")

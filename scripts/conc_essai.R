@@ -587,14 +587,16 @@ d9$part_family_language[d9$interview=="TBU"]<-"D/T" #13
 d9$part_family_language[d9$interview=="TBV"]<-"D/T" #14
 
 #############################################################
-write_csv(d9,"sesDB010")
+#write_csv(d9,"sesDB010")
 ##### other method subscript
 #}
 ##############################################################################
 # now concordances for kids:
 # 
-#d8<-read.csv()
+d8<-read.csv("local/HU-LX/SES/sesDB010.csv")
 d9<-d8
+
+temp_analyse<-function(){
 # unique tokens subsets after kids
 subc_int<-function(set,kid){
   d9<-set
@@ -672,3 +674,17 @@ summary(le1)
 plot(le1)
 # x<-gl(3,3,201,labels = c("eins","zwei","drei"))
 # x
+}
+
+### postprocess finalize DB
+d8<-read.csv("local/HU-LX/SES/sesDB010b.csv")
+dns<-colnames(d8)
+dns
+dns[5]<-"lemma_SkE"
+dns[6]<-"lemma"
+dns[8]<-"turn_preceding"
+dns[9]<-"tag_SkE"
+dns[11]<-"PoS"
+colnames(d8)<-dns
+d9<-d8[3:length(d8)]
+write.csv(d9,"local/HU-LX/SES/sesDB010b.csv")
