@@ -24,16 +24,22 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[4]
+scheme<-outputschemes[2]
 datestamp<-"13083"
 version<-"v2_9"
-numbered<-T
+numbered<-F
+boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi, ewa
 #setwd("~/boxHKW/UNI/21S/DH/")
+ske<-F
+if (scheme==outputschemes[2]){
+  ske<-T
+  scheme<-outputschemes[4]
+}
 dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text")
 #codesource<-"/r-temp/codes_cpt3mod.csv"
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
@@ -44,12 +50,12 @@ list.files(dirtext)
 dirmod<-dirtext #after manual regex modifying in VSCode
 #version<-"v2_8_sketchE_INLINE_C"
 sketchversion<-"v2.9"
-if (scheme=="original")
+if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
-if (scheme=="sansCodes"){
+if (scheme==outputschemes[3]){
   dirchat<-paste("SES_transcripts",version,datestamp,"clean-without-codes",sep="_")
   codesubstitute<-"<#coding removed#>"}
-if (scheme=="inlineCodes")
+if (scheme==outputschemes[4])
   dirchat<-paste("SES_transcripts",version,datestamp,"InlineCodes",sep="_")
 if (numbered==T)
   dirchat<-paste(dirchat,"linenumbers",sep="_")
@@ -61,14 +67,14 @@ if (numbered==T)
 dir_2ndmod<-"sketchmod"
 chatvmodified<-paste(version,"mod",sep="_")
 #list.files(paste(dirtext,"SES_CHAT_transcripts_v2_7",sep = "/"))
-if (scheme=="original")
+if (scheme==outputschemes[1])
   transextension<-"_CHAT"
 
-if (scheme=="sansCodes")
+if (scheme==outputschemes[3])
 transextension<-"_sanscodes"
 if (scheme=="sketchE")
 transextension<-"_sketchE"
-if (scheme=="inlineCodes")
+if (scheme==outputschemes[4])
   transextension<-"_InlineCodes"
 
 chatfileextension<-".txt"
@@ -1024,15 +1030,16 @@ sketchcoding<-function(){
     ### this section main replacement ###
     ##### wks.
     #find transcript start
-    mstart<-grep("^\\*",tbu)[1]
+    mstart<-grep("\\*[A-Z]{3}",tbu)[1]
+    #mstart<-grep("^\\*",tbu)[1]
     tbub<-tbu[mstart:length(tbu)] #transcript section
     tbusafe<-tbu
     tbuheader<-tbu[1:mstart-1] #header section
-    tbu<-tbub
-  regx1<-"(^\\*INT:)"
+    #tbu<-tbub
+  regx1<-"(\\*INT:)"
   mint<-grep(regx1,tbub) # *INT: lines
   mkid<-grep(regx1,tbub,invert = T) # *CHILD: lines    
-  regx2<-"^(.*)" # sentences
+  regx2<-"(.*)" # sentences
   sent<-grep(regx2,tbub)
   regx3<-"\\*([A-Z]{3}:)"
   repl3<-"#\\1"
@@ -1070,19 +1077,28 @@ sketchcoding<-function(){
   # ################
   ns<-sans_ext(filelist3[f])
   ext<-file_ext(filelist3[f])
-  chatfilename<-paste0(ns,"_iCodes.",ext)
+  chatfilename<-paste0(ns,"_SkE.",ext)
   #version<-"2.8a"
   dir_2ndmod<-paste0("sketchmode")
   chat2ndoutdir<-paste(dirtext,dir_2ndmod,sketchversion,sep = "/")
   chat2ndoutdir
   dir.create(chat2ndoutdir)
+#  chat2ndoutdir<-boxfolderns
+  dir.create(paste(chat2ndoutdir,boxfolderns,sep = "/"))
+  
   #dir.create(paste(chat2ndoutdir,sketchversion,sep = "/"))
   #tbu_cpt<-c(tbuheader,tbu)
   #tbu<-tbu_cpt
   tbu_out<-tbuwrap
-  writeLines(tbu_out,paste(chat2ndoutdir,chatfilename,sep = "/"))
+  writeLines(tbu_out,paste(chat2ndoutdir,boxfolderns,chatfilename,sep = "/"))
   }
   ### END replacement loop #########
-  
+  ### outputs transcript version: without header, with inline codes, lines <s>wrapped</s>
 }
 #end postchatcoding temp function, not called
+#call ske version:
+if(ske==T) #declared in head of script
+  sketchcoding()
+
+
+
