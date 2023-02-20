@@ -1,7 +1,7 @@
 #13407.hu-lx reformatting
 #20221007(20.35)
 #20221015(18.12) please download the most recent version of the script always
-#here: https://github.com/esteeschwarz/DH_essais/blob/main/sections/HU-LX/20221015_transcript_chat_preprocessing(R-script).R
+#here: https://github.com/esteeschwarz/HU-LX/blob/main/scripts/
 #important: the script as provided in the box (.md instead of .R) will not work in R language
 #since all escaped (e.g. "\\.") characters are converted to standard markdown ("\."),
 #saying if you want to have the script run in R you have to use the github version.
@@ -25,7 +25,7 @@ path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
 scheme<-outputschemes[4]
-datestamp<-"13065"
+datestamp<-"13083"
 version<-"v2_9"
 numbered<-T
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
@@ -43,7 +43,7 @@ list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
 #version<-"v2_8_sketchE_INLINE_C"
-sketchversion<-"v2.8b"
+sketchversion<-"v2.9"
 if (scheme=="original")
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme=="sansCodes"){
@@ -437,10 +437,27 @@ for (f in 1:length(filelist2)){
 transtart[f]<-p3  
 }
 f<-1
+metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
+mns<-colnames(metatable)
+headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
+              "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
 transtart<-max(transtart)
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
-  p1<-grep(".ctivities",tbu)
+  #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
+  kidname<-stri_split(filelist2[k],regex="_")
+  kidname<-toupper(unlist(kidname)[3])
+  #13083.header modification
+  p1<-grep("@.anguage",tbu)
+  head1<-array()
+  k<-1
+  for (k in 1:length(metatable)-1){
+    head0<-metatable[metatable$participant==kidname,k+1]
+    head1[k]<-paste0("@",headermeta[k],": ",head0)
+  }
+  head1
+  tbu<-insert(tbu,p1[1]+1,head1)
+    p1<-grep(".ctivities",tbu)
   tbu[p1[1]]
   tbu<-insert(tbu,p1[1]+1,"@Elicitation files: box.FU folder:00_SES Documents (to revise) for BERLANGDEV")
   p2<-grep("@.oding",tbu)
