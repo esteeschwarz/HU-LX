@@ -675,16 +675,61 @@ plot(le1)
 # x<-gl(3,3,201,labels = c("eins","zwei","drei"))
 # x
 }
-
+#####################################
+### from here to continue db progress
 ### postprocess finalize DB
 d8<-read.csv("local/HU-LX/SES/sesDB010b.csv")
-dns<-colnames(d8)
-dns
-dns[5]<-"lemma_SkE"
-dns[6]<-"lemma"
-dns[8]<-"turn_preceding"
-dns[9]<-"tag_SkE"
-dns[11]<-"PoS"
-colnames(d8)<-dns
-d9<-d8[3:length(d8)]
-write.csv(d9,"local/HU-LX/SES/sesDB010b.csv")
+# dns<-colnames(d8)
+# dns
+# dns[5]<-"lemma_SkE"
+# dns[6]<-"lemma"
+# dns[8]<-"turn_preceding"
+# dns[9]<-"tag_SkE"
+# dns[11]<-"PoS"
+# colnames(d8)<-dns
+# d9<-d8[3:length(d8)]
+# write.csv(d9,"local/HU-LX/SES/sesDB010b.csv")
+
+# integrate kids meta
+meta<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
+mns<-colnames(meta)
+mns
+for (k in meta$participant){
+d8$part_CoB[d8$interview==k]<-meta$CoB[meta$participant==k]
+d8$part_YiG[d8$interview==k]<-meta$YiG[meta$participant==k]
+d8$part_YoSH[d8$interview==k]<-meta$YoSH[meta$participant==k]
+d8$part_LPM[d8$interview==k]<-meta$LPM[meta$participant==k]
+d8$part_LPF[d8$interview==k]<-meta$LPF[meta$participant==k]
+d8$part_LUM[d8$interview==k]<-meta$LUM[meta$participant==k]
+d8$part_LUF[d8$interview==k]<-meta$LUF[meta$participant==k]
+d8$part_LUS[d8$interview==k]<-meta$LUS[meta$participant==k]
+d8$part_LUFR[d8$interview==k]<-meta$LUFR[meta$participant==k]
+
+
+  
+  
+}
+#chk
+#d8$YiG[d8$interview=="TBU"]
+d8ns<-colnames(d8)
+d8ns
+#rearrange columns
+d91<-d8[,2:19]
+d92<-d8[,25:41]
+d93<-d8[,42:50]
+d8b<-c(d91,d92,d93)
+d8b<-data.frame()
+l2<-length(d91)
+d8b[1:length(d91$interview),1:l2]<-d91
+l1<-length(d8b)+1
+l2<-l1+length(d93)-1
+d8b[1:length(d91$interview),l1:l2]<-d93
+l1<-length(d8b)+1
+l2<-l1+length(d92)-1
+d8b[1:length(d91$interview),l1:l2]<-d92
+
+library(writexl)
+write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
+write_xlsx(d8b,"local/HU-LX/SES/20230220(10.37)_SES_database_by_tokens.xlsx")
+
+
