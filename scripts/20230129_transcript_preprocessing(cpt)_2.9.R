@@ -25,9 +25,9 @@ path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
 scheme<-outputschemes[2]
-datestamp<-"13083"
+datestamp<-"13086"
 version<-"v2_9"
-numbered<-F
+numbered<-T
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
