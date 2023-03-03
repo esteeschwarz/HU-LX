@@ -24,8 +24,8 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
-datestamp<-"13086"
+scheme<-outputschemes[1]
+datestamp<-"13097"
 version<-"v2_9"
 numbered<-T
 boxfolderns<-"version without header for SketchEngine upload"
@@ -34,13 +34,17 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi, ewa
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/UNI/21S/DH/")
+getwd()
 ske<-F
 if (scheme==outputschemes[2]){
   ske<-T
   scheme<-outputschemes[4]
 }
-dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text")
+#dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text")
+#2nd run with all 32 transcripts formatted from docx > txt
+dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt")
+
 #codesource<-"/r-temp/codes_cpt3mod.csv"
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
 codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
@@ -400,7 +404,11 @@ codes_cpt2["ar"]<-match(codes_cpt2$subst,ar)
 codes_cpt2["regex"]<-codesarray$V1
 codes_cpt4<-regxmean(codes_cpt2)
 #save codes table
-write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
+getwd()
+codedir<-"local/HU-LX/SES"
+write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt4",version,".csv"))
+
+#write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
 ii<-order(-codes_cpt4$regxmean)
 codes_cpt4$regexcor[ii]
 rpall<-as.data.frame(codes_cpt4$regex[ii])
