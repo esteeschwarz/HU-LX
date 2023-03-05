@@ -24,19 +24,19 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
-datestamp<-"13097"
+scheme<-outputschemes[2]
+datestamp<-"13101"
 version<-"v2_9"
 numbered<-T
+ske<-F
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
 #mini
 #setwd("~/boxHKW/21S/DH/")
-#lapsi, ewa
-setwd("~/boxHKW/UNI/21S/DH/")
+#lapsi
+#setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
-ske<-F
 if (scheme==outputschemes[2]){
   ske<-T
   scheme<-outputschemes[4]
@@ -47,7 +47,9 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 
 #codesource<-"/r-temp/codes_cpt3mod.csv"
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
-codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
+#codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
+getwd()
+codesource<-"local/HU-LX/SES/codes_cpt4mod.csv"
 
 list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
@@ -98,10 +100,26 @@ dirtemp
 #external codes .csv table
 codes_cpt <- read_delim(codesource, 
                         delim = ";", escape_double = T)
-codes_nna<-!is.na(codes_cpt[,1])
+codes_nna<-!is.na(codes_cpt$codes)
 codes_nna<-array(codes_nna)
 codes_cpt_nna<-codes_cpt[codes_nna,]
 codes_cpt<-codes_cpt_nna
+### refine codes
+# u3<-unique(codes_cpt$phrase)
+# u4<-unique(codes_cpt$feature)
+# u2<-unique(codes_cpt$pre3)
+# u1<-unique(codes_cpt$pre2)
+# u5<-unique(paste0(u1[1],u2))
+# u6<-unique(paste0(u1[3],u2))
+# u7<-unique(paste0(codes_cpt$pre2,codes_cpt$pre3))
+# u8<-unique(paste(codes_cpt$phrase,codes_cpt$feature,sep  = " "))
+# codesmod<-codes_cpt
+# for (k in codesmod$pre2){
+#   if (codesmod$pre2[k]=="N")
+#      codesmod$phrase[k]<-"nonstandard"
+#   
+# }
+
 # 2.
 #get source files in top directory
 filelist<-list.files(dirtext,pattern="(\\.txt)")
@@ -406,7 +424,7 @@ codes_cpt4<-regxmean(codes_cpt2)
 #save codes table
 getwd()
 codedir<-"local/HU-LX/SES"
-write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt4",version,".csv"))
+write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt4_used",version,".csv"))
 
 #write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
 ii<-order(-codes_cpt4$regxmean)
@@ -512,6 +530,7 @@ for (f in 1:length(filelist2)){
   ######################################################################
   tbu
   rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3)
+  rptiers$
   #####################################
   ### this section main replacement ###
   ##### wks.

@@ -7,11 +7,13 @@ getwd()
 datadir<-"local/HU-LX/SES"
 
 # now again from base DB
-getwd()
+list.files(getwd())
 setwd(datadir)
-
+docscheme<-"sesCPT" #Sketchengine doc scheme
+filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
-d1<-read_delim("ses_vert.csv")
+#d1<-read_delim("ses_vert.csv")
+d1<-read_delim("ses_32_v2_9vert.csv")
 
 #set<-d2
 cleandb<-function(set){
@@ -43,7 +45,8 @@ ms<-grep("(#[A-Z]{3})",d$token) #speaker lines #"(#[A-Z]{3})" = 4942 matches in 
 # distinct speakers:
 ms2<-grep("(#[A-Z]{3})",d$token,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
 spk<-unique(ms2)
-spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
+spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA","TAB","TAD","TAF","TAG","TAH","TAI","TBD","TBE","TBH","TBI","TBK","TBL","TBM","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
+#spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
 spk_array2<-paste0("#",spk_array)
 #spk_grep<-paste0(spk_array2,"|")
 spk_grep2<-paste0(spk_array2,collapse = "|")
@@ -200,6 +203,8 @@ d6<-d5
 #l<-2
 ##########################
 # this is a 5 minute loop!
+mxcolumns<-grep("x",colnames(d4))
+
 for (r in 1:length(d5$cat)){
 #s2<- d5$pos_cpt[r]
 s2<-getarray(d4,r)
@@ -207,7 +212,6 @@ for (top in 1:length(ns_g2$cor)){
 for (l in 1:length(ns_g2$cor[[top]])){
 m1<-match(ns_g2$cor[[top]][[l]],s2)
 #s2[m1]
-mxcolumns<-grep("x",colnames(d4))
 
 pos<-mxcolumns[1]-1+top
 ifelse (m1!=0,d6[r,pos]<-s2[m1],d6[r,pos]<-"-")
@@ -220,9 +224,11 @@ print(r)
 } # end POS position correction
 ###############################
 head(d6)
+
 d6safe<-d6
 getwd()
-write.csv(d6,"sesDB009_d6safe.csv")
+### DEFINITELY SAFE AFTER RUN! ####
+write.csv(d6,"sesDB009_32_d6safe_2.csv")
 ###### finalise
 colnames(d6)
 
@@ -250,14 +256,22 @@ colnames(d7)<-dns_n
 #### post processing ##########################
 # reread DB
 #d7
-m1<-grep("(sansHiCod)",d7$token)
+#13101.new 32 transcript db
+### paste docscheme here
+regx1<-paste0("</",docscheme)
+m1<-grep(docscheme,d7$token)
 d7$token[m1[3]]
-m4<-grep("(</sansHiCod)",d7$token) #transcript end
+m4<-grep(regx1,d7$token) #transcript end
 # d7$token[m2[1]]
-m3<-grep("(<sansHiCod id)",d7$token) #transcript start
-m5<-grep("(SES_.*)(sketchE)",d7$token,value = T)
+regx2<-paste0("<",docscheme," id")
+m3<-grep(regx2,d7$token) #transcripts start
+regx3<-paste0("(SES_.*)(",filescheme,")")
+m5<-grep(regx3,d7$token,value = T)
 #m5<-grepl("(SES_.*)(sketchE)",d7$token)
-m6<-gsub(".*(SES_.*)(_sketchE).*","\\1",m5) #kids
+regx4<-paste0(".*(SES_.*)(",filescheme,").*")
+m6<-gsub(regx4,"\\1",m5) #kids
+
+#here stepback
 d8<-d7
 
 # m6
@@ -291,25 +305,30 @@ for (l in 1:length(m6)){
   
 }
  # wks., check:
-   d8$interview[2750:3400]
+   d8$interview[3750:4800]
    ##############
    # delete transcript references obsolete entries
-   m<-grepl("(sansHiCod)",d8$token)
-   d8$speaker[m]<-"---"
-   d8$lemma[m]<-"---"
-   d8$sentence[m]<-"---"
-   d8$cat[m]<-"---"
-   d8$PoS_ok[m]<-"---"
-   d8$pos[m]<-"---"
-   d8$category[m]<-"---"
-   d8$funct[m]<-"---"
-   d8$case[m]<-"---"
-   d8$pers[m]<-"---"
-   d8$num[m]<-"---"
-   d8$gender[m]<-"---"
-   d8$tense[m]<-"---"
-   d8$mode[m]<-"---"
-   d8$gilt[m]<-"---"
+   m<-grepl(docscheme,d8$token)
+   sum(m)
+   repl1<-"---"
+   m2<-grepl("token",colnames(d8))
+   m3<-m2==F
+   d8[m,m3]<-repl1
+   # d8$speaker[m]<-"---"
+   # d8$lemma[m]<-"---"
+   # d8$sentence[m]<-"---"
+   # d8$cat[m]<-"---"
+   # d8$PoS_ok[m]<-"---"
+   # d8$pos[m]<-"---"
+   # d8$category[m]<-"---"
+   # d8$funct[m]<-"---"
+   # d8$case[m]<-"---"
+   # d8$pers[m]<-"---"
+   # d8$num[m]<-"---"
+   # d8$gender[m]<-"---"
+   # d8$tense[m]<-"---"
+   # d8$mode[m]<-"---"
+   # d8$gilt[m]<-"---"
    #m_end_c[r]<-m  
    tail(d8)
 ### clean lemma entry
@@ -320,7 +339,7 @@ for (l in 1:length(m6)){
      ll[k]<-x[[k]][1]
    }
    lemmalist<-unlist(ll)
-   m<-grep("[^A-Za-züöä]",lemmalist)
+   m<-grep("[^A-Za-züöäß]",lemmalist)
    lemmalist[m]<-""
    #lemma_c<-gsub("[^A-Za-z]","",d8$lemma)
    #length(lemmalist)
@@ -337,7 +356,7 @@ for (l in 1:length(m6)){
    # add coded feature columns
    ms2<-grep("(#[A-Z]{3})",d8$turn,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
    spk<-unique(ms2)
-   spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
+   #spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA","TAB","TAD","TAF","TAG","TAH","TAI","TBD","TBE","TBH","TBI","TBK","TBL","TBM","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
    spk_array2<-paste0("#",spk_array)
    #spk_grep<-paste0(spk_array2,"|")
    spk_grep2<-paste0(spk_array2,collapse = "|")
@@ -350,6 +369,7 @@ for (l in 1:length(m6)){
    ms4<-grep("(#[A-Z]{3})",d8$turn,value = T)
    # simple: delete speaker codes in sentence to grep only coded features
    sent1<-gsub(spk_grep3,"%000%",d8$turn)
+   d8$turn[3000]
    sent1[3000]
    ms5<-grep("(#[A-Z]{3,3}|0[A-Z]{1,2})",sent1)
 ms6<-head(unique(ms5))
@@ -362,9 +382,18 @@ codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
    #ms7<-lapply(ms6, codef)
    ms7<-lapply(sent1, codef)
   # unlist(head(ms7[ms5][]))
+   #ms7<-lapply(sent1, codef)
+   ms8<-unique(unlist(ms7)) #unique coded features
+   ms8<-ms8[!is.na(ms8)]
+   
    ##########################
   # d8[,22:34]<-"---"
-   codecolumns<-grep("V",colnames(d8))
+   tend<-length(d8)
+   tcodeend<-tend+length(ms8)
+   tcodestart<-tend+1
+   codecolumns<-tcodestart:tcodeend
+   
+   #codecolumns<-grep("V",colnames(d8))
    d8[,codecolumns]<-"---"
    ########################## NOT CHECKED!
     #codem<-matrix(ms7[ms5])
@@ -379,8 +408,8 @@ codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
      print(r)
      d8[r,codestart:le]<-repl
    }
-   ms8<-grep("([A-Z]{3,3})",sent1,value=T)
-   ms8<-grepl("([A-Z]{3,3})",sent1)
+   #ms8<-grep("([A-Z]{3,3})",sent1,value=T)
+   #ms8<-grepl("([A-Z]{3,3})",sent1)
 #   head(ms7[ms5][][])
 #   unique(sent1[ms8])
 #   sent1[95]
@@ -395,7 +424,7 @@ colnames(d8)[codecolumns]<-dns_code
 # sentence preceding interviewer line
 # transcript lines references column, thus numbering lines in transkript
 ###
-write.csv(d8,"sesDB009_d8safe.csv")
+write.csv(d8,"sesDB011_d8safe.csv")
 #################
 # preceding line:
 ###
@@ -406,7 +435,7 @@ postprocess_precede<-function(set){
   # distinct speakers:
   ms2<-grep("(#[A-Z]{3})",d$token,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
   spk<-unique(ms2)
-  spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
+#  spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
   spk_array2<-paste0("#",spk_array)
   #spk_grep<-paste0(spk_array2,"|")
   spk_grep2<-paste0(spk_array2,collapse = "|")
@@ -464,15 +493,142 @@ d9<-postprocess_precede(d8)
 #sort DB
 coldb<-colnames(d9)
 colcodes<-grep("C",colnames(d9))
-d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt,V38=d9$V38)
-write.csv(d9b,"20230118(14.16)_SES_database_by_tokens+PoS_check_column.csv")
-write.csv(d9b,"sesDB010.csv")
+# d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt)
+d9b<-data.frame(p_interview=d9$interview,p_speaker=d9$speaker,p_token=d9$token,p_lemma_SkE=d9$lemma,
+                p_lemma=d9$lemma_c,p_turn=d9$turn,p_turn_preceding=d9$turn_precede,t_tag_SkE=d9$cat,
+                t_PoS_ok=d9$PoS_ok,t_PoS=d9$pos,t_category=d9$category,t_funct=d9$funct,t_case=d9$case,
+                t_pers=d9$pers,t_num=d9$num,t_gender=d9$gender,t_tense=d9$tense,t_mode=d9$mode,
+                part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,codes=d9[,colcodes],m_feature_eval=FALSE,m_free_col=0)
+
+#write.csv(d9b,"20230305(09.26)_SES_database_by_tokens.csv")
+#write.csv(d9b,"sesDB012_d9b.csv")
 #typeof(lemmalist)
+#################################
+#add ruth metadata:
+dns<-colnames(d9b)
+dns
+# dns[4]<-"p_lemma_SkE"
+# dns[5]<-"p_lemma"
+# dns[7]<-"p_turn_preceding"
+# dns[8]<-"t_tag_SkE"
+# dns[10]<-"t_PoS"
+# dns[42]<-"m_feature_eval"
+colnames(d9b)<-dns
+dns
+### nice feature from correction issue: add column with transcript line numbers
+lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}$")
+ln<-lapply(d9b$p_turn, lineextract)
+ln<-unlist(ln)
+ln[1661]
+d9b$p_transcriptLine<-ln
+#d9c<-insert(d9b,d9b[,19],ln)
+getwd()
+meta<-read.csv(ruthtable)
+mns<-colnames(meta)
+m<-grep(NA,meta)
+m<-is.na(meta)
+meta[m]<-"N.A."
+sum(m)
+mns
+d8<-d9b
+#write_clip(spk_array)
+for (k in meta$participant){
+  #  k<-1
+  sum(d8$token[d8$p_interview==k])
+  d8$part_CoB[d8$p_interview==k]<-meta$CoB[meta$participant==k]
+  d8$part_YiG[d8$p_interview==k]<-meta$YiG[meta$participant==k]
+  d8$part_YoSH[d8$p_interview==k]<-meta$YoSH[meta$participant==k]
+  d8$part_LPM[d8$p_interview==k]<-meta$LPM[meta$participant==k]
+  d8$part_LPF[d8$p_interview==k]<-meta$LPF[meta$participant==k]
+  d8$part_LUM[d8$p_interview==k]<-meta$LUM[meta$participant==k]
+  d8$part_LUF[d8$p_interview==k]<-meta$LUF[meta$participant==k]
+  d8$part_LUS[d8$p_interview==k]<-meta$LUS[meta$participant==k]
+  d8$part_LUFR[d8$p_interview==k]<-meta$LUFR[meta$participant==k]
+  
+  
+  
+  
+}
+#chk
+#d8$part_YiG[d8$p_interview=="TBV"]
+#sum(d8$p_interview=="TBV")
+d8ns<-colnames(d8)
+colnames(d8)
+d8ns
+#rearrange columns
+# d91<-d8[,1:5]
+# d92<-d8[,43]
+# d93<-d8[,6:21]
+# d96<-d8[,22:41]
+# d94<-d8[,44:51]
+# d95<-d8[,42]
+
+d91<-grep("p_",colnames(d8))
+d91<-d8[,d91] #primary columns 8 = transcript line
+d92<-grep("m_",colnames(d8))
+d92<-d8[,d92]
+
+d93<-grep("t_",colnames(d8))
+d93<-d8[,d93]
+
+d94<-grep("part_",colnames(d8))
+d94<-d8[,d94]
+
+d95<-grep("codes",colnames(d8))
+d95<-d8[,d95]
+
+#d95<-d8[,42]
+
+#d8b<-c(d91,d92,d93)
+d8b<-data.frame()
+l2<-length(d91)
+d8b[1:length(d91$p_interview),1:l2]<-d91
+l1<-length(d8b)+1
+l2<-l1+length(d92)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d92
+l1<-length(d8b)+1
+l2<-l1+length(d93)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d93
+l1<-length(d8b)+1
+l2<-l1+length(d94)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d94
+l1<-length(d8b)+1
+l2<-l1+length(d95)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d95
+# l1<-length(d8b)+1
+# l2<-l1+length(d96)-1
+# d8b[1:length(d91$interview),l1:l2]<-d96
+dns<-colnames(d8b)
+dns
+#dns[6]<-"transcript_line"
+#dns[31]<-"feature_eval"
+#colnames(d8b)<-dns
+#rearrange from .csv read (extra 1st column)
+# d91<-d8[,2:19]
+# d92<-d8[,25:41]
+# d93<-d8[,42:50]
+# d8b<-c(d91,d92,d93)
+# d8b<-data.frame()
+# l2<-length(d91)
+# d8b[1:length(d91$interview),1:l2]<-d91
+# l1<-length(d8b)+1
+# l2<-l1+length(d93)-1
+# d8b[1:length(d91$interview),l1:l2]<-d93
+# l1<-length(d8b)+1
+# l2<-l1+length(d92)-1
+# d8b[1:length(d91$interview),l1:l2]<-d92
+
+library(writexl)
+getwd()
+write.csv(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/sesDB012a.csv")
+write_xlsx(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/20230305(15.36)_SES_database_by_tokens.xlsx")
+
 ##############################################################################
 # DB created above, read DB from .csv to make queries and concordances
 # 
 ##############################################################################
 # queries ######################
+temprun<-function(){
 #d8<-read.csv("sesDB007.csv")
 #sampleq$id[k]
 #query[1,1]
@@ -731,5 +887,5 @@ d8b[1:length(d91$interview),l1:l2]<-d92
 library(writexl)
 write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
 write_xlsx(d8b,"local/HU-LX/SES/20230220(10.37)_SES_database_by_tokens.xlsx")
-
+}
 

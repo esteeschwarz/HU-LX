@@ -9,7 +9,7 @@ datadir<-"local/HU-LX/SES"
 # now again from base DB
 getwd()
 #setwd(datadir)
-
+ruthtable<-paste0(getwd(),"/ruthtable_kidsmeta.csv")
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
 d1<-read_delim("local/HU-LX/SES/ses_vert_v2_9.csv")
@@ -477,88 +477,116 @@ d9<-postprocess_precede(d8)
 #sort DB
 coldb<-colnames(d9)
 colcodes<-grep("C",colnames(d9))
-d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt)
-d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,
-                lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,
-                PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,
-                pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,
-                part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,codes=d9[,colcodes],gilt=d9$gilt)
+# d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt)
+d9b<-data.frame(p_interview=d9$interview,p_speaker=d9$speaker,p_token=d9$token,p_lemma_SkE=d9$lemma,
+                p_lemma=d9$lemma_c,p_turn=d9$turn,p_turn_preceding=d9$turn_precede,t_tag_SkE=d9$cat,
+                t_PoS_ok=d9$PoS_ok,t_PoS=d9$pos,t_category=d9$category,t_funct=d9$funct,t_case=d9$case,
+                t_pers=d9$pers,t_num=d9$num,t_gender=d9$gender,t_tense=d9$tense,t_mode=d9$mode,
+                part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,codes=d9[,colcodes],m_feature_eval=FALSE,m_free_col=0)
 
-write.csv(d9b,"20230118(14.16)_SES_database_by_tokens+PoS_check_column.csv")
-write.csv(d9b,"sesDB011_d9b.csv")
+#write.csv(d9b,"20230305(09.26)_SES_database_by_tokens.csv")
+#write.csv(d9b,"sesDB012_d9b.csv")
 #typeof(lemmalist)
 #################################
 #add ruth metadata:
 dns<-colnames(d9b)
 dns
-dns[4]<-"lemma_SkE"
-dns[5]<-"lemma"
-dns[7]<-"turn_preceding"
-dns[8]<-"tag_SkE"
-dns[10]<-"PoS"
-dns[42]<-"feature_eval"
+# dns[4]<-"p_lemma_SkE"
+# dns[5]<-"p_lemma"
+# dns[7]<-"p_turn_preceding"
+# dns[8]<-"t_tag_SkE"
+# dns[10]<-"t_PoS"
+# dns[42]<-"m_feature_eval"
 colnames(d9b)<-dns
-
+dns
 ### nice feature from correction issue: add column with transcript line numbers
-lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}")
-ln<-lapply(d8b$turn, lineextract)
+lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}$")
+ln<-lapply(d9b$p_turn, lineextract)
 ln<-unlist(ln)
-d9b$transcript_line<-ln
+ln[1661]
+d9b$p_transcriptLine<-ln
 #d9c<-insert(d9b,d9b[,19],ln)
-meta<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
+getwd()
+meta<-read.csv(ruthtable)
 mns<-colnames(meta)
+m<-grep(NA,meta)
+m<-is.na(meta)
+meta[m]<-"N.A."
+sum(m)
 mns
 d8<-d9b
+#write_clip(spk_array)
 for (k in meta$participant){
-  d8$part_CoB[d8$interview==k]<-meta$CoB[meta$participant==k]
-  d8$part_YiG[d8$interview==k]<-meta$YiG[meta$participant==k]
-  d8$part_YoSH[d8$interview==k]<-meta$YoSH[meta$participant==k]
-  d8$part_LPM[d8$interview==k]<-meta$LPM[meta$participant==k]
-  d8$part_LPF[d8$interview==k]<-meta$LPF[meta$participant==k]
-  d8$part_LUM[d8$interview==k]<-meta$LUM[meta$participant==k]
-  d8$part_LUF[d8$interview==k]<-meta$LUF[meta$participant==k]
-  d8$part_LUS[d8$interview==k]<-meta$LUS[meta$participant==k]
-  d8$part_LUFR[d8$interview==k]<-meta$LUFR[meta$participant==k]
+#  k<-1
+  sum(d8$token[d8$p_interview==k])
+  d8$part_CoB[d8$p_interview==k]<-meta$CoB[meta$participant==k]
+  d8$part_YiG[d8$p_interview==k]<-meta$YiG[meta$participant==k]
+  d8$part_YoSH[d8$p_interview==k]<-meta$YoSH[meta$participant==k]
+  d8$part_LPM[d8$p_interview==k]<-meta$LPM[meta$participant==k]
+  d8$part_LPF[d8$p_interview==k]<-meta$LPF[meta$participant==k]
+  d8$part_LUM[d8$p_interview==k]<-meta$LUM[meta$participant==k]
+  d8$part_LUF[d8$p_interview==k]<-meta$LUF[meta$participant==k]
+  d8$part_LUS[d8$p_interview==k]<-meta$LUS[meta$participant==k]
+  d8$part_LUFR[d8$p_interview==k]<-meta$LUFR[meta$participant==k]
   
   
   
   
 }
 #chk
-#d8$YiG[d8$interview=="TBU"]
+#d8$part_YiG[d8$p_interview=="TBV"]
+#sum(d8$p_interview=="TBV")
 d8ns<-colnames(d8)
+colnames(d8)
 d8ns
 #rearrange columns
-d91<-d8[,1:5]
-d92<-d8[,43]
-d93<-d8[,6:21]
-d96<-d8[,22:41]
-d94<-d8[,44:51]
-d95<-d8[,42]
+# d91<-d8[,1:5]
+# d92<-d8[,43]
+# d93<-d8[,6:21]
+# d96<-d8[,22:41]
+# d94<-d8[,44:51]
+# d95<-d8[,42]
+
+d91<-grep("p_",colnames(d8))
+d91<-d8[,d91] #primary columns 8 = transcript line
+d92<-grep("m_",colnames(d8))
+d92<-d8[,d92]
+
+d93<-grep("t_",colnames(d8))
+d93<-d8[,d93]
+
+d94<-grep("part_",colnames(d8))
+d94<-d8[,d94]
+
+d95<-grep("codes",colnames(d8))
+d95<-d8[,d95]
+
+#d95<-d8[,42]
+
 #d8b<-c(d91,d92,d93)
 d8b<-data.frame()
 l2<-length(d91)
-d8b[1:length(d91$interview),1:l2]<-d91
+d8b[1:length(d91$p_interview),1:l2]<-d91
 l1<-length(d8b)+1
-l2<-l1+1-1
-d8b[1:length(d91$interview),l1:l2]<-d92
+l2<-l1+length(d92)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d92
 l1<-length(d8b)+1
 l2<-l1+length(d93)-1
-d8b[1:length(d91$interview),l1:l2]<-d93
+d8b[1:length(d91$p_interview),l1:l2]<-d93
 l1<-length(d8b)+1
 l2<-l1+length(d94)-1
-d8b[1:length(d91$interview),l1:l2]<-d94
+d8b[1:length(d91$p_interview),l1:l2]<-d94
 l1<-length(d8b)+1
-l2<-l1+1-1
-d8b[1:length(d91$interview),l1:l2]<-d95
-l1<-length(d8b)+1
-l2<-l1+length(d96)-1
-d8b[1:length(d91$interview),l1:l2]<-d96
+l2<-l1+length(d95)-1
+d8b[1:length(d91$p_interview),l1:l2]<-d95
+# l1<-length(d8b)+1
+# l2<-l1+length(d96)-1
+# d8b[1:length(d91$interview),l1:l2]<-d96
 dns<-colnames(d8b)
 dns
-dns[6]<-"transcript_line"
-dns[31]<-"feature_eval"
-colnames(d8b)<-dns
+#dns[6]<-"transcript_line"
+#dns[31]<-"feature_eval"
+#colnames(d8b)<-dns
 #rearrange from .csv read (extra 1st column)
 # d91<-d8[,2:19]
 # d92<-d8[,25:41]
@@ -575,8 +603,9 @@ colnames(d8b)<-dns
 # d8b[1:length(d91$interview),l1:l2]<-d92
 
 library(writexl)
-write.csv(d8b,"local/HU-LX/SES/sesDB011a.csv")
-write_xlsx(d8b,"local/HU-LX/SES/20230224(09.20)_SES_database_by_tokens.xlsx")
+getwd()
+write.csv(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/sesDB012a.csv")
+write_xlsx(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/20230305(15.36)_SES_database_by_tokens.xlsx")
 
 
 temprun<-function(){
