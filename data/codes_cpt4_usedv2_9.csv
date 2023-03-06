@@ -1,0 +1,225 @@
+202;...2;...3;...4;codes;category;scheme;pre1;pre2;pre3;phrase;feature;subst;ar;regex;repl;regexcor;test;version;regxmean
+1;1;1;NA;#9 0 art/det#;2;1;%;0;AD;zero;article/determiner;%0AD: zero article/determiner;1;(#9 0 art/det#);%#%;#9 0 art/det#;test3;v2_9;13
+2;2;2;6;# 9nst agmt#;1;9;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;# 9nst agmt#;test3;v2_9;12
+3;3;3;17;# 9nst agmt#;1;9;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;# 9nst agmt#;test3;v2_9;12
+4;4;4;76;9nst agmt;1;9;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;9nst agmt;test3;v2_9;9
+5;5;5;95;9nst agmt;1;9;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;9nst agmt;test3;v2_9;9
+6;6;6;141;9nst agmt;1;9;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;9nst agmt;test3;v2_9;9
+7;7;7;NA;#9nst agmt.#;1;1;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;#9nst agmt\.#;test3;v2_9;12
+8;8;8;NA;#9nst agmt#;1;1;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;#9nst agmt#;test3;v2_9;11
+9;9;9;NA;# 9nst agmt#;1;1;%;N;AG;nonstandard;agreement;%NAG: nonstandard agreement;2;(# 9nst agmt#)|(# 9nst agmt#)|(9nst agmt)|(9nst agmt)|(9nst agmt)|(#9nst agmt\.#)|(#9nst agmt#)|(# 9nst agmt#);%#%;# 9nst agmt#;test3;v2_9;12
+10;10;10;NA;# 90 art 90 prep#;2;1;%;0;AP;zero;article/preposition;%0AP: zero article/preposition;3;(# 90 art 90 prep#);%#%;# 90 art 90 prep#;test3;v2_9;17
+11;11;11;4;prep 90 art#;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;prep 90 art#;test3;v2_9;NA
+12;12;12;8;90 art#;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art#;test3;v2_9;7
+13;13;13;9;# 90 art.;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;# 90 art\.;test3;v2_9;NA
+14;14;14;15;prep 90 art#;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;prep 90 art#;test3;v2_9;NA
+15;15;15;19;90 art#;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art#;test3;v2_9;7
+16;16;16;32;90 art;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art;test3;v2_9;6
+17;17;17;42;90 art;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art;test3;v2_9;6
+18;18;18;78;90 art;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art;test3;v2_9;6
+18;18;18;78;#90 art;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#90 art;test3;v2_9;7
+19;19;19;79;90 art.;2;9;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90 art\.;test3;v2_9;7
+20;20;20;NA;#90 art.#;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#90 art\.#;test3;v2_9;9
+21;21;21;NA;#90 art#;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#90 art#;test3;v2_9;8
+22;22;22;NA;#9 0 art#;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#9 0 art#;test3;v2_9;9
+23;23;23;NA;#0 art#;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#0 art#;test3;v2_9;7
+24;24;24;NA;#90 art?#;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;#90 art\?#;test3;v2_9;9
+25;25;25;NA;#9nst art#;1;1;%;N;AR;nonstandard;article;%NAR: nonstandard article;5;(#9nst art#)|(<#NAR#>)|(9nst art);%#%;#9nst art#;test3;v2_9;10
+26;26;26;NA;#90 aux #;2;1;%;0;AU;zero;auxiliary;%0AU: zero auxiliary;6;(#90 aux #)|(#90 aux\?#)|(90 aux);%#%;#90 aux #;test3;v2_9;9
+27;27;27;NA;#9nst compar.#;1;1;%;N;CM;nonstandard;comparison;%NCM: nonstandard comparison;7;(#9nst compar\.#)|(#9nst compar#)|(#9nst compar#)|(9nst compar);%#%;#9nst compar\.#;test3;v2_9;14
+28;28;28;NA;#9nst compar#;1;1;%;N;CM;nonstandard;comparison;%NCM: nonstandard comparison;7;(#9nst compar\.#)|(#9nst compar#)|(#9nst compar#)|(9nst compar);%#%;#9nst compar#;test3;v2_9;13
+29;29;29;NA;#9nst conditional#;1;1;%;N;CN;nonstandard;conditional;%NCN: nonstandard conditional;8;(#9nst conditional#);%#%;#9nst conditional#;test3;v2_9;18
+30;30;30;58;90 cop.;2;9;%;0;CP;zero;copula;%0CP: zero copula;9;(90 cop\.)|(#90 cop#)|(#90 cop\?#)|(#9 0 cop#)|(90 cop);%#%;90 cop\.;test3;v2_9;7
+31;31;31;NA;#90 cop#;2;1;%;0;CP;zero;copula;%0CP: zero copula;9;(90 cop\.)|(#90 cop#)|(#90 cop\?#)|(#9 0 cop#)|(90 cop);%#%;#90 cop#;test3;v2_9;8
+32;32;32;NA;#90 cop?#;2;1;%;0;CP;zero;copula;%0CP: zero copula;9;(90 cop\.)|(#90 cop#)|(#90 cop\?#)|(#9 0 cop#)|(90 cop);%#%;#90 cop\?#;test3;v2_9;9
+33;33;33;NA;#9 0 cop#;2;1;%;0;CP;zero;copula;%0CP: zero copula;9;(90 cop\.)|(#90 cop#)|(#90 cop\?#)|(#9 0 cop#)|(90 cop);%#%;#9 0 cop#;test3;v2_9;9
+34;34;34;NA;#9extra art#;1;1;%;N;EA;nonstandard;extra article;%NEA: nonstandard extra article;10;(#9extra art#);%#%;#9extra art#;test3;v2_9;12
+35;35;35;NA;#9 0 existential#;2;1;%;0;EX;zero;existential;%0EX: zero existential;11;(#9 0 existential#)|(90 existential);%#%;#9 0 existential#;test3;v2_9;17
+36;36;36;NA;#9nst existential#;1;1;%;N;EX;nonstandard;existential;%NEX: nonstandard existential;12;(#9nst existential#)|(9nst ext#)|(9nst ext#)|(9nst existential);%#%;#9nst existential#;test3;v2_9;18
+37;37;37;NA;9nst ext#;1;9;%;N;EX;nonstandard;existential;%NEX: nonstandard existential;12;(#9nst existential#)|(9nst ext#)|(9nst ext#)|(9nst existential);%#%;9nst ext#;test3;v2_9;NA
+38;38;38;NA;9nst ext#;1;1;%;N;EX;nonstandard;existential;%NEX: nonstandard existential;12;(#9nst existential#)|(9nst ext#)|(9nst ext#)|(9nst existential);%#%;9nst ext#;test3;v2_9;NA
+39;39;39;11;# 9nst#;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;# 9nst#;test3;v2_9;7
+40;40;40;22;# 9nst#;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;# 9nst#;test3;v2_9;7
+41;41;41;38;9nst;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;9nst;test3;v2_9;4
+42;42;42;39;9nst;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;9nst;test3;v2_9;4
+43;43;43;40;9nst;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;9nst;test3;v2_9;4
+44;44;44;113;9nst.;1;9;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;9nst\.;test3;v2_9;5
+45;45;45;NA;#9nst#;1;1;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;#9nst#;test3;v2_9;6
+46;46;46;NA;#9nst #;1;1;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;#9nst #;test3;v2_9;7
+47;47;47;NA;# 9nst#;1;1;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;# 9nst#;test3;v2_9;7
+48;48;48;NA;#9nst;1;1;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;#9nst;test3;v2_9;5
+49;49;49;65;9double feminine, nst;1;9;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;9double feminine, nst;test3;v2_9;21
+50;50;50;77;9nst gen;1;9;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;9nst gen;test3;v2_9;8
+51;51;51;NA;#9nst gen#;1;1;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;#9nst gen#;test3;v2_9;10
+52;52;52;NA;#9 nst gen#;1;1;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;#9 nst gen#;test3;v2_9;11
+53;53;53;NA;#9nst gen;1;1;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;#9nst gen;test3;v2_9;9
+54;54;54;NA;#9nst i.o.#;1;1;%;N;IO;nonstandard;i.o.;%NIO: nonstandard i.o.;15;(#9nst i\.o\.#);%#%;#9nst i\.o\.#;test3;v2_9;11
+55;55;55;35;90 obj;2;9;%;0;OB;zero;object;%0OB: zero object;16;(90 obj)|(90 obj)|(#90 obj#)|(#90 obj\.#)|(<#0OB#>);%#%;90 obj;test3;v2_9;6
+56;56;56;121;90 obj;2;9;%;0;OB;zero;object;%0OB: zero object;16;(90 obj)|(90 obj)|(#90 obj#)|(#90 obj\.#)|(<#0OB#>);%#%;90 obj;test3;v2_9;6
+57;57;57;NA;#90 obj#;2;1;%;0;OB;zero;object;%0OB: zero object;16;(90 obj)|(90 obj)|(#90 obj#)|(#90 obj\.#)|(<#0OB#>);%#%;#90 obj#;test3;v2_9;8
+58;58;58;NA;#90 obj.#;2;1;%;0;OB;zero;object;%0OB: zero object;16;(90 obj)|(90 obj)|(#90 obj#)|(#90 obj\.#)|(<#0OB#>);%#%;#90 obj\.#;test3;v2_9;9
+59;59;59;59;9ck tape;3;9;%;C;OM;cmnt;check tape;%COM: cmnt check tape;17;(9ck tape)|(#check tape#);%#%;9ck tape;test3;v2_9;8
+60;60;60;NA;#check tape#;3;1;%;C;OM;cmnt;check tape;%COM: cmnt check tape;17;(9ck tape)|(#check tape#);%#%;#check tape#;test3;v2_9;12
+61;61;61;60;9besondere Form;3;9;%;C;OM;cmnt;form;%COM: cmnt form;18;(9besondere Form);%#%;9besondere Form;test3;v2_9;15
+62;62;62;NA;#Gestik#;3;1;%;C;OM;cmnt;gesture;%COM: cmnt gesture;19;(#Gestik#);%#%;#Gestik#;test3;v2_9;8
+63;63;63;NA;#innere Monolog#;3;1;%;C;OM;cmnt;inner monologue;%COM: cmnt inner monologue;20;(#innere Monolog#);%#%;#innere Monolog#;test3;v2_9;16
+64;64;64;NA;#unverstaendlich#;3;1;%;C;OM;cmnt;unintelligible;%COM: cmnt unintelligible;21;(#unverstaendlich#)|(unverstaendlich);%#%;#unverstaendlich#;test3;v2_9;17
+65;65;65;NA;unverstaendlich;3;1;%;C;OM;cmnt;unintelligible;%COM: cmnt unintelligible;21;(#unverstaendlich#)|(unverstaendlich);%#%;unverstaendlich;test3;v2_9;15
+66;66;66;NA;#lachen#;3;1;%;C;OM;cmnt;laughter;%COM: cmnt laughter;22;(#lachen#)|(#Lachen#);%#%;#lachen#;test3;v2_9;8
+67;67;67;NA;#Lachen#;3;1;%;C;OM;cmnt;laughter;%COM: cmnt laughter;22;(#lachen#)|(#Lachen#);%#%;#Lachen#;test3;v2_9;8
+68;68;68;NA;#9misunderstand#;3;1;%;C;OM;cmnt;misunderstanding;%COM: cmnt misunderstanding;23;(#9misunderstand#)|(#9misunderstands#);%#%;#9misunderstand#;test3;v2_9;16
+69;69;69;NA;#9misunderstands#;3;1;%;C;OM;cmnt;misunderstanding;%COM: cmnt misunderstanding;23;(#9misunderstand#)|(#9misunderstands#);%#%;#9misunderstands#;test3;v2_9;17
+70;70;70;NA;"#minunderstands ""wann""?#";3;1;%;C;OM;cmnt;misunderstanding 'wann';%COM: cmnt misunderstanding 'wann';24;(#minunderstands .wann.\?#);%#%;#minunderstands .wann.\?#;test3;v2_9;NA
+71;71;71;NA;"#misunderstands ""welchen""#";3;1;%;C;OM;cmnt;misunderstanding 'welchen';%COM: cmnt misunderstanding 'welchen';25;(#misunderstands .welchen.#);%#%;#misunderstands .welchen.#;test3;v2_9;NA
+72;72;72;NA;#Pause#;4;2;%;P;AU;pause;NA;%PAU: pause NA;26;(#Pause#)|(…@)|(\.\.\.@)|(#\(P\)#);((...));#Pause#;test3;v2_9;7
+73;73;73;NA;…@;4;1;%;P;AU;pause;NA;%PAU: pause NA;26;(#Pause#)|(…@)|(\.\.\.@)|(#\(P\)#);((...));…@;test3;v2_9;2
+73;73;73;NA;...@;4;1;%;P;AU;pause;NA;%PAU: pause NA;26;(#Pause#)|(…@)|(\.\.\.@)|(#\(P\)#);((...));\.\.\.@;test3;v2_9;4
+73;73;73;NA;#(P)#;4;1;%;P;AU;pause;NA;%PAU: pause NA;26;(#Pause#)|(…@)|(\.\.\.@)|(#\(P\)#);((...));#\(P\)#;test3;v2_9;5
+74;74;74;NA;#? #;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;#\? #;test3;v2_9;4
+75;75;75;NA;# ---#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;# ---#;test3;v2_9;6
+76;76;76;NA;---#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;---#;test3;v2_9;4
+77;77;77;NA;#grrrrrr#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;#grrrrrr#;test3;v2_9;9
+78;78;78;NA;#9…#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;#9…#;test3;v2_9;4
+79;79;79;NA;#...#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;#\.\.\.#;test3;v2_9;5
+80;80;80;NA;#9..#;3;1;%;C;OM;cmnt;Q;%COM: cmnt Q;27;(#\? #)|(# ---#)|(---#)|(#grrrrrr#)|(#9…#)|(#\.\.\.#)|(#9\.\.#);%#%;#9\.\.#;test3;v2_9;5
+81;81;81;63;9direct quote?@.;3;9;%;C;OM;cmnt;quote;%COM: cmnt quote;28;(9direct quote\?@\.);%#%;9direct quote\?@\.;test3;v2_9;16
+82;82;82;NA;# unclear script#;3;1;%;C;OM;cmnt;script unclear;%COM: cmnt script unclear;29;(# unclear script#)|(#unclear script#)|(unclear script)|(#script unclear#);%#%;# unclear script#;test3;v2_9;17
+82;82;82;NA;#unclear script#;3;1;%;C;OM;cmnt;script unclear;%COM: cmnt script unclear;29;(# unclear script#)|(#unclear script#)|(unclear script)|(#script unclear#);%#%;#unclear script#;test3;v2_9;16
+82;82;82;NA;unclear script;3;1;%;C;OM;cmnt;script unclear;%COM: cmnt script unclear;29;(# unclear script#)|(#unclear script#)|(unclear script)|(#script unclear#);%#%;unclear script;test3;v2_9;14
+83;83;83;NA;#script unclear#;3;1;%;C;OM;cmnt;script unclear;%COM: cmnt script unclear;29;(# unclear script#)|(#unclear script#)|(unclear script)|(#script unclear#);%#%;#script unclear#;test3;v2_9;16
+84;84;84;NA;#self-correction#;3;1;%;C;OM;cmnt;self-correction;%COM: cmnt self-correction;30;(#self-correction#);%#%;#self-correction#;test3;v2_9;17
+85;85;85;NA;#Kopfschuetteln#;3;1;%;C;OM;cmnt;shakes head;%COM: cmnt shakes head;31;(#Kopfschuetteln#);%#%;#Kopfschuetteln#;test3;v2_9;16
+86;86;86;NA;#zeigt auf Besen#;3;1;%;C;OM;cmnt;showing;%COM: cmnt showing;32;(#zeigt auf Besen#)|(#zeigt auf ihre Locken#)|(# zeigt #)|(#die zeigt auf den dicken Mann#)|(#zeigt richtig#);%#%;#zeigt auf Besen#;test3;v2_9;17
+87;87;87;NA;#zeigt auf ihre Locken#;3;1;%;C;OM;cmnt;showing;%COM: cmnt showing;32;(#zeigt auf Besen#)|(#zeigt auf ihre Locken#)|(# zeigt #)|(#die zeigt auf den dicken Mann#)|(#zeigt richtig#);%#%;#zeigt auf ihre Locken#;test3;v2_9;23
+88;88;88;NA;# zeigt #;3;1;%;C;OM;cmnt;showing;%COM: cmnt showing;32;(#zeigt auf Besen#)|(#zeigt auf ihre Locken#)|(# zeigt #)|(#die zeigt auf den dicken Mann#)|(#zeigt richtig#);%#%;# zeigt #;test3;v2_9;9
+89;89;89;NA;# zeigt auf das Richtige#;3;1;%;C;OM;cmnt;showing correct;%COM: cmnt showing correct;33;(# zeigt auf das Richtige#);%#%;# zeigt auf das Richtige#;test3;v2_9;25
+90;90;90;NA;#unklar#;3;1;%;C;OM;cmnt;unclear;%COM: cmnt unclear;34;(#unklar#)|(unklar)|(unverstaenglich);%#%;#unklar#;test3;v2_9;8
+91;91;91;NA;#unclear script#;3;1;%;C;OM;cmnt;unclear script;%COM: cmnt unclear script;35;(#unclear script#);%#%;#unclear script#;test3;v2_9;16
+92;92;92;104;9no pl/num.;2;9;%;0;PN;zero;plural/numeral;%0PN: zero plural/numeral;36;(9no pl/num\.)|(#9no pl/num#)|(9no pl /num);%#%;9no pl/num\.;test3;v2_9;11
+93;93;93;NA;#9no pl/num#;2;1;%;0;PN;zero;plural/numeral;%0PN: zero plural/numeral;36;(9no pl/num\.)|(#9no pl/num#)|(9no pl /num);%#%;#9no pl/num#;test3;v2_9;12
+94;94;94;NA;#9nst pro#;1;1;%;N;PO;nonstandard;pronoun;%NPO: nonstandard pronoun;37;(#9nst pro#);%#%;#9nst pro#;test3;v2_9;10
+95;95;95;NA;90 prep#;2;9;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;90 prep#;test3;v2_9;8
+96;96;96;107;90 prep;2;9;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;90 prep;test3;v2_9;7
+96;96;96;107;#90 prep;2;9;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;#90 prep;test3;v2_9;8
+97;97;97;NA;#90 prep#;2;1;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;#90 prep#;test3;v2_9;9
+98;98;98;NA;#90 prep #;2;1;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;#90 prep #;test3;v2_9;NA
+99;99;99;NA;#90 prep.#;2;1;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;#90 prep\.#;test3;v2_9;10
+99;99;99;NA;#90 prep#?;2;1;%;0;PR;zero;preposition;%0PR: zero preposition;38;(90 prep#)|(90 prep)|(#90 prep)|(#90 prep#)|(#90 prep #)|(#90 prep\.#)|(#90 prep#\?);%#%;#90 prep#\?;test3;v2_9;10
+100;100;100;NA;#9nst pers#;1;1;%;N;PE;nonstandard;person;%NPE: nonstandard person;39;(#9nst pers#)|(<#NPE#>)|(9nst pers);%#%;#9nst pers#;test3;v2_9;11
+101;101;101;7;# 9nst prep#;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;# 9nst prep#;test3;v2_9;12
+102;102;102;18;# 9nst prep#;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;# 9nst prep#;test3;v2_9;12
+103;103;103;36;9nst prep;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep;test3;v2_9;9
+104;104;104;37;9nst prep;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep;test3;v2_9;9
+105;105;105;43;9nst prep;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep;test3;v2_9;9
+106;106;106;105;9nst prep?@.;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep\?@\.;test3;v2_9;12
+107;107;107;106;9nst prep.;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep\.;test3;v2_9;10
+108;108;108;151;9nst prep;1;9;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;9nst prep;test3;v2_9;9
+109;109;109;NA;#9nst prep#;1;1;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;#9nst prep#;test3;v2_9;11
+110;110;110;NA;#9nst prep.#;1;1;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;#9nst prep\.#;test3;v2_9;12
+111;111;111;NA;#9nst prep #;1;1;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;#9nst prep #;test3;v2_9;12
+112;112;112;NA;# 9nst prep#;1;1;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;# 9nst prep#;test3;v2_9;12
+113;113;113;NA;#9nst passive#;1;1;%;N;PS;nonstandard;passive;%NPS: nonstandard passive;41;(#9nst passive#)|(#9nst passive\?#);%#%;#9nst passive#;test3;v2_9;14
+114;114;114;NA;#9nst passive?#;1;1;%;N;PS;nonstandard;passive;%NPS: nonstandard passive;41;(#9nst passive#)|(#9nst passive\?#);%#%;#9nst passive\?#;test3;v2_9;15
+115;115;115;61;9nst poss.;1;9;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;9nst poss\.;test3;v2_9;10
+116;116;116;66;9nst poss;1;9;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;9nst poss;test3;v2_9;9
+117;117;117;NA;#9 nst poss#;1;1;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;#9 nst poss#;test3;v2_9;12
+118;118;118;NA;#9nst poss#;1;1;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;#9nst poss#;test3;v2_9;11
+119;119;119;152;90 refl?@;2;9;%;0;RF;zero;reflexive;%0RF: zero reflexive;43;(90 refl\?@)|(#90 refl#);%#%;90 refl\?@;test3;v2_9;9
+120;120;120;NA;#90 refl#;2;1;%;0;RF;zero;reflexive;%0RF: zero reflexive;43;(90 refl\?@)|(#90 refl#);%#%;#90 refl#;test3;v2_9;9
+121;121;121;NA;#90 rel#;2;1;%;0;RL;zero;relative;%0RL: zero relative;44;(#90 rel#);%#%;#90 rel#;test3;v2_9;8
+122;122;122;10;9rel;1;9;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;9rel;test3;v2_9;4
+123;123;123;34;9rel;1;9;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;9rel;test3;v2_9;4
+124;124;124;114;9nst rel;1;9;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;9nst rel;test3;v2_9;8
+125;125;125;NA;#9rel;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;#9rel;test3;v2_9;5
+126;126;126;NA;#9rel#;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;#9rel#;test3;v2_9;6
+127;127;127;NA;#9nst rel#;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;#9nst rel#;test3;v2_9;10
+128;128;128;NA;#9nst rel?#;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;#9nst rel\?#;test3;v2_9;11
+129;129;129;NA;#9rel?#;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;#9rel\?#;test3;v2_9;7
+130;130;130;125;9semantics;1;9;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;9semantics;test3;v2_9;10
+131;131;131;NA;#9semantics;1;1;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;#9semantics;test3;v2_9;11
+132;132;132;NA;#9semantics#;1;1;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;#9semantics#;test3;v2_9;12
+133;133;133;NA;#9semantics of viel#;1;1;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;#9semantics of viel#;test3;v2_9;20
+134;134;134;NA;#9semantics.#;1;1;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;#9semantics\.#;test3;v2_9;13
+135;135;135;56;90 subj.;2;9;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;90 subj\.;test3;v2_9;8
+136;136;136;64;9ck 0 subj.;2;9;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;9ck 0 subj\.;test3;v2_9;11
+137;137;137;84;90 subj;2;9;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;90 subj;test3;v2_9;7
+138;138;138;129;90 subj;2;9;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;90 subj;test3;v2_9;7
+139;139;139;138;90 subj;2;9;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;90 subj;test3;v2_9;7
+140;140;140;NA;#90 subj#;2;1;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;#90 subj#;test3;v2_9;9
+141;141;141;NA;#90 subj;2;1;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;#90 subj;test3;v2_9;8
+142;142;142;NA;#90 sub#;2;1;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;#90 sub#;test3;v2_9;8
+143;143;143;NA;#9 0 subj#;2;1;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;#9 0 subj#;test3;v2_9;10
+144;144;144;NA;#90 subj.#;2;1;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;#90 subj\.#;test3;v2_9;NA
+145;145;145;73;90 verb;2;9;%;0;VP;zero;VP;%0VP: zero VP;48;(90 verb)|(#90 verb#)|(<#0VP#>)|(90 verb);%#%;90 verb;test3;v2_9;7
+146;146;146;NA;#90 verb#;2;1;%;0;VP;zero;VP;%0VP: zero VP;48;(90 verb)|(#90 verb#)|(<#0VP#>)|(90 verb);%#%;#90 verb#;test3;v2_9;9
+147;147;147;NA;#9nst verb#;1;1;%;N;VP;nonstandard;VP;%NVP: nonstandard VP;49;(#9nst verb#)|(<#NVP#>)|(9verb)|(9nst verb form);%#%;#9nst verb#;test3;v2_9;11
+148;148;148;112;9nst w;1;9;%;N;WD;nonstandard;word;%NWD: nonstandard word;50;(9nst w);%#%;9nst w;test3;v2_9;6
+149;149;149;81;9w o.;1;9;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9w o\.;test3;v2_9;5
+150;150;150;115;9w.o.;1;9;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9w\.o\.;test3;v2_9;5
+151;151;151;134;9nst w o;1;9;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9nst w o;test3;v2_9;8
+152;152;152;143;9nst w o;1;9;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9nst w o;test3;v2_9;8
+153;153;153;153;9nst w o;1;9;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9nst w o;test3;v2_9;8
+154;154;154;NA;#9nst w.o.#;1;1;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;#9nst w\.o\.#;test3;v2_9;11
+155;155;155;NA;#9nst w o#;1;1;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;#9nst w o#;test3;v2_9;10
+156;156;156;NA;#9nst w o.#;1;1;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;#9nst w o\.#;test3;v2_9;11
+157;157;157;NA;#9nst w o. #;1;1;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;#9nst w o\. #;test3;v2_9;12
+200;NA;NA;NA;#90 aux?#;2;1;%;0;AU;zero;auxiliary;%0AU: zero auxiliary;6;(#90 aux #)|(#90 aux\?#)|(90 aux);%#%;#90 aux\?#;NA;v2_9;9
+NA;NA;NA;NA;<#0AR#>;2;1;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;<#0AR#>;NA;v2_9;NA
+NA;NA;NA;NA;<#NAR#>;1;1;%;N;AR;nonstandard;article;%NAR: nonstandard article;5;(#9nst art#)|(<#NAR#>)|(9nst art);%#%;<#NAR#>;NA;v2_9;NA
+NA;NA;NA;NA;9nst art;1;NA;%;N;AR;nonstandard;article;%NAR: nonstandard article;5;(#9nst art#)|(<#NAR#>)|(9nst art);%#%;9nst art;NA;v2_9;8
+NA;NA;NA;NA;90  art;1;NA;%;0;AR;zero;article;%0AR: zero article;4;(prep 90 art#)|(90 art#)|(# 90 art\.)|(prep 90 art#)|(90 art#)|(90 art)|(90 art)|(90 art)|(#90 art)|(90 art\.)|(#90 art\.#)|(#90 art#)|(#9 0 art#)|(#0 art#)|(#90 art\?#)|(<#0AR#>)|(90  art);%#%;90  art;NA;v2_9;7
+NA;NA;NA;NA;90 aux;1;NA;%;0;AU;zero;auxiliary;%0AU: zero auxiliary;6;(#90 aux #)|(#90 aux\?#)|(90 aux);%#%;90 aux;NA;v2_9;6
+NA;NA;NA;NA;9nst aux;1;NA;%;N;AU;nonstandard;auxiliary;%NAU: nonstandard auxiliary;52;(9nst aux);%#%;9nst aux;NA;v2_9;8
+NA;NA;NA;NA;<#NCA#>;1;NA;%;N;CA;nonstandard;case marking;%NCA: nonstandard case marking;53;(<#NCA#>);%#%;<#NCA#>;NA;v2_9;NA
+NA;NA;NA;NA;#9nst compar#;1;NA;%;N;CM;nonstandard;comparison;%NCM: nonstandard comparison;7;(#9nst compar\.#)|(#9nst compar#)|(#9nst compar#)|(9nst compar);%#%;#9nst compar#;NA;v2_9;13
+NA;NA;NA;NA;9nst compar;1;NA;%;N;CM;nonstandard;comparison;%NCM: nonstandard comparison;7;(#9nst compar\.#)|(#9nst compar#)|(#9nst compar#)|(9nst compar);%#%;9nst compar;NA;v2_9;11
+NA;NA;NA;NA;90 cop;1;NA;%;0;CP;zero;copula;%0CP: zero copula;9;(90 cop\.)|(#90 cop#)|(#90 cop\?#)|(#9 0 cop#)|(90 cop);%#%;90 cop;NA;v2_9;6
+NA;NA;NA;NA;cop is/s;1;NA;%;N;CP;nonstandard;copula;%NCP: nonstandard copula;54;(cop is/s);%#%;cop is/s;NA;v2_9;8
+NA;NA;NA;NA;<#REP#>;1;NA;%;R;EP;repair;NA;%REP: repair NA;55;(<#REP#>);%#%;<#REP#>;NA;v2_9;NA
+NA;NA;NA;NA;9nst existential;1;NA;%;N;EX;nonstandard;existential;%NEX: nonstandard existential;12;(#9nst existential#)|(9nst ext#)|(9nst ext#)|(9nst existential);%#%;9nst existential;NA;v2_9;16
+NA;NA;NA;NA;90 existential;1;NA;%;0;EX;zero;existential;%0EX: zero existential;11;(#9 0 existential#)|(90 existential);%#%;90 existential;NA;v2_9;14
+NA;NA;NA;NA;9ns gen;1;NA;%;N;GN;nonstandard;gender;%NGN: nonstandard gender;14;(9double feminine, nst)|(9nst gen)|(#9nst gen#)|(#9 nst gen#)|(#9nst gen)|(9ns gen);%#%;9ns gen;NA;v2_9;7
+NA;NA;NA;NA;#90 modal?#;1;NA;%;0;MD;zero;modal;%0MD: zero modal;56;(#90 modal\?#)|(90 modal);%#%;#90 modal\?#;NA;v2_9;11
+NA;NA;NA;NA;90 modal;1;NA;%;0;MD;zero;modal;%0MD: zero modal;56;(#90 modal\?#)|(90 modal);%#%;90 modal;NA;v2_9;8
+NA;NA;NA;NA;<#NMO#>;1;1;%;N;MO;nonstandard;morphem;%NMO: nonstandard morphem;57;(<#NMO#>);%#%;<#NMO#>;NA;v2_9;NA
+NA;NA;NA;NA;9nst modal;1;NA;%;N;MD;nonstandard;modal;%NMD: nonstandard modal;58;(9nst modal);%#%;9nst modal;NA;v2_9;10
+NA;NA;NA;NA;9neg;1;NA;%;N;NN;nonstandard;negation;%NNN: nonstandard negation;59;(9neg);%#%;9neg;NA;v2_9;4
+NA;NA;NA;NA;9wohl/woll;3;NA;%;N;NS;nonstandard;not specified;%NNS: nonstandard not specified;13;(# 9nst#)|(# 9nst#)|(9nst)|(9nst)|(9nst)|(9nst\.)|(#9nst#)|(#9nst #)|(# 9nst#)|(#9nst)|(9wohl/woll);%#%;9wohl/woll;NA;v2_9;10
+NA;NA;NA;NA;<#0OB#>;2;1;%;0;OB;zero;object;%0OB: zero object;16;(90 obj)|(90 obj)|(#90 obj#)|(#90 obj\.#)|(<#0OB#>);%#%;<#0OB#>;NA;v2_9;NA
+NA;NA;NA;NA;#com: tape interrupted#;3;NA;%;C;OM;cmnt;tape interrupted;%COM: cmnt tape interrupted;60;(#com: tape interrupted#);%#%;#com: tape interrupted#;NA;v2_9;23
+NA;NA;NA;NA;#com: Luecke#;3;NA;%;C;OM;cmnt;gap;%COM: cmnt gap;61;(#com: Luecke#);%#%;#com: Luecke#;NA;v2_9;13
+NA;NA;NA;NA;#ahmt die Mundform nach#;3;NA;%;C;OM;cmnt;NA;%COM: cmnt NA;62;(#ahmt die Mundform nach#)|(#Streicheln#)|(#seufzen#)|(9ck Q or S)|(9doesn't comprehend passive);%#%;#ahmt die Mundform nach#;NA;v2_9;24
+NA;NA;NA;NA;#Bewegung der Hanteln#;3;NA;%;C;OM;cmnt;movement;%COM: cmnt movement;63;(#Bewegung der Hanteln#);%#%;#Bewegung der Hanteln#;NA;v2_9;22
+NA;NA;NA;NA;#die zeigt auf den dicken Mann#;3;NA;%;C;OM;cmnt;showing;%COM: cmnt showing;32;(#zeigt auf Besen#)|(#zeigt auf ihre Locken#)|(# zeigt #)|(#die zeigt auf den dicken Mann#)|(#zeigt richtig#);%#%;#die zeigt auf den dicken Mann#;NA;v2_9;31
+NA;NA;NA;NA;#zeigt richtig#;3;NA;%;C;OM;cmnt;showing;%COM: cmnt showing;32;(#zeigt auf Besen#)|(#zeigt auf ihre Locken#)|(# zeigt #)|(#die zeigt auf den dicken Mann#)|(#zeigt richtig#);%#%;#zeigt richtig#;NA;v2_9;15
+NA;NA;NA;NA;#Streicheln#;3;NA;%;C;OM;cmnt;NA;%COM: cmnt NA;62;(#ahmt die Mundform nach#)|(#Streicheln#)|(#seufzen#)|(9ck Q or S)|(9doesn't comprehend passive);%#%;#Streicheln#;NA;v2_9;12
+NA;NA;NA;NA;#seufzen#;3;NA;%;C;OM;cmnt;NA;%COM: cmnt NA;62;(#ahmt die Mundform nach#)|(#Streicheln#)|(#seufzen#)|(9ck Q or S)|(9doesn't comprehend passive);%#%;#seufzen#;NA;v2_9;9
+NA;NA;NA;NA;9ck Q or S;3;NA;%;C;OM;cmnt;NA;%COM: cmnt NA;62;(#ahmt die Mundform nach#)|(#Streicheln#)|(#seufzen#)|(9ck Q or S)|(9doesn't comprehend passive);%#%;9ck Q or S;NA;v2_9;10
+NA;NA;NA;NA;9check tape for speaker;3;NA;%;C;OM;cmnt;chk tape;%COM: cmnt chk tape;64;(9check tape for speaker);%#%;9check tape for speaker;NA;v2_9;23
+NA;NA;NA;NA;unklar;3;NA;%;C;OM;cmnt;unclear;%COM: cmnt unclear;34;(#unklar#)|(unklar)|(unverstaenglich);%#%;unklar;NA;v2_9;6
+NA;NA;NA;NA;unverstaenglich;3;NA;%;C;OM;cmnt;unclear;%COM: cmnt unclear;34;(#unklar#)|(unklar)|(unverstaenglich);%#%;unverstaenglich;NA;v2_9;15
+NA;NA;NA;NA;9doesn't comprehend passive;3;NA;%;C;OM;cmnt;NA;%COM: cmnt NA;62;(#ahmt die Mundform nach#)|(#Streicheln#)|(#seufzen#)|(9ck Q or S)|(9doesn't comprehend passive);%#%;9doesn't comprehend passive;NA;v2_9;27
+NA;NA;NA;NA;9nst passive;1;NA;%;N;PA;nonstandard;passive;%NPA: nonstandard passive;65;(9nst passive);%#%;9nst passive;NA;v2_9;12
+NA;NA;NA;NA;90 predicate;1;NA;%;0;PD;zero;predicate;%0PD: zero predicate;66;(90 predicate);%#%;90 predicate;NA;v2_9;12
+NA;NA;NA;NA;<#NPE#>;1;1;%;N;PE;nonstandard;person;%NPE: nonstandard person;39;(#9nst pers#)|(<#NPE#>)|(9nst pers);%#%;<#NPE#>;NA;v2_9;NA
+NA;NA;NA;NA;9nst pers;1;NA;%;N;PE;nonstandard;person;%NPE: nonstandard person;39;(#9nst pers#)|(<#NPE#>)|(9nst pers);%#%;9nst pers;NA;v2_9;9
+NA;NA;NA;NA;9no pl /num;1;NA;%;0;PN;zero;plural/numeral;%0PN: zero plural/numeral;36;(9no pl/num\.)|(#9no pl/num#)|(9no pl /num);%#%;9no pl /num;NA;v2_9;11
+NA;NA;NA;NA;<#NPR#>;1;1;%;N;PR;nonstandard;preposition;%NPR: nonstandard preposition;40;(# 9nst prep#)|(# 9nst prep#)|(9nst prep)|(9nst prep)|(9nst prep)|(9nst prep\?@\.)|(9nst prep\.)|(9nst prep)|(#9nst prep#)|(#9nst prep\.#)|(#9nst prep #)|(# 9nst prep#)|(<#NPR#>);%#%;<#NPR#>;NA;v2_9;NA
+NA;NA;NA;NA;9poss 0 element;1;NA;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;9poss 0 element;NA;v2_9;15
+NA;NA;NA;NA;9poss 0 rel;1;NA;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;9poss 0 rel;NA;v2_9;11
+NA;NA;NA;NA;9poss 0 cop;1;NA;%;N;PV;nonstandard;possessive;%NPV: nonstandard possessive;42;(9nst poss\.)|(9nst poss)|(#9 nst poss#)|(#9nst poss#)|(9poss 0 element)|(9poss 0 rel)|(9poss 0 cop);%#%;9poss 0 cop;NA;v2_9;11
+NA;NA;NA;NA;<#NRL#>;1;1;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;<#NRL#>;NA;v2_9;NA
+NA;NA;NA;NA;9rel;1;NA;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;9rel;NA;v2_9;4
+NA;NA;NA;NA;9std rel except case;1;NA;%;N;RL;nonstandard;relative;%NRL: nonstandard relative;45;(9rel)|(9rel)|(9nst rel)|(#9rel)|(#9rel#)|(#9nst rel#)|(#9nst rel\?#)|(#9rel\?#)|(<#NRL#>)|(9rel)|(9std rel except case);%#%;9std rel except case;NA;v2_9;20
+NA;NA;NA;NA;90 refl pro;1;NA;%;0;RP;zero;reflexive pronoun;%0RP: zero reflexive pronoun;67;(90 refl pro);%#%;90 refl pro;NA;v2_9;11
+NA;NA;NA;NA;<#NSM#>;1;1;%;N;SM;nonstandard;semantics;%NSM: nonstandard semantics;46;(9semantics)|(#9semantics)|(#9semantics#)|(#9semantics of viel#)|(#9semantics\.#)|(<#NSM#>);%#%;<#NSM#>;NA;v2_9;NA
+NA;NA;NA;NA;<#NSU#>;1;1;%;N;SU;nonstandard;subject;%NSU: nonstandard subject;68;(<#NSU#>);%#%;<#NSU#>;NA;v2_9;NA
+NA;NA;NA;NA;90  subj;1;NA;%;0;SU;zero;subject;%0SU: zero subject;47;(90 subj\.)|(9ck 0 subj\.)|(90 subj)|(90 subj)|(90 subj)|(#90 subj#)|(#90 subj)|(#90 sub#)|(#9 0 subj#)|(#90 subj\.#)|(90  subj);%#%;90  subj;NA;v2_9;8
+NA;NA;NA;NA;<#NSY#>;1;1;%;N;SY;nonstandard;syntax;%NSY: nonstandard syntax;69;(<#NSY#>);%#%;<#NSY#>;NA;v2_9;NA
+NA;NA;NA;NA;9vocab;1;NA;%;N;VC;nonstandard;vocab;%NVC: nonstandard vocab;70;(9vocab);%#%;9vocab;NA;v2_9;6
+NA;NA;NA;NA;<#0VP#>;2;1;%;0;VP;zero;VP;%0VP: zero VP;48;(90 verb)|(#90 verb#)|(<#0VP#>)|(90 verb);%#%;<#0VP#>;NA;v2_9;NA
+NA;NA;NA;NA;<#NVP#>;1;1;%;N;VP;nonstandard;VP;%NVP: nonstandard VP;49;(#9nst verb#)|(<#NVP#>)|(9verb)|(9nst verb form);%#%;<#NVP#>;NA;v2_9;NA
+NA;NA;NA;NA;9verb;1;NA;%;N;VP;nonstandard;VP;%NVP: nonstandard VP;49;(#9nst verb#)|(<#NVP#>)|(9verb)|(9nst verb form);%#%;9verb;NA;v2_9;5
+NA;NA;NA;NA;9nst verb form;1;NA;%;N;VP;nonstandard;VP;%NVP: nonstandard VP;49;(#9nst verb#)|(<#NVP#>)|(9verb)|(9nst verb form);%#%;9nst verb form;NA;v2_9;14
+NA;NA;NA;NA;90 verb;1;NA;%;0;VP;zero;VP;%0VP: zero VP;48;(90 verb)|(#90 verb#)|(<#0VP#>)|(90 verb);%#%;90 verb;NA;v2_9;7
+NA;NA;NA;NA;9w o;1;NA;%;N;WO;nonstandard;word order;%NWO: nonstandard word order;51;(9w o\.)|(9w\.o\.)|(9nst w o)|(9nst w o)|(9nst w o)|(#9nst w\.o\.#)|(#9nst w o#)|(#9nst w o\.#)|(#9nst w o\. #)|(9w o);%#%;9w o;NA;v2_9;4

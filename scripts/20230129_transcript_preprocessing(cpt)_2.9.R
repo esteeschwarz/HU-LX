@@ -49,6 +49,7 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
 #codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 getwd()
+codesdir<-"gith/HU-LX/data"
 codesource<-"local/HU-LX/SES/codes_cpt4mod.csv"
 
 list.files(dirtext)

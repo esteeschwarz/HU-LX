@@ -1,0 +1,50 @@
+code,feature,subst
+#90 modal?#,zero modal,#0MO#
+#com: tape interrupted#,tape interrupted,#COM#
+#com: Luecke#,Luecke,#COM#
+#ahmt die Mundform nach#,,#COM#
+#Bewegung der Hanteln#,,#COM#
+#die zeigt auf den dicken Mann#,,#COM#
+#Streicheln#,,#COM#
+#seufzen#,,#COM#
+#9nst compar#,nonstandard comparison,NCO
+9nst modal,,
+9rel,,
+9poss 0 element,taa,
+9ck Q or S,taa,
+90 cop,taa,
+9poss 0 rel,taa,
+90 modal,taa,
+9w o,taa,
+9wohl/woll,taa,
+9poss 0 cop,tab,
+9check tape for speaker,tab,
+90  subj,tab,
+9nst pers,tab,
+9ns gen,taf,
+9nst passive,tbi,
+9verb,tbi,
+9nst compar,tbi,
+9neg,tbi,
+90 aux,tbi,
+unklar,tbk,
+unverstaenglich,tbk,
+9no pl /num,tbl,
+9nst existential,tbl,
+9nst art,tbl,
+90  subj,tbl,
+cop is/s,tbq,
+9nst verb form,tbq,
+90 refl pro,tbq,
+9doesn't comprehend passive,tbq,
+9nst passive,tbq,
+90 aux,tbq,
+9nst aux,tbq,
+90 predicate,tbq,
+90  art,tbq,
+90 verb,tbq,
+9vocab,tbq,
+90 existential,tbq,
+90  subj,tbq,
+9nst passive,tbr,
+9std rel except case,tbr,

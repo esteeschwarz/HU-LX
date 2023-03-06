@@ -4,7 +4,8 @@ library(readr)
 library(stringi)
 library(R.utils)
 getwd()
-datadir<-"local/HU-LX/SES"
+datadir<-"local/HU-LX/SES" #database
+codesdir<-"gith/HU-LX/data"
 
 # now again from base DB
 list.files(getwd())
