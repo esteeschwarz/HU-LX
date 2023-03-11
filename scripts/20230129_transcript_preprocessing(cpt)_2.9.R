@@ -29,6 +29,7 @@ datestamp<-"13107.2"
 version<-"v2_9"
 numbered<-T
 ske<-F
+codesubstitute<-" "
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
@@ -61,7 +62,7 @@ if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme==outputschemes[3]){
   dirchat<-paste("SES_transcripts",version,datestamp,"clean-without-codes",sep="_")
-  codesubstitute<-"<#coding removed#>"}
+  codesubstitute<-codesubstitute}
 if (scheme==outputschemes[4])
   dirchat<-paste("SES_transcripts",version,datestamp,"InlineCodes",sep="_")
 if (numbered==T)
@@ -1203,28 +1204,38 @@ headercoding<-function(){
     k<-1
     k
 tna<-!is.na(turns$X2)
-t2<-turns$X2
-m<-grep("INT",turns$X1,invert = T)
+sum(tna)
+t2<-turns$X1
+m<-grepl("INT",t2)
+m<-(m+1-2)*-1
+m<-m==1 #inverted INT lines
 #m2<-grep("%",turns$X1,invert = T)
-mna<-!is.na(turns$X2[m])
+mna<-!is.na(turns$X2)
+sum(mna)
+m2<-mna*m
+sum(m2)
+m2<-m2==1
 tn1<-turns$X2[m]
 mna<-!is.na(tn1)
-tna<-tn1[mna]
-    for (k in tna){
+tna<-tn1[m2]
+    for (k in 1:length(t2)){
       
-#      if (!is.na(k)){
-      turn<-tna
+      if (m2[k]!=F){
+      turn<-turns$X2[k]
       turn<-gsub("\t","",turn)
       print(turn)
-      prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
-#      prompt
-      q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+#      prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+#      prompt<-paste0('finde fehlende definite Artikel in der Phrase [',turn,'] und zeichne sie mit #0AR <Artikel># aus: ')
+      prompt<-paste0('find missing definite articles in the phrase [',turn,'] and tag them #0AR <article>#')
+#prompt
+            q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
       q
       answer<-askgpt(q)
       turns[k,"tag"]<-answer
   #    }
     }
-      }
+    }
+turns$tag
  # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
   
     ### END replacement loop #########
