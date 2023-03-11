@@ -24,8 +24,8 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
-datestamp<-"13101"
+scheme<-outputschemes[3]
+datestamp<-"13107.2"
 version<-"v2_9"
 numbered<-T
 ske<-F
@@ -35,7 +35,7 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
 if (scheme==outputschemes[2]){
   ske<-T
@@ -100,7 +100,7 @@ dirtemp
 ###wks.
 #external codes .csv table
 codes_cpt <- read_delim(codesource, 
-                        delim = ";", escape_double = T)
+                        delim = ",", escape_double = T)
 codes_nna<-!is.na(codes_cpt$codes)
 codes_nna<-array(codes_nna)
 codes_cpt_nna<-codes_cpt[codes_nna,]
@@ -323,8 +323,11 @@ regxcor<-function(codeset,subset){
     regx4<-"\\)"
     repl4<-"\\\\)"
     regxf<-gsub(regx4,repl4,regxe)
+    regx5<-"\\*"
+    repl5<-"\\\\*"
+    regxg<-gsub(regx5,repl5,regxf)
     
-    codes_cpt[k,"regexcor"]<-regxf
+    codes_cpt[k,"regexcor"]<-regxg
     codes_cpt[k,"version"]<-version
   }
   return(codes_cpt)
@@ -450,7 +453,7 @@ rpall["shortcode"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"#")
 ### THIS complete replacement loop
 filelist2
 f<-1
-###13052.get common transcrpt start:
+###13052.get common transcript start:
 transtart<-array()
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
@@ -469,7 +472,7 @@ for (f in 1:length(filelist2)){
   p3
 transtart[f]<-p3  
 }
-f<-1
+f<-6
 metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 mns<-colnames(metatable)
 headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
@@ -478,7 +481,7 @@ transtart<-max(transtart)
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
-  kidname<-stri_split(filelist2[k],regex="_")
+  kidname<-stri_split(filelist2[f],regex="_")
   kidname<-toupper(unlist(kidname)[3])
   #13083.header modification
   p1<-grep("@.anguage",tbu)
@@ -531,13 +534,13 @@ for (f in 1:length(filelist2)){
   ######################################################################
   tbu
   rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3)
-  rptiers$
+  #rptiers$
   #####################################
   ### this section main replacement ###
   ##### wks.
   #find transcript start
   mstart<-grep("^\\*",tbu)[1]
-  tbu<-insert(tbu,mstart-1,"@header end")
+  tbu<-insert(tbu,mstart,"@header end")
   tbub<-tbu[mstart:length(tbu)] #transcript section
   tbusafe<-tbu
   tbuheader<-tbu[1:mstart-1] #header section
@@ -578,6 +581,7 @@ for (f in 1:length(filelist2)){
          rpall[k,5+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
+  tbu
   #### end replacement loop
   #TODO: create table of code instances in transcript:
   #scheme<-"sansCodes"
@@ -1128,5 +1132,102 @@ sketchcoding<-function(){
 if(ske==T) #declared in head of script
   sketchcoding()
 
+######################################
+### header construct new, header database
+getwd()
+chat2ndoutdir<-paste(dirtext,dir_2ndmod,sketchversion,sep = "/")
+translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
 
-
+headercoding<-function(){
+  ##############################
+  ### >>> run this on preprocessed last version transcript to modify for sketch #####
+  chatlastoutdir<-paste(dirtext,dirchat,sep="/")
+  chatlastoutdir
+  filelist3<-list.files(chatlastoutdir)
+  filelist3
+  f<-3
+  hdb<-read.csv("local/HU-LX/SES/db_header.csv")
+  for (f in 1:length(filelist3)){
+    tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
+    p3<-grep("@.egin",tbu)
+    #####################################
+    #find transcript start
+    mstart<-grep("\\*[A-Z]{3}",tbu)[1]
+    #mstart<-grep("^\\*",tbu)[1]
+    tbub<-tbu[mstart:length(tbu)] #transcript section
+    tbusafe<-tbu
+    tbuheader<-tbu[1:mstart-1] #header section
+    headerlines<-tbuheader[2:length(tbuheader)]
+    headeritems<-stri_split_regex(headerlines,":",simplify = T)
+    header_df<-data.frame(headeritems,row.names = headeritems[,1])
+    h1<-header_df
+    h1$content<-paste(h1$X2,h1$X3,h1$X4)
+    h1["@Comment","content"]
+    regx1<-"\t"
+    repl1<-" "
+    h1$content<-gsub(regx1,repl1,h1$content)
+    regx1<-"   "
+    repl1<-" "
+    h1$content<-gsub(regx1,repl1,h1$content)
+    h1<-data.frame(d1=h1$content,row.names = rownames(h1))
+    h2<-h1
+    #h3<-list(h1)
+#    rns<-h2$d1[!is.na(h2$d1)]
+    rownames(hdb)<-hdb[,1]
+    library(purrr)
+    h2["@Duration",]<-h2["@Duration",]%>%stri_extract_all_regex("[0-9]{1,2}")%>%unlist()%>%paste(collapse=":")
+    #kid<-"GDB"
+    kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
+    kid<-kidsdf[f,2]
+    #hdb[,kid]<-h2$d1
+    k<-1
+    for (k in rownames(h2)){
+      hdb[k,kid]<-h2[k,"d1"]
+    }
+    f
+    k<-2
+    #rownames(h2)==rownames(hdb)
+    hdb[k,"d1"]
+        #tbu<-tbub
+    tbub
+    turns<-stri_split_regex(tbub,":",simplify = T)
+    turns<-data.frame(turns)
+    ### chatgpt request:
+    turn<-turns$X2[10]
+    turn<-gsub("\t","",turn)
+    
+    prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+    prompt
+    q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+    q
+    k<-1
+    k
+tna<-!is.na(turns$X2)
+t2<-turns$X2
+m<-grep("INT",turns$X1,invert = T)
+#m2<-grep("%",turns$X1,invert = T)
+mna<-!is.na(turns$X2[m])
+tn1<-turns$X2[m]
+mna<-!is.na(tn1)
+tna<-tn1[mna]
+    for (k in tna){
+      
+#      if (!is.na(k)){
+      turn<-tna
+      turn<-gsub("\t","",turn)
+      print(turn)
+      prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+#      prompt
+      q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+      q
+      answer<-askgpt(q)
+      turns[k,"tag"]<-answer
+  #    }
+    }
+      }
+ # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
+  
+    ### END replacement loop #########
+  ### outputs transcript version: without header, with inline codes, lines <s>wrapped</s>
+}
+#headercoding()
