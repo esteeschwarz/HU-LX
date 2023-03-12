@@ -25,17 +25,18 @@ path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
 scheme<-outputschemes[2]
-datestamp<-"13101"
+datestamp<-"13112"
 version<-"v2_9"
 numbered<-T
-ske<-F
+ske<-F #not change!
+codesubstitute<-" "
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
 if (scheme==outputschemes[2]){
   ske<-T
@@ -49,8 +50,9 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
 #codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 getwd()
-codesource<-"local/HU-LX/SES/codes_cpt4mod.csv"
-
+codesdir<-"gith/HU-LX/data"
+codesource<-"gith/HU-LX/data/codes_cpt5.csv"
+metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
@@ -60,7 +62,7 @@ if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme==outputschemes[3]){
   dirchat<-paste("SES_transcripts",version,datestamp,"clean-without-codes",sep="_")
-  codesubstitute<-"<#coding removed#>"}
+  codesubstitute<-codesubstitute}
 if (scheme==outputschemes[4])
   dirchat<-paste("SES_transcripts",version,datestamp,"InlineCodes",sep="_")
 if (numbered==T)
@@ -99,7 +101,7 @@ dirtemp
 ###wks.
 #external codes .csv table
 codes_cpt <- read_delim(codesource, 
-                        delim = ";", escape_double = T)
+                        delim = ",", escape_double = T)
 codes_nna<-!is.na(codes_cpt$codes)
 codes_nna<-array(codes_nna)
 codes_cpt_nna<-codes_cpt[codes_nna,]
@@ -322,8 +324,11 @@ regxcor<-function(codeset,subset){
     regx4<-"\\)"
     repl4<-"\\\\)"
     regxf<-gsub(regx4,repl4,regxe)
+    regx5<-"\\*"
+    repl5<-"\\\\*"
+    regxg<-gsub(regx5,repl5,regxf)
     
-    codes_cpt[k,"regexcor"]<-regxf
+    codes_cpt[k,"regexcor"]<-regxg
     codes_cpt[k,"version"]<-version
   }
   return(codes_cpt)
@@ -449,7 +454,7 @@ rpall["shortcode"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"#")
 ### THIS complete replacement loop
 filelist2
 f<-1
-###13052.get common transcrpt start:
+###13052.get common transcript start:
 transtart<-array()
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
@@ -468,8 +473,8 @@ for (f in 1:length(filelist2)){
   p3
 transtart[f]<-p3  
 }
-f<-1
-metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
+f<-6
+# metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 mns<-colnames(metatable)
 headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
               "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
@@ -477,7 +482,7 @@ transtart<-max(transtart)
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
-  kidname<-stri_split(filelist2[k],regex="_")
+  kidname<-stri_split(filelist2[f],regex="_")
   kidname<-toupper(unlist(kidname)[3])
   #13083.header modification
   p1<-grep("@.anguage",tbu)
@@ -530,13 +535,13 @@ for (f in 1:length(filelist2)){
   ######################################################################
   tbu
   rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3)
-  rptiers$
+  #rptiers$
   #####################################
   ### this section main replacement ###
   ##### wks.
   #find transcript start
   mstart<-grep("^\\*",tbu)[1]
-  tbu<-insert(tbu,mstart-1,"@header end")
+  tbu<-insert(tbu,mstart,"@header end")
   tbub<-tbu[mstart:length(tbu)] #transcript section
   tbusafe<-tbu
   tbuheader<-tbu[1:mstart-1] #header section
@@ -577,6 +582,7 @@ for (f in 1:length(filelist2)){
          rpall[k,5+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
+  tbu
   #### end replacement loop
   #TODO: create table of code instances in transcript:
   #scheme<-"sansCodes"
@@ -1126,6 +1132,175 @@ sketchcoding<-function(){
 #call ske version:
 if(ske==T) #declared in head of script
   sketchcoding()
+
+######################################
+### header construct new, header database
+getwd()
+chat2ndoutdir<-paste(dirtext,dir_2ndmod,sketchversion,sep = "/")
+translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
+
+headercoding<-function(){
+  ##############################
+  ### >>> run this on preprocessed last version transcript to modify for sketch #####
+  chatlastoutdir<-paste(dirtext,dirchat,sep="/")
+  chatlastoutdir
+  filelist3<-list.files(chatlastoutdir)
+  filelist3
+  f<-4
+  hdb<-read.csv("local/HU-LX/SES/db_header.csv")
+  for (f in 1:length(filelist3)){
+    tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
+    p3<-grep("@.egin",tbu)
+    #####################################
+    #find transcript start
+    mstart<-grep("\\*[A-Z]{3}",tbu)[1]
+    #mstart<-grep("^\\*",tbu)[1]
+    tbub<-tbu[mstart:length(tbu)] #transcript section
+    tbusafe<-tbu
+    tbuheader<-tbu[1:mstart-1] #header section
+    headerlines<-tbuheader[2:length(tbuheader)]
+    headeritems<-stri_split_regex(headerlines,":",simplify = T)
+    header_df<-data.frame(headeritems,row.names = headeritems[,1])
+    h1<-header_df
+    h1$content<-paste(h1$X2,h1$X3,h1$X4)
+    h1["@Comment","content"]
+    regx1<-"\t"
+    repl1<-" "
+    h1$content<-gsub(regx1,repl1,h1$content)
+    regx1<-"   "
+    repl1<-" "
+    h1$content<-gsub(regx1,repl1,h1$content)
+    h1<-data.frame(d1=h1$content,row.names = rownames(h1))
+    h2<-h1
+    #h3<-list(h1)
+#    rns<-h2$d1[!is.na(h2$d1)]
+    #rownames(hdb)<-hdb[,1]
+    library(purrr)
+    h2["@Duration",]<-h2["@Duration",]%>%stri_extract_all_regex("[0-9]{1,2}")%>%unlist()%>%paste(collapse=":")
+    #kid<-"GDB"
+    kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
+    kid<-kidsdf[f,2]
+    #hdb[,kid]<-h2$d1
+    k<-1
+    for (k in rownames(h2)){
+      hdb[k,kid]<-h2[k,"d1"]
+    }
+  }
+}
+#headercoding()
+
+getwd()
+source("local/R/askchatgpt.R")
+notrun<-function(){
+    f
+    k<-2
+    #rownames(h2)==rownames(hdb)
+    hdb[k,"d1"]
+        #tbu<-tbub
+    tbub
+    turns<-stri_split_regex(tbub,":",simplify = T)
+    turns<-data.frame(turns)
+    ### chatgpt request:
+    turn<-turns$X2[10]
+    turn<-gsub("\t","",turn)
+    
+    #prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+    prompt
+    #q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+    #q
+    #k<-1
+    #k
+tna<-!is.na(turns$X2)
+sum(tna)
+t2<-turns$X1
+m<-grepl("INT",t2)
+m<-(m+1-2)*-1
+m<-m==1 #inverted INT lines
+#m2<-grep("%",turns$X1,invert = T)
+mna<-!is.na(turns$X2)
+sum(mna)
+m2<-mna*m
+sum(m2)
+m2<-m2==1
+tn1<-turns$X2[m]
+mna<-!is.na(tn1)
+tna<-tn1[m2]
+    for (k in 1:length(t2)){
+      #c<-stri_extract_all_boundaries()
+      if (m2[k]!=F){
+      turn<-turns$X2[k]
+      turn<-gsub("\t","",turn)
+      c<-unlist(stri_extract_all_words(turn))
+      if (length(c)>=5)
+      print(turn)
+#      prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+#      prompt<-paste0('finde fehlende definite Artikel in der Phrase [',turn,'] und zeichne sie mit #0AR <Artikel># aus: ')
+      prompt<-paste0('find missing definite articles in the phrase [',turn,'] and tag them #0AR <article>#')
+      prompt<-paste0('define any eventually missing definite articles in the phrase [',turn,'] and tag the corresponding noun <0AR>')
+      #
+      #prompt
+            q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+ answer<-3
+ #q
+#      answer<-askgpt(q)
+      turns[k,"tag"]<-answer
+  #    }
+    }
+    }
+turns$tag
+}
+ # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
+##########
+### fetch codes in original transcript
+fcodes<-function(){
+filelist
+### corpus
+library(quanteda)
+dirtext
+tcfiles<-paste(dirtext,filelist,sep = "/")
+dta <- readtext(tcfiles)
+#dta
+# Create a corpus object
+dta_cor <- corpus(dta)
+#tc<-corpus(paste(dirtext,filelist,sep = "/"))
+summary(dta_cor)
+tc_tokens <- tokens(dta_cor)
+
+# 4.1 Keywords in Context (KWIC)
+# https://tutorials.quanteda.io/basic-operations/tokens/kwic/
+# head() prints the first six results returned by the kwic() function
+cc9<-kwic(tc_tokens, pattern="9", window = 3, case_insensitive = TRUE)
+cc90<-kwic(tc_tokens, pattern="90", window = 3, case_insensitive = TRUE)
+ccnst<-kwic(tc_tokens, pattern="nst", window = 3, case_insensitive = TRUE)
+ccr<-kwic(tc_tokens, pattern="#*#", window = 3, case_insensitive = TRUE)
+
+l1<-length(codes_cpt$codes)+1
+l2<-l1+length(ccr$keyword)
+l3<-length(codes_cpt)
+nsc1<-colnames(codes_cpt)
+#cd2<-
+cda<-rbind(codes_cpt["codes"],ccr$keyword,l1)
+library(dplyr)
+codes<-unique(ccr$keyword)
+#cd3<-bind_rows(codes_cpt,tibble(codes))
+#u1<-unique(cd3$codes)
+#cda1<-unique(codes_cpt$codes)
+u2<-codes%in%codes_cpt$codes
+u2
+m<-(u2+1-2)*-1
+m<-m==1 #inverted INT lines
+m
+u2<-codes[m]
+codes<-u2
+cd3<-bind_rows(codes_cpt,tibble(codes))
+###wks.
+#######
+codes<-unique(paste0(cc90$pre,cc90$keyword,cc90$post))
+cd3<-bind_rows(cd3,tibble(codes))
+codes<-paste0(ccnst$pre,ccnst$keyword,ccnst$post)
+cd3<-bind_rows(cd3,tibble(codes))
+write.csv(cd3,"gith/HU-LX/data/codes_cpt5.csv")
+}
 
 
 
