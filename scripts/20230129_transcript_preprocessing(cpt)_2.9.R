@@ -24,8 +24,8 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[3]
-datestamp<-"13107.2"
+scheme<-outputschemes[1]
+datestamp<-"13112"
 version<-"v2_9"
 numbered<-T
 ske<-F
@@ -51,8 +51,8 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 #codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 getwd()
 codesdir<-"gith/HU-LX/data"
-codesource<-"local/HU-LX/SES/codes_cpt4mod.csv"
-
+codesource<-"gith/HU-LX/data/codes_cpt5.csv"
+metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
@@ -474,7 +474,7 @@ for (f in 1:length(filelist2)){
 transtart[f]<-p3  
 }
 f<-6
-metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
+# metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 mns<-colnames(metatable)
 headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
               "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
@@ -1146,7 +1146,7 @@ headercoding<-function(){
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
   filelist3
-  f<-3
+  f<-4
   hdb<-read.csv("local/HU-LX/SES/db_header.csv")
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
@@ -1174,7 +1174,7 @@ headercoding<-function(){
     h2<-h1
     #h3<-list(h1)
 #    rns<-h2$d1[!is.na(h2$d1)]
-    rownames(hdb)<-hdb[,1]
+    #rownames(hdb)<-hdb[,1]
     library(purrr)
     h2["@Duration",]<-h2["@Duration",]%>%stri_extract_all_regex("[0-9]{1,2}")%>%unlist()%>%paste(collapse=":")
     #kid<-"GDB"
@@ -1185,6 +1185,13 @@ headercoding<-function(){
     for (k in rownames(h2)){
       hdb[k,kid]<-h2[k,"d1"]
     }
+  }
+}
+#headercoding()
+
+getwd()
+source("local/R/askchatgpt.R")
+notrun<-function(){
     f
     k<-2
     #rownames(h2)==rownames(hdb)
@@ -1197,12 +1204,12 @@ headercoding<-function(){
     turn<-turns$X2[10]
     turn<-gsub("\t","",turn)
     
-    prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
+    #prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
     prompt
-    q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
-    q
-    k<-1
-    k
+    #q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
+    #q
+    #k<-1
+    #k
 tna<-!is.na(turns$X2)
 sum(tna)
 t2<-turns$X1
@@ -1219,26 +1226,81 @@ tn1<-turns$X2[m]
 mna<-!is.na(tn1)
 tna<-tn1[m2]
     for (k in 1:length(t2)){
-      
+      #c<-stri_extract_all_boundaries()
       if (m2[k]!=F){
       turn<-turns$X2[k]
       turn<-gsub("\t","",turn)
+      c<-unlist(stri_extract_all_words(turn))
+      if (length(c)>=5)
       print(turn)
 #      prompt<-paste0('find all missing articles in the following sentence and tag them like #0AR <article>#: ',turn)
 #      prompt<-paste0('finde fehlende definite Artikel in der Phrase [',turn,'] und zeichne sie mit #0AR <Artikel># aus: ')
       prompt<-paste0('find missing definite articles in the phrase [',turn,'] and tag them #0AR <article>#')
-#prompt
+      prompt<-paste0('define any eventually missing definite articles in the phrase [',turn,'] and tag the corresponding noun <0AR>')
+      #
+      #prompt
             q<- paste0('{"model": "text-davinci-003", "prompt": "',prompt,'", "temperature": 0, "max_tokens": 600}')
-      q
-      answer<-askgpt(q)
+ answer<-3
+ #q
+#      answer<-askgpt(q)
       turns[k,"tag"]<-answer
   #    }
     }
     }
 turns$tag
- # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
-  
-    ### END replacement loop #########
-  ### outputs transcript version: without header, with inline codes, lines <s>wrapped</s>
 }
-#headercoding()
+ # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
+##########
+### fetch codes in original transcript
+fcodes<-function(){
+filelist
+### corpus
+library(quanteda)
+dirtext
+tcfiles<-paste(dirtext,filelist,sep = "/")
+dta <- readtext(tcfiles)
+#dta
+# Create a corpus object
+dta_cor <- corpus(dta)
+#tc<-corpus(paste(dirtext,filelist,sep = "/"))
+summary(dta_cor)
+tc_tokens <- tokens(dta_cor)
+
+# 4.1 Keywords in Context (KWIC)
+# https://tutorials.quanteda.io/basic-operations/tokens/kwic/
+# head() prints the first six results returned by the kwic() function
+cc9<-kwic(tc_tokens, pattern="9", window = 3, case_insensitive = TRUE)
+cc90<-kwic(tc_tokens, pattern="90", window = 3, case_insensitive = TRUE)
+ccnst<-kwic(tc_tokens, pattern="nst", window = 3, case_insensitive = TRUE)
+ccr<-kwic(tc_tokens, pattern="#*#", window = 3, case_insensitive = TRUE)
+
+l1<-length(codes_cpt$codes)+1
+l2<-l1+length(ccr$keyword)
+l3<-length(codes_cpt)
+nsc1<-colnames(codes_cpt)
+#cd2<-
+cda<-rbind(codes_cpt["codes"],ccr$keyword,l1)
+library(dplyr)
+codes<-unique(ccr$keyword)
+#cd3<-bind_rows(codes_cpt,tibble(codes))
+#u1<-unique(cd3$codes)
+#cda1<-unique(codes_cpt$codes)
+u2<-codes%in%codes_cpt$codes
+u2
+m<-(u2+1-2)*-1
+m<-m==1 #inverted INT lines
+m
+u2<-codes[m]
+codes<-u2
+cd3<-bind_rows(codes_cpt,tibble(codes))
+###wks.
+#######
+codes<-unique(paste0(cc90$pre,cc90$keyword,cc90$post))
+cd3<-bind_rows(cd3,tibble(codes))
+codes<-paste0(ccnst$pre,ccnst$keyword,ccnst$post)
+cd3<-bind_rows(cd3,tibble(codes))
+write.csv(cd3,"gith/HU-LX/data/codes_cpt5.csv")
+}
+
+
+
