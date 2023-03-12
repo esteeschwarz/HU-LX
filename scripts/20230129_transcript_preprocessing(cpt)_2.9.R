@@ -24,11 +24,11 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[2]
 datestamp<-"13112"
 version<-"v2_9"
 numbered<-T
-ske<-F
+ske<-F #not change!
 codesubstitute<-" "
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
