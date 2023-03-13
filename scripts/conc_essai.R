@@ -10,15 +10,15 @@ codesdir<-"gith/HU-LX/data"
 # now again from base DB
 getwd()
 list.files(getwd())
-setwd(datadir)
+#setwd(datadir)
 docscheme<-"sesCPT" #Sketchengine doc scheme
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-#d1<-read_delim("ses_32_v2_9vert.csv")
-d1<-read_table("ses_40_v2_9.csv")
+d1<-read_table("ses_40_v2_9-2.vert")
+#d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-"ruthtable_kidsmeta.csv"
-
+datestamp<-"13113"
 #set<-d2
 cleandb<-function(set){
   #set
@@ -260,7 +260,8 @@ head(d6)
 d6safe<-d6
 getwd()
 ### DEFINITELY SAFE AFTER RUN! ####
-write.csv(d6,"sesDB010_40_d6safe.csv")
+dbname<-paste0("sesDB013_d6safe_",datestamp,".csv")
+write.csv(d6,dbname)
 ###### finalise
 colnames(d6)
 
@@ -456,7 +457,8 @@ colnames(d8)[codecolumns]<-dns_code
 # sentence preceding interviewer line
 # transcript lines references column, thus numbering lines in transkript
 ###
-write.csv(d8,"sesDB011_d8safe.csv")
+dbname<-paste0("sesDB013_d8safe_",datestamp,".csv")
+write.csv(d8,dbname)
 #################
 # preceding line:
 ###
@@ -652,8 +654,9 @@ dns
 
 library(writexl)
 getwd()
-write.csv(d8b,"sesDB013a.csv")
-write_xlsx(d8b,"20230312(17.40)_SES_database_by_tokens.xlsx")
+dbname<-paste0("sesDB013_",datestamp,".csv")
+write.csv(d8b,dbname)
+#write_xlsx(d8b,"20230313(17.37)_SES_database_by_tokens.xlsx")
 
 ##############################################################################
 # DB created above, read DB from .csv to make queries and concordances

@@ -24,7 +24,7 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[2]
 datestamp<-"13113"
 version<-"v2_9"
 numbered<-T
@@ -112,6 +112,14 @@ codes_cpt_nna<-codes_cpt[codes_nna,]
 codes_cpt<-codes_cpt_nna
 m<-!duplicated(codes_cpt$codes)
 codes_cpt<-codes_cpt[m,]
+m<-grep("codes",colnames(codes_cpt))
+s<-m-2
+c2<-codes_cpt[,s:length(codes_cpt)]
+mode(c2$scheme)<-"character"
+m<-is.na(c2)
+m
+c2[m]<-""
+codes_cpt<-c2
 ### refine codes
 # u3<-unique(codes_cpt$phrase)
 # u4<-unique(codes_cpt$feature)
