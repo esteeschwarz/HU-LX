@@ -25,7 +25,7 @@ path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
 scheme<-outputschemes[2]
-datestamp<-"13112"
+datestamp<-"13113"
 version<-"v2_9"
 numbered<-T
 ske<-F #not change!
@@ -52,6 +52,10 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 getwd()
 codesdir<-"gith/HU-LX/data"
 codesource<-"gith/HU-LX/data/codes_cpt5.csv"
+codesource<-"local/HU-LX/SES/codes_cpt6.csv"
+#codesource<-"local/HU-LX/SES/fcodes_cpt_unique_d24.csv"
+#codesource<-"local/HU-LX/SES/codes_cpt_usedv2_9.csv"
+
 metatable<-read.csv("local/HU-LX/SES/ruthtable_kidsmeta.csv")
 list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
@@ -101,11 +105,21 @@ dirtemp
 ###wks.
 #external codes .csv table
 codes_cpt <- read_delim(codesource, 
-                        delim = ",", escape_double = T)
+                        delim = ",", escape_double = T) #numbers: sep = ","
 codes_nna<-!is.na(codes_cpt$codes)
-codes_nna<-array(codes_nna)
+#codes_nna<-array(codes_nna)
 codes_cpt_nna<-codes_cpt[codes_nna,]
 codes_cpt<-codes_cpt_nna
+m<-!duplicated(codes_cpt$codes)
+codes_cpt<-codes_cpt[m,]
+m<-grep("codes",colnames(codes_cpt))
+s<-m-2
+c2<-codes_cpt[,s:length(codes_cpt)]
+mode(c2$scheme)<-"character"
+m<-is.na(c2)
+m
+c2[m]<-""
+codes_cpt<-c2
 ### refine codes
 # u3<-unique(codes_cpt$phrase)
 # u4<-unique(codes_cpt$feature)
@@ -342,6 +356,8 @@ regxmean<-function(set){
   #get regex gefräszigkeit, sort array by
   #loop
   #k<-15
+  f<-1
+  codes_cpt<-codes_cptu
   codes_cpt<-set
   regxout<-array()
   nfiles<-length(filelist2)
@@ -353,12 +369,16 @@ regxmean<-function(set){
       regxout<-stri_extract_all(tbu$text,regex=regx1)
       regxmatrix[k,f]<-mean(stri_count_boundaries(regxout[[1]],"character"),na.rm = T)
       regxmatrix[k,nfiles+1]<-mean(regxmatrix[k,],na.rm = T)
-      
+     # regxmatrix[is.na(regxmatrix)]<-0
     }
     #regxmatrix[,nfiles+1]<-lapply(regxmatrix,mean)
     codes_cpt$regxmean<-regxmatrix[,nfiles+1]
   }
-  return(codes_cpt)
+  m<-!is.na(codes_cpt$regxmean)
+  
+  sum(m)
+ # return(codes_cpt)
+  return(codes_cpt[m,])
 }
 
 #wks.
@@ -413,7 +433,7 @@ getfeature<-function(set){
 feat_array<-getfeature(codes_cpt2)
 codes_cpt2["subst"]<-feat_array[,1]
 
-
+length(unique(codes_cpt$codes))
 #codesarray<-getcodes(codes_cpt2,regexcor)
 codesarray<-getcodescpt(codes_cpt2,regexcor)
 #157 cpt
@@ -425,11 +445,17 @@ codes_cpt2["ar"]<-match(codes_cpt2$subst,ar)
 #for (k in 1:length(codes_cpt$regexcor)){
 # m<-codes_cpt$ar
 codes_cpt2["regex"]<-codesarray$V1
-codes_cpt4<-regxmean(codes_cpt2)
+#13113.flaw
+m<-!duplicated(codes_cpt2$codes)
+codes_cptu<-codes_cpt2[m,]
+codes_cpt4<-regxmean(codes_cpt2) #cpt2
+#codes_cpt4<-regxmean(codes_cptu) #cpt2
+#codes_cpt5<-!duplicated(codes_cpt$codes)
+
 #save codes table
 getwd()
 codedir<-"local/HU-LX/SES"
-write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt4_used",version,".csv"))
+write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt_used",version,".csv"))
 
 #write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
 ii<-order(-codes_cpt4$regxmean)
@@ -1269,11 +1295,92 @@ tc_tokens <- tokens(dta_cor)
 # 4.1 Keywords in Context (KWIC)
 # https://tutorials.quanteda.io/basic-operations/tokens/kwic/
 # head() prints the first six results returned by the kwic() function
-cc9<-kwic(tc_tokens, pattern="9", window = 3, case_insensitive = TRUE)
-cc90<-kwic(tc_tokens, pattern="90", window = 3, case_insensitive = TRUE)
-ccnst<-kwic(tc_tokens, pattern="nst", window = 3, case_insensitive = TRUE)
-ccr<-kwic(tc_tokens, pattern="#*#", window = 3, case_insensitive = TRUE)
+cc9<-kwic(tc_tokens, pattern="9", window = 3, case_insensitive = TRUE,valuetype = "regex")
+cc90<-kwic(tc_tokens, pattern="90", window = 3, case_insensitive = TRUE,valuetype = "regex")
+ccnst<-kwic(tc_tokens, pattern="nst", window = 3, case_insensitive = TRUE,valuetype = "regex")
+ccr<-kwic(tc_tokens, pattern="#.*#", window = 3, case_insensitive = TRUE,valuetype = "regex")
+ex<-kwic(tc_tokens, pattern="9nst agmnt", window = 3, case_insensitive = TRUE)
+ex
+#intersections:
+c1<-cc9$from%in%cc90$from
+sum(c1)
+ccpt<-rbind(cc9,cc90,ccnst,ccr)
+m<-!duplicated(ccpt$from)
+sum(m)
+ccpt<-ccpt[m,]
+u1<-unique(paste(ccpt$keyword,ccpt$post,sep = "%"))
+write.csv(u1,"fcodes_cpt.csv")
+d<-read.csv("local/HU-LX/SES/fcodes_cpt_m.csv")
+d1<-unique(d$x)
+regx1<-"%$"
+m<-grep(regx1,d1)
+d1[m]
+d1<-gsub(regx1,"",d1)
+regx1<-"%"
+m<-grep(regx1,d1)
+d1[m]
+d1<-gsub(regx1," ",d1)
+m<-!is.na(d1)
+sum(m)
+d1<-d1[2:length(d1)]
+d2<-read.csv(codesource)
+m<-!duplicated(d2$codes)
+sum(m)
+length(unique(d2$codes))
+d21<-d2[m,]
+#d21
+m<-d1%in%d21$codes
+sum(!m)
+#sum(d1[!m,])
+codes<-d1[m==F]
+codes
+library(dplyr)
+d22<-bind_rows(d21,tibble(codes))
+d22$codes[6]==d22$codes[7]
+d23<-d22[!duplicated(d22$codes),]
+#codes
+write.csv(d24,"local/HU-LX/SES/fcodes_cpt_unique_d24.csv")
+d24<-read.csv("local/HU-LX/SES/fcodes_cpt_unique_d24.csv")
+d24$pre3
+d24$phrase #228
+m<-d24$pre2!="C"&!is.na(d24$pre2)&!is.na(d24$feature)
+m[190]
+sum(m)
+#m<-d24$pre2[!is.na]
+p1<-unique(d24$pre3[m])
+#m<-!is.na(d24$feature)
+p11<-unique(d24$feature[m])
+p12<-unique(d24$phrase[m])
+p12<-c("zero","nonstandard")
+p13<-unique(d24$pre2[m])
 
+p1
+p11
+p12
+d24$phrase[d24$pre2=="0"]<-"zero"
+d24$phrase[d24$pre2=="N"]<-"nonstandard"
+d24$phrase[d24$pre2=="C"]<-"cmnt"
+m<-d24$pre2=="P"
+d24$pre2[m]<-"PAU"
+d24$pre3[m]<-""
+d24$repl[m]<-" ((...)) "
+d24$feature[d24$pre3=="CJ"]<-"conjunction"
+
+k<-4
+for (k in 1:length(p1)){
+  m<-d24$pre3==p1[k]
+  m2<-m!=T|is.na(m)
+  m2<-m2==F
+  m2
+  d24$feature[m2]<-p11[k]
+}
+
+sum(m)
+d24$feature[190]
+p3<-unique(d24$pre2)
+p2<-unique(d24$phrase)
+
+u<-unique(d22$codes)
 l1<-length(codes_cpt$codes)+1
 l2<-l1+length(ccr$keyword)
 l3<-length(codes_cpt)
@@ -1299,7 +1406,7 @@ codes<-unique(paste0(cc90$pre,cc90$keyword,cc90$post))
 cd3<-bind_rows(cd3,tibble(codes))
 codes<-paste0(ccnst$pre,ccnst$keyword,ccnst$post)
 cd3<-bind_rows(cd3,tibble(codes))
-write.csv(cd3,"gith/HU-LX/data/codes_cpt5.csv")
+write.csv(cd3,"gith/HU-LX/data/codes_cptmissing.csv")
 }
 
 

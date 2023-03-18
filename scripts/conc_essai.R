@@ -8,14 +8,17 @@ datadir<-"local/HU-LX/SES" #database
 codesdir<-"gith/HU-LX/data"
 
 # now again from base DB
+getwd()
 list.files(getwd())
-setwd(datadir)
+#setwd(datadir)
 docscheme<-"sesCPT" #Sketchengine doc scheme
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_delim("ses_32_v2_9vert.csv")
-
+d1<-read_table("ses_40_v2_9-2.vert")
+#d1<-read_table("ses_40_v2_9.csv")
+ruthtable<-"ruthtable_kidsmeta.csv"
+datestamp<-"13113"
 #set<-d2
 cleandb<-function(set){
   #set
@@ -40,13 +43,28 @@ cleandb<-function(set){
 #d3<-cleandb(d2)
 #d<-d1
 #set<-d1
+spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
+             "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
+             "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
+
 preprocess_temp<-function(set){
 d<-set
+#grep linenumbers
+regx1<-"[0-9]{4}"
+m1<-grep(regx1,d$token,value = T)
+m2<-grep(regx1,d$token)
+
+l2<-as.double(m1)
+l3<-l2-1
+d$token[m2]<-l3 #linenumbers minus 1
+
 ms<-grep("(#[A-Z]{3})",d$token) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
 # distinct speakers:
 ms2<-grep("(#[A-Z]{3})",d$token,value = T) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
 spk<-unique(ms2)
-spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA","TAB","TAD","TAF","TAG","TAH","TAI","TBD","TBE","TBH","TBI","TBK","TBL","TBM","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
+# spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
+#              "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
+#              "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
 #spk_array<-c("GCB","GCC","GDA","GDB","GDC","GDD","GDE","GDF","TAD","TAH","TAI","TBD","TBE","TBS","TBT","TBU","TBV","INT")
 spk_array2<-paste0("#",spk_array)
 #spk_grep<-paste0(spk_array2,"|")
@@ -112,6 +130,17 @@ colnames(d4)<-dns
 #d4$sentence<-sp_sentence
 #d4$sentence_cn<-sp_sentence_cn
 dim(d3)
+# #grep linenumbers
+# regx1<-"[0-9]{4}"
+# m1<-grep(regx1,d4$token,value = T)
+# m2<-grep(regx1,d4$token)
+# 
+# l2<-as.double(m1)
+# l3<-l2-1
+# d4$token[m2]<-l3 #linenumbers minus 1
+m1<-grep(docscheme,d4$token) #join filedescription columns
+f1<-paste(d4$token[m1],d4$cat[m1],d4$lemma[m1],sep = " ")
+d4$token[m1]<-f1
 return(data.frame(d4))
 } # end preprocess
 ###### wks.
@@ -119,9 +148,11 @@ return(data.frame(d4))
 #######################
 #######################
 #######################
+d2<-cleandb(d1)
 d2<-preprocess_temp(d1)
-#d2<-d4
 d3<-cleandb(d2)
+
+#d2<-d4
 
 #######################
 #######################
@@ -229,7 +260,8 @@ head(d6)
 d6safe<-d6
 getwd()
 ### DEFINITELY SAFE AFTER RUN! ####
-write.csv(d6,"sesDB009_32_d6safe_2.csv")
+dbname<-paste0("sesDB013_d6safe_",datestamp,".csv")
+write.csv(d6,dbname)
 ###### finalise
 colnames(d6)
 
@@ -271,7 +303,7 @@ m5<-grep(regx3,d7$token,value = T)
 #m5<-grepl("(SES_.*)(sketchE)",d7$token)
 regx4<-paste0(".*(SES_.*)(",filescheme,").*")
 m6<-gsub(regx4,"\\1",m5) #kids
-
+head(m6)
 #here stepback
 d8<-d7
 
@@ -306,7 +338,7 @@ for (l in 1:length(m6)){
   
 }
  # wks., check:
-   d8$interview[3750:4800]
+   d8$interview[3650:4800]
    ##############
    # delete transcript references obsolete entries
    m<-grepl(docscheme,d8$token)
@@ -408,7 +440,7 @@ codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
      le<-codestart+l-1
      print(r)
      d8[r,codestart:le]<-repl
-   }
+   }#TODO: put codes in unique column each code one column
    #ms8<-grep("([A-Z]{3,3})",sent1,value=T)
    #ms8<-grepl("([A-Z]{3,3})",sent1)
 #   head(ms7[ms5][][])
@@ -425,7 +457,8 @@ colnames(d8)[codecolumns]<-dns_code
 # sentence preceding interviewer line
 # transcript lines references column, thus numbering lines in transkript
 ###
-write.csv(d8,"sesDB011_d8safe.csv")
+dbname<-paste0("sesDB013_d8safe_",datestamp,".csv")
+write.csv(d8,dbname)
 #################
 # preceding line:
 ###
@@ -590,9 +623,9 @@ d8b[1:length(d91$p_interview),l1:l2]<-d92
 l1<-length(d8b)+1
 l2<-l1+length(d93)-1
 d8b[1:length(d91$p_interview),l1:l2]<-d93
-l1<-length(d8b)+1
-l2<-l1+length(d94)-1
-d8b[1:length(d91$p_interview),l1:l2]<-d94
+#l1<-length(d8b)+1
+#l2<-l1+length(d94)-1
+#d8b[1:length(d91$p_interview),l1:l2]<-d94 #skip for double occurence grep t_ & part_ above 
 l1<-length(d8b)+1
 l2<-l1+length(d95)-1
 d8b[1:length(d91$p_interview),l1:l2]<-d95
@@ -621,8 +654,9 @@ dns
 
 library(writexl)
 getwd()
-write.csv(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/sesDB012a.csv")
-write_xlsx(d8b,"/Users/lion/boxHKW/21S/DH/local/HU-LX/SES/20230305(15.36)_SES_database_by_tokens.xlsx")
+dbname<-paste0("sesDB013_",datestamp,".csv")
+write.csv(d8b,dbname)
+#write_xlsx(d8b,"20230313(17.37)_SES_database_by_tokens.xlsx")
 
 ##############################################################################
 # DB created above, read DB from .csv to make queries and concordances
