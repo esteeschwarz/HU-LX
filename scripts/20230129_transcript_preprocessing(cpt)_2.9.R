@@ -608,7 +608,8 @@ for (f in 1:length(filelist2)){
 
           #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
           #  tbuheader<- gsub("#todeletespace#","",tbuheader)
-         rpall[k,5+f]<-length(m)   
+         rphead<-grep("headex",colnames(rpall))  
+         rpall[k,rphead+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
   tbu
@@ -1178,6 +1179,7 @@ headercoding<-function(){
   f<-1
   f<-30
   f
+  tbu
   hdb<-read.csv("local/HU-LX/SES/db_header.csv")
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
@@ -1254,7 +1256,7 @@ headercoding<-function(){
   m4<-grep("@#PAU",rownames(hdb))
   m5<-m4+1
 #  m6<-grep()
-  hdb2<-rbind(hdb[m:m2,],hdb[m5:length(hdb$X),],hdb[m3:m4,])
+  hdb2<-rbind(hdb[m:m2,],hdb[m5:length(hdb[,1]),],hdb[m3:m4,])
   hdb2<-hdb2[,3:length(hdb2)]
   #hdb2<-data.frame(hdb2[,3],row.names = rownames(hdb2))
   #colnames(hdb2)<-kid
@@ -1272,7 +1274,7 @@ headercoding<-function(){
   #   hdb2[m1[2],k]<-hdb2[m1[1],k]
   # }
   #hdb2<-hdb[m:length(hdb$X),3:length(hdb)]
-#  write.csv(hdb2,"local/HU-LX/SES/db_headertable.csv")
+ # write.csv(hdb3,"local/HU-LX/SES/db_headertable.csv")
 ########
   
    
@@ -1280,6 +1282,15 @@ headercoding<-function(){
   
   }
 headertable<-headercoding()
+h1<-headertable
+for (k in 1:length(headertable)){
+  r1<-"^ "
+  m<-grep(r1,h1[,k])
+  repl<-""
+  h1[m,k]<-gsub(r1,repl,h1[m,k])
+}
+write.csv(headertable,"local/HU-LX/SES/db_headertable.csv")
+
 #combine header of df and transcript
 k<-1
 transcombine<-function(){
@@ -1313,7 +1324,7 @@ chatlastoutdir
 
 
 getwd()
-source("local/R/askchatgpt.R")
+#source("local/R/askchatgpt.R")
 notrun<-function(){
     f
     k<-2
