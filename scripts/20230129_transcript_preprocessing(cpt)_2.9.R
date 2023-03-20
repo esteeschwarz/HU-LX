@@ -467,7 +467,7 @@ rpall["category"]<-codes_cpt4$category[ii]
 rpall["repl"]<-codes_cpt4$repl[ii]
 #rpall["shortcode"]<-paste0(codes_cpt4$pre1[ii],codes_cpt4$pre2[ii],codes_cpt4$pre3[ii])
 rpall["shortcode"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"#")
-rpall["headex"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"# ",codes_cpt4$phrase[ii]," ",codes_cpt4$feature[ii])
+rpall["headpre"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"# ",codes_cpt4$phrase[ii]," ",codes_cpt4$feature[ii]," n = : ")
 
 
 ###
@@ -537,7 +537,7 @@ for (f in 1:length(filelist2)){
   if (length(p3)>=1){tbu[p3[2:3]]<-""}
   #           tbu<-insert(tbu,p2[1]+1,"@Annotation checked:"))
   #get unique alphabetically sorted tier description
-  rp3<-paste0("@",rpall$headex)
+  rp3<-paste0("@",rpall$headpre)
   rpall["headex"]<-rp3
   #rp4
   is<-order(rp3)
@@ -603,7 +603,9 @@ for (f in 1:length(filelist2)){
   #  ifelse(m!=0&tier!=4,tbuheader<-
     ### this adds number of occurences of code to header description of code, has to be formatted
             ifelse (length(m)!=0,tbuheader<-gsub(rpall$headex[k],
-                       paste0(rpall$headex[k]," n = ",length(m)),tbuheader),flag<-0)
+#                       paste0(rpall$headex[k]," n = : ",length(m)),tbuheader),flag<-0)
+            paste0(rpall$headex[k],length(m)),tbuheader),flag<-0)
+
           #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
           #  tbuheader<- gsub("#todeletespace#","",tbuheader)
          rpall[k,5+f]<-length(m)   
@@ -1166,14 +1168,16 @@ getwd()
 chat2ndoutdir<-paste(dirtext,dir_2ndmod,sketchversion,sep = "/")
 translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
 trans_dfl<-list()
+
 headercoding<-function(){
   ##############################
   chatlastoutdir<-paste(dirtext,dirchat,sep="/")
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
   filelist3
-  f<-4
+  f<-1
   f<-30
+  f
   hdb<-read.csv("local/HU-LX/SES/db_header.csv")
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
@@ -1190,7 +1194,7 @@ headercoding<-function(){
     # for (k in rownames(h2)){
     #   hdb[k,kid]<-h2[k,"d1"]
     # }
-    trans_dfl[[kid]]<-tbub
+   # trans_dfl[[kid]]<-tbub
     
     tbusafe<-tbu
     tbuheader<-tbu[1:mstart-1] #header section
@@ -1247,11 +1251,13 @@ headercoding<-function(){
   
   m2<-grep("@Coding",rownames(hdb))
   m3<-grep("@TIER",rownames(hdb))
-  m4<-grep("@%PAU",rownames(hdb))
+  m4<-grep("@#PAU",rownames(hdb))
   m5<-m4+1
 #  m6<-grep()
   hdb2<-rbind(hdb[m:m2,],hdb[m5:length(hdb$X),],hdb[m3:m4,])
   hdb2<-hdb2[,3:length(hdb2)]
+  #hdb2<-data.frame(hdb2[,3],row.names = rownames(hdb2))
+  #colnames(hdb2)<-kid
   #m11<-grep("@")
   m1<-grep("@Participants",rownames(hdb2))
   m2<-grep("@Duration",rownames(hdb2))
