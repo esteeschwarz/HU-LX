@@ -467,6 +467,7 @@ rpall["category"]<-codes_cpt4$category[ii]
 rpall["repl"]<-codes_cpt4$repl[ii]
 #rpall["shortcode"]<-paste0(codes_cpt4$pre1[ii],codes_cpt4$pre2[ii],codes_cpt4$pre3[ii])
 rpall["shortcode"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"#")
+rpall["headex"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"# ",codes_cpt4$phrase[ii]," ",codes_cpt4$feature[ii])
 
 
 ###
@@ -536,7 +537,7 @@ for (f in 1:length(filelist2)){
   if (length(p3)>=1){tbu[p3[2:3]]<-""}
   #           tbu<-insert(tbu,p2[1]+1,"@Annotation checked:"))
   #get unique alphabetically sorted tier description
-  rp3<-paste0("@",rpall$subst)
+  rp3<-paste0("@",rpall$headex)
   rpall["headex"]<-rp3
   #rp4
   is<-order(rp3)
