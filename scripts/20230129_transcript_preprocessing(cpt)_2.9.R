@@ -24,9 +24,9 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[2]
 datestamp<-"13124"
-version<-"v2_9"
+version<-"v3_0"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
@@ -38,6 +38,9 @@ boxfolderns<-"version without header for SketchEngine upload"
 #lapsi
 setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
+datetime<-Sys.Date()
+datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
+codesusedns<-paste0(datetime,"_codes_cpt_used_",version,".csv")
 if (scheme==outputschemes[2]){
   ske<-T
   scheme<-outputschemes[4]
@@ -50,6 +53,7 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
 #codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 getwd()
+codeusedir<-"local/HU-LX/SES"
 codesdir<-"gith/HU-LX/data"
 codesource<-"gith/HU-LX/data/codes_cpt5.csv"
 codesource<-"local/HU-LX/SES/codes_cpt6.csv"
@@ -454,8 +458,8 @@ codes_cpt4<-regxmean(codes_cpt2) #cpt2
 
 #save codes table
 getwd()
-codedir<-"local/HU-LX/SES"
-write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt_used",version,".csv"))
+# codedir<-"local/HU-LX/SES"
+write_csv2(codes_cpt4,paste(codeusedir,codesusedns,sep = "/"))
 
 #write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
 ii<-order(-codes_cpt4$regxmean)
@@ -1334,9 +1338,11 @@ return(h2)
 #h3<-cleandb(h2)
 #h5<-rbind(AAglobal=colnames(h3),h3[,0:length(h3)])
 #write.csv(h5,"local/HU-LX/SES/db_headertable_002t2x.csv")
+# writexl::write_xlsx(h5,"local/HU-LX/SES/db_headertable_20230321(18.55).xlsx")
 #############################
 #h6 <- read_delim("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
-h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+# h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+#writexl::write_xlsx(h6,"local/HU-LX/SES/20230321(18.55)_SES_headertable.xlsx")
 
 #write_clip(s)
 #write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
@@ -1388,6 +1394,7 @@ transcombine<-function(set){
 #chatlastoutdir
 
 #################
+#h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
 #transcombine(h6)
 #################
 
