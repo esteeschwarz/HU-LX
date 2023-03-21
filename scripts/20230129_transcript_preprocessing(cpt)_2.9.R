@@ -1281,15 +1281,6 @@ headercoding<-function(){
   return(hdb3)
   
   }
-headertable<-headercoding()
-h1<-headertable
-for (k in 1:length(headertable)){
-  r1<-"^ "
-  m<-grep(r1,h1[,k])
-  repl<-""
-  h1[m,k]<-gsub(r1,repl,h1[m,k])
-}
-h2<-t(h1)
 
 cleandb<-function(set){
 h2<-as.data.frame(h2)
@@ -1327,26 +1318,39 @@ for (k in 1:length(h2$`@ID`)){
   h2[k,sc]<-gsub(" ","",h2[k,s])
 }
 
+for (k in 1:length(h2)){
+  r1<-"^ "
+  m<-grep(r1,h2[,k])
+  repl<-""
+  h2[m,k]<-gsub(r1,repl,h2[m,k])
+}
+
 return(h2)
 }
-h3<-cleandb(h2)
-#h4<-read.csv("local/HU-LX/SES/db_headertable_002t.csv")
-#h4<-read.table("local/HU-LX/SES/db_headertable_002t.csv",col.names = )
-h5<-rbind(global=colnames(h3),h3[,1:length(h3)])
-h6 <- read_delim("local/HU-LX/SES/db_headertable_002t.csv", 
-                                  delim = ";", escape_double = FALSE, trim_ws = TRUE, 
-                                  skip = 1)
+#############################
+# headertable<-headercoding()
+# h1<-headertable
+# h2<-t(h1)
+#h3<-cleandb(h2)
+#h5<-rbind(AAglobal=colnames(h3),h3[,0:length(h3)])
+#write.csv(h5,"local/HU-LX/SES/db_headertable_002t2x.csv")
+#############################
+#h6 <- read_delim("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+
 #write_clip(s)
 #write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
-#write.table(h5,"local/HU-LX/SES/db_headertable_002t.csv",sep = ";")
 #typeof(h2[,9])
 #sum(h2$`@#0AR# zero article n = `)
 ### transpose rows/columns
 
 #combine header of df and transcript
 k<-1
+f<-1
+#set<-h6
 transcombine<-function(set){
   h4<-set
+  mode(h4$`@Duration`)<-"character"
   chatlastoutdir<-paste(dirtext,dirchat,sep="/")
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
@@ -1365,9 +1369,10 @@ transcombine<-function(set){
 #  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
   #r<-f+1
   r<-f
+  h4[r,21]
   headerentries<-colnames(set)
-  tbu_h2<-paste(headerentries,h4[r,],sep  = ": ")
-  
+  tbu_h2<-paste0(headerentries,": ",h4[r,])
+  tbu_h2<-tbu_h2[2:length(tbu_h2)]
     tbu_t<-tbub
   tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
@@ -1379,10 +1384,12 @@ transcombine<-function(set){
   writeLines(tbu_cpt,paste(chatoutdir,kid,sep = "/"))  
   }
 }
+#tbu_h2
+#chatlastoutdir
 
-transcombine(h6)
-tbu_h2
-chatlastoutdir
+#################
+#transcombine(h6)
+#################
 
 
 getwd()
