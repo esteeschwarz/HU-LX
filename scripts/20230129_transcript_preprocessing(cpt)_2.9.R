@@ -1290,6 +1290,8 @@ for (k in 1:length(headertable)){
   h1[m,k]<-gsub(r1,repl,h1[m,k])
 }
 h2<-t(h1)
+
+cleandb<-function(set){
 h2<-as.data.frame(h2)
 
 m<-grep("#|Age|Year",colnames(h2))
@@ -1320,8 +1322,21 @@ h2$`@Family Language(s)`<-gsub("DEU","german",h2$`@Family Language(s)`)
 h2$`@Family Language(s)`<-gsub("ARB","arabic",h2$`@Family Language(s)`)
 h2$`@Family Language(s)`<-tolower(h2$`@Family Language(s)`)
 h2["TAH",4]<-"female"
+sc<-c(2,4,5,7,8,13,14,15,16,18) #rm space in columns
+for (k in 1:length(h2$`@ID`)){
+  h2[k,sc]<-gsub(" ","",h2[k,s])
+}
 
-write.csv(h2,"local/HU-LX/SES/db_headertable_002.csv")
+return(h2)
+}
+h3<-cleandb(h2)
+h5<-rbind(global=colnames(h3),h3[,1:length(h3)])
+h4<-read.csv("local/HU-LX/SES/db_headertable_002t.csv")
+h4<-read.table("local/HU-LX/SES/db_headertable_002t.csv")
+h4$
+#write_clip(s)
+write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
+write.table(h5,"local/HU-LX/SES/db_headertable_002t.csv")
 typeof(h2[,9])
 sum(h2$`@#0AR# zero article n = `)
 ### transpose rows/columns
@@ -1344,8 +1359,11 @@ transcombine<-function(){
   #kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
   kid<-filelist3[f]
 
-  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
-  tbu_t<-tbub
+#  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
+  r<-f+1
+  tbu_h2<-paste(h4[1,],h4[r,],sep  = ": ")
+  
+    tbu_t<-tbub
   tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
