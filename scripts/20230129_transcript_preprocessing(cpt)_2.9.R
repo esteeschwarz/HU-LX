@@ -25,7 +25,7 @@ path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
 scheme<-outputschemes[1]
-datestamp<-"13123"
+datestamp<-"13124"
 version<-"v2_9"
 numbered<-T
 ske<-F #not change!
@@ -841,7 +841,7 @@ translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
 #write_clip(filelist)
 #date()
 #format(Sys.time(), "%a %b %e %H:%M:%S %Y")
-datestamp<-format(Sys.time(), "%Y%m%d(%H.%M)")
+datetime<-format(Sys.time(), "%Y%m%d(%H.%M)")
 #translistname<-paste0("CHAT_transcripts_list_",datestamp,".txt")
 #writeLines(translist,paste(dirtemp,translistname,sep = "/"))
 ##########
@@ -1330,20 +1330,23 @@ for (k in 1:length(h2$`@ID`)){
 return(h2)
 }
 h3<-cleandb(h2)
+#h4<-read.csv("local/HU-LX/SES/db_headertable_002t.csv")
+#h4<-read.table("local/HU-LX/SES/db_headertable_002t.csv",col.names = )
 h5<-rbind(global=colnames(h3),h3[,1:length(h3)])
-h4<-read.csv("local/HU-LX/SES/db_headertable_002t.csv")
-h4<-read.table("local/HU-LX/SES/db_headertable_002t.csv")
-h4$
+h6 <- read_delim("local/HU-LX/SES/db_headertable_002t.csv", 
+                                  delim = ";", escape_double = FALSE, trim_ws = TRUE, 
+                                  skip = 1)
 #write_clip(s)
-write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
-write.table(h5,"local/HU-LX/SES/db_headertable_002t.csv")
-typeof(h2[,9])
-sum(h2$`@#0AR# zero article n = `)
+#write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
+#write.table(h5,"local/HU-LX/SES/db_headertable_002t.csv",sep = ";")
+#typeof(h2[,9])
+#sum(h2$`@#0AR# zero article n = `)
 ### transpose rows/columns
 
 #combine header of df and transcript
 k<-1
-transcombine<-function(){
+transcombine<-function(set){
+  h4<-set
   chatlastoutdir<-paste(dirtext,dirchat,sep="/")
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
@@ -1360,18 +1363,24 @@ transcombine<-function(){
   kid<-filelist3[f]
 
 #  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
-  r<-f+1
-  tbu_h2<-paste(h4[1,],h4[r,],sep  = ": ")
+  #r<-f+1
+  r<-f
+  headerentries<-colnames(set)
+  tbu_h2<-paste(headerentries,h4[r,],sep  = ": ")
   
     tbu_t<-tbub
   tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
-  writeLines(tbu_cpt,paste("local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/temp",kid,sep = "/"))  
+  version<-"v3_0"
+  chatoutparent<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/"
+  chatoutdir<-paste0(chatoutparent,"SES_transcripts_w_header_",version,"_",datestamp)
+  dir.create(chatoutdir)
+  writeLines(tbu_cpt,paste(chatoutdir,kid,sep = "/"))  
   }
 }
 
-transcombine()
+transcombine(h6)
 tbu_h2
 chatlastoutdir
 
