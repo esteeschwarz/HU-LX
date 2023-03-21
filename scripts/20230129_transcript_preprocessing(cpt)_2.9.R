@@ -1289,7 +1289,42 @@ for (k in 1:length(headertable)){
   repl<-""
   h1[m,k]<-gsub(r1,repl,h1[m,k])
 }
-write.csv(headertable,"local/HU-LX/SES/db_headertable.csv")
+h2<-t(h1)
+h2<-as.data.frame(h2)
+
+m<-grep("#|Age|Year",colnames(h2))
+colnames(h2)[m]
+m
+for (k in 1:length(m)){
+mode(h2[,m[k]])<-"double"
+}
+k
+#h3<-t(h1)
+h2$`@Year`<-1978
+h2$`@Language of Interview`<-"german"
+h2$`@Elicitation files`<-"HU-BOX/!WS2022-23_SES/SES_documentation"
+h2$`@Participants`<-paste0(rownames(h2),"_target child, INT_interviewer")
+idkid<-stri_split_regex(h2$`@ID`,"_",simplify = T)
+idkid[,2]<-rownames(h2)
+idage<-stri_extract_all_regex(idkid[,3],"[0-9]{2}",simplify = T)
+idgnd<-stri_extract_all_regex(idkid[,3],"[A-Za-z]{1}",simplify = T)
+idkid[,3]<-idgnd
+m<-!is.na(idage)
+m
+idkid[m,4]<-idage[m]
+idkid2<-paste(idkid[,1],idkid[,2],idkid[,3],idkid[,4],sep  = "_")
+h2$`@ID`<-idkid2
+h2$`@Family Language(s)`<-gsub("ELL","greek",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("TUR","turkish",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("DEU","german",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("ARB","arabic",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-tolower(h2$`@Family Language(s)`)
+h2["TAH",4]<-"female"
+
+write.csv(h2,"local/HU-LX/SES/db_headertable_002.csv")
+typeof(h2[,9])
+sum(h2$`@#0AR# zero article n = `)
+### transpose rows/columns
 
 #combine header of df and transcript
 k<-1
