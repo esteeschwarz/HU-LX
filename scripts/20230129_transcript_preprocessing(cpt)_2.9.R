@@ -24,8 +24,8 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
-datestamp<-"13124"
+scheme<-outputschemes[1]
+datestamp<-"13141"
 version<-"v3_0"
 numbered<-T
 ske<-F #not change!
@@ -217,8 +217,11 @@ linecor<-function(k,filelist){
   cc2<-gsub(regx1,repl1,cc1)
   cc2
   #write_clip(cc2)
+  regx1<-'"'
+  repl1<-"'"
+  cc3<-gsub(regx1,repl1,cc2,perl = T)
   
-  regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
+    regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
   repl1<-" \\2"
   cc3<-gsub(regx1,repl1,cc2,perl = T)
   #write_clip(cc3)
@@ -510,6 +513,8 @@ mns<-colnames(metatable)
 headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
               "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
 #transtart<-max(transtart)
+transfail<-list()
+
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
@@ -792,12 +797,22 @@ for (f in 1:length(filelist2)){
   tbu_cpt<-c(tbuheader,tbu_e)
 #  mnew<-grep("@header end",tbu_cpt)[1]+1
   mnew<-grep("^\\*",tbu)[1]
-  
+  #####13141.
   transcpt<-mnew:length(tbu_cpt)
-  if (numbered==T){
+  # transfail<-list()
+  #####
+    if (numbered==T){
+    #sp1<-stri_split_fixed(tbu_cpt[transcpt],pattern = "(*|%...:)",simplify = T)
+    sp2<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
+    sp1<-stri_extract_all_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
+    sp3<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:")
+    
+    transfail[f]<-sp2[1]
     lt<-length(transcpt)
     num<-sprintf("%04s", as.character(1:lt))
-    tbu_enumb<-paste(num,tbu_cpt[transcpt],sep = "\t")
+    dim(sp1)
+    dim(transcpt)
+    tbu_enumb<-paste(sp1[,1],num,sp2[,2],sep = "\t")
     tbu_cpt<-c(tbuheader,tbu_enumb)} #false end
   tbu_e<-tbu_cpt
   tail(tbu_e)
@@ -1353,17 +1368,18 @@ return(h2)
 #combine header of df and transcript
 k<-1
 f<-1
-#set<-h6
+set<-h6
 transcombine<-function(set){
   h4<-set
-  mode(h4$`@Duration`)<-"character"
+  #mode(h4$`@Duration`)<-"character"
   chatlastoutdir<-paste(dirtext,dirchat,sep="/")
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
   filelist3
   for (f in 1:length(filelist3)){
   tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
-  p3<-grep("@.egin",tbu)
+  #p3<-grep("@.egin",tbu)
+  #p3
   #####################################
   #find transcript start
   mstart<-grep("\\*[A-Z]{3}",tbu)[1]
@@ -1376,11 +1392,18 @@ transcombine<-function(set){
   #r<-f+1
   r<-f
   h4[r,21]
+  m<-grep("@TIER.*?",colnames(set))
+  m<-m-1
   headerentries<-colnames(set)
-  tbu_h2<-paste0(headerentries,": ",h4[r,])
-  tbu_h2<-tbu_h2[2:length(tbu_h2)]
+  headerentries<-headerentries[2:m]
+  tbu_h2<-paste0(headerentries,": ",h4[r,2:m])
+  #tbu_h2<-tbu_h2[2:length(tbu_h2)]
     tbu_t<-tbub
-  tbu_cpt<-c(tbu_h2,tbu_t)
+  m2<-grep("@#.*?",tbu)
+  m3<-grep("@TIER.*?",tbu)
+  m3<-c(m3,m2)
+  tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)])
+    #tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
   version<-"v3_0"
@@ -1394,7 +1417,9 @@ transcombine<-function(set){
 #chatlastoutdir
 
 #################
-#h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
+               skip = 1)
+#mode(h6$`@Duration`)
 #transcombine(h6)
 #################
 
