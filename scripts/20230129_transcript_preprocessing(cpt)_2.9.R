@@ -24,9 +24,9 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
-datestamp<-"13113"
-version<-"v2_9"
+scheme<-outputschemes[1]
+datestamp<-"13141"
+version<-"v3_0"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
@@ -38,6 +38,9 @@ boxfolderns<-"version without header for SketchEngine upload"
 #lapsi
 setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
+datetime<-Sys.Date()
+datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
+codesusedns<-paste0(datetime,"_codes_cpt_used_",version,".csv")
 if (scheme==outputschemes[2]){
   ske<-T
   scheme<-outputschemes[4]
@@ -50,6 +53,7 @@ dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted 
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
 #codesource<-"gith/HU-LX/data/codes_cpt4mod.csv"
 getwd()
+codeusedir<-"local/HU-LX/SES"
 codesdir<-"gith/HU-LX/data"
 codesource<-"gith/HU-LX/data/codes_cpt5.csv"
 codesource<-"local/HU-LX/SES/codes_cpt6.csv"
@@ -213,8 +217,11 @@ linecor<-function(k,filelist){
   cc2<-gsub(regx1,repl1,cc1)
   cc2
   #write_clip(cc2)
+  regx1<-'"'
+  repl1<-"'"
+  cc3<-gsub(regx1,repl1,cc2,perl = T)
   
-  regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
+    regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
   repl1<-" \\2"
   cc3<-gsub(regx1,repl1,cc2,perl = T)
   #write_clip(cc3)
@@ -454,8 +461,8 @@ codes_cpt4<-regxmean(codes_cpt2) #cpt2
 
 #save codes table
 getwd()
-codedir<-"local/HU-LX/SES"
-write_csv2(codes_cpt4,paste0(codedir,"/codes_cpt_used",version,".csv"))
+# codedir<-"local/HU-LX/SES"
+write_csv2(codes_cpt4,paste(codeusedir,codesusedns,sep = "/"))
 
 #write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
 ii<-order(-codes_cpt4$regxmean)
@@ -467,6 +474,7 @@ rpall["category"]<-codes_cpt4$category[ii]
 rpall["repl"]<-codes_cpt4$repl[ii]
 #rpall["shortcode"]<-paste0(codes_cpt4$pre1[ii],codes_cpt4$pre2[ii],codes_cpt4$pre3[ii])
 rpall["shortcode"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"#")
+rpall["headpre"]<-paste0("#",codes_cpt4$pre2[ii],codes_cpt4$pre3[ii],"# ",codes_cpt4$phrase[ii]," ",codes_cpt4$feature[ii]," n = : ")
 
 
 ###
@@ -504,7 +512,9 @@ f<-6
 mns<-colnames(metatable)
 headermeta<-c("Country of Birth","Years in Germany","Years of school heritage country","Language Proficiency Mother",
               "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
-transtart<-max(transtart)
+#transtart<-max(transtart)
+transfail<-list()
+
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
@@ -536,7 +546,7 @@ for (f in 1:length(filelist2)){
   if (length(p3)>=1){tbu[p3[2:3]]<-""}
   #           tbu<-insert(tbu,p2[1]+1,"@Annotation checked:"))
   #get unique alphabetically sorted tier description
-  rp3<-paste0("@",rpall$subst)
+  rp3<-paste0("@",rpall$headpre)
   rpall["headex"]<-rp3
   #rp4
   is<-order(rp3)
@@ -602,10 +612,13 @@ for (f in 1:length(filelist2)){
   #  ifelse(m!=0&tier!=4,tbuheader<-
     ### this adds number of occurences of code to header description of code, has to be formatted
             ifelse (length(m)!=0,tbuheader<-gsub(rpall$headex[k],
-                       paste0(rpall$headex[k]," n = ",length(m)),tbuheader),flag<-0)
+#                       paste0(rpall$headex[k]," n = : ",length(m)),tbuheader),flag<-0)
+            paste0(rpall$headex[k],length(m)),tbuheader),flag<-0)
+
           #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
           #  tbuheader<- gsub("#todeletespace#","",tbuheader)
-         rpall[k,5+f]<-length(m)   
+         rphead<-grep("headex",colnames(rpall))  
+         rpall[k,rphead+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
   tbu
@@ -784,12 +797,22 @@ for (f in 1:length(filelist2)){
   tbu_cpt<-c(tbuheader,tbu_e)
 #  mnew<-grep("@header end",tbu_cpt)[1]+1
   mnew<-grep("^\\*",tbu)[1]
-  
+  #####13141.
   transcpt<-mnew:length(tbu_cpt)
-  if (numbered==T){
+  # transfail<-list()
+  #####
+    if (numbered==T){
+    #sp1<-stri_split_fixed(tbu_cpt[transcpt],pattern = "(*|%...:)",simplify = T)
+    sp2<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
+    sp1<-stri_extract_all_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
+    sp3<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:")
+    
+    transfail[f]<-sp2[1]
     lt<-length(transcpt)
     num<-sprintf("%04s", as.character(1:lt))
-    tbu_enumb<-paste(num,tbu_cpt[transcpt],sep = "\t")
+    dim(sp1)
+    dim(transcpt)
+    tbu_enumb<-paste(sp1[,1],num,sp2[,2],sep = "\t")
     tbu_cpt<-c(tbuheader,tbu_enumb)} #false end
   tbu_e<-tbu_cpt
   tail(tbu_e)
@@ -837,7 +860,7 @@ translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
 #write_clip(filelist)
 #date()
 #format(Sys.time(), "%a %b %e %H:%M:%S %Y")
-datestamp<-format(Sys.time(), "%Y%m%d(%H.%M)")
+datetime<-format(Sys.time(), "%Y%m%d(%H.%M)")
 #translistname<-paste0("CHAT_transcripts_list_",datestamp,".txt")
 #writeLines(translist,paste(dirtemp,translistname,sep = "/"))
 ##########
@@ -1164,15 +1187,18 @@ if(ske==T) #declared in head of script
 getwd()
 chat2ndoutdir<-paste(dirtext,dir_2ndmod,sketchversion,sep = "/")
 translist<-list.files(paste(dirtext,dirchat,sep="/"),pattern="(\\.txt)")
+trans_dfl<-list()
 
 headercoding<-function(){
   ##############################
-  ### >>> run this on preprocessed last version transcript to modify for sketch #####
   chatlastoutdir<-paste(dirtext,dirchat,sep="/")
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
   filelist3
-  f<-4
+  f<-1
+  f<-30
+  f
+  tbu
   hdb<-read.csv("local/HU-LX/SES/db_header.csv")
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
@@ -1182,11 +1208,36 @@ headercoding<-function(){
     mstart<-grep("\\*[A-Z]{3}",tbu)[1]
     #mstart<-grep("^\\*",tbu)[1]
     tbub<-tbu[mstart:length(tbu)] #transcript section
+    kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
+    kid<-kidsdf[f,2]
+    #hdb[,kid]<-h2$d1
+    # k<-1
+    # for (k in rownames(h2)){
+    #   hdb[k,kid]<-h2[k,"d1"]
+    # }
+   # trans_dfl[[kid]]<-tbub
+    
     tbusafe<-tbu
     tbuheader<-tbu[1:mstart-1] #header section
     headerlines<-tbuheader[2:length(tbuheader)]
     headeritems<-stri_split_regex(headerlines,":",simplify = T)
+    headeritems<-unique(headeritems)
+    m<-grep("Duration",headeritems)
+    headeritems[m]<-"@Duration"
+    m<-grep("Cassette",headeritems)
+    headeritems[m]<-"@Cassette Location"
+    m<-grep("Comment",headeritems)
+    headeritems[m]<-"@Comments"
+    m<-grep(".enamed audio",headeritems)
+    headeritems[m]<-"@cut and renamed audio file"
+    m<-grep("digitized audio",headeritems)
+    headeritems[m]<-"@digitized audio file"
+    m<-grep("War.?ning",headeritems)
+    headeritems[m]<-"@Warning"
+    # m<-grep("Duration",headeritems)
+    # headeritems[m]<-"@Duration"
     header_df<-data.frame(headeritems,row.names = headeritems[,1])
+    #header_df<-data.frame(headeritems,row.names = hdb$X[1:76])
     h1<-header_df
     h1$content<-paste(h1$X2,h1$X3,h1$X4)
     h1["@Comment","content"]
@@ -1202,21 +1253,179 @@ headercoding<-function(){
 #    rns<-h2$d1[!is.na(h2$d1)]
     #rownames(hdb)<-hdb[,1]
     library(purrr)
+
     h2["@Duration",]<-h2["@Duration",]%>%stri_extract_all_regex("[0-9]{1,2}")%>%unlist()%>%paste(collapse=":")
+    #if (h2["Duration",])
+    #h2["@Duration",]<-h2["@Duration",]%>%stri_extract_all_regex("[0-9]{1,2}")%>%unlist()%>%paste(collapse=":")
     #kid<-"GDB"
-    kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
-    kid<-kidsdf[f,2]
-    #hdb[,kid]<-h2$d1
-    k<-1
+    # kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
+    # kid<-kidsdf[f,2]
+    # #hdb[,kid]<-h2$d1
+    # k<-1
     for (k in rownames(h2)){
       hdb[k,kid]<-h2[k,"d1"]
     }
+  #  trans_dfl[[kid]]<-tbub
+    
+  }
+  m<-grep("@Participants",rownames(hdb))
+  
+  m2<-grep("@Coding",rownames(hdb))
+  m3<-grep("@TIER",rownames(hdb))
+  m4<-grep("@#PAU",rownames(hdb))
+  m5<-m4+1
+#  m6<-grep()
+  hdb2<-rbind(hdb[m:m2,],hdb[m5:length(hdb[,1]),],hdb[m3:m4,])
+  hdb2<-hdb2[,3:length(hdb2)]
+  #hdb2<-data.frame(hdb2[,3],row.names = rownames(hdb2))
+  #colnames(hdb2)<-kid
+  #m11<-grep("@")
+  m1<-grep("@Participants",rownames(hdb2))
+  m2<-grep("@Duration",rownames(hdb2))
+  m3<-grep("@cut",rownames(hdb2))
+  m4<-grep("@header end",rownames(hdb2))
+  m5<-m2+1
+  m6<-grep("@TIER",rownames(hdb2))
+  m7<-grep("@Comments",rownames(hdb2))
+  hdb3<-rbind(hdb2[m1:m2,],hdb2[m3,],hdb2[m5:m7,],hdb2[m6:length(hdb2[,1]),],hdb2[m4,])
+  # for (k in 1:length(hdb2)){
+  # if (is.na(hdb2[m1[2],k]))
+  #   hdb2[m1[2],k]<-hdb2[m1[1],k]
+  # }
+  #hdb2<-hdb[m:length(hdb$X),3:length(hdb)]
+ # write.csv(hdb3,"local/HU-LX/SES/db_headertable.csv")
+########
+  
+   
+  return(hdb3)
+  
+  }
+
+cleandb<-function(set){
+h2<-as.data.frame(h2)
+
+m<-grep("#|Age|Year",colnames(h2))
+colnames(h2)[m]
+m
+for (k in 1:length(m)){
+mode(h2[,m[k]])<-"double"
+}
+k
+#h3<-t(h1)
+h2$`@Year`<-1978
+h2$`@Language of Interview`<-"german"
+h2$`@Elicitation files`<-"HU-BOX/!WS2022-23_SES/SES_documentation"
+h2$`@Participants`<-paste0(rownames(h2),"_target child, INT_interviewer")
+idkid<-stri_split_regex(h2$`@ID`,"_",simplify = T)
+idkid[,2]<-rownames(h2)
+idage<-stri_extract_all_regex(idkid[,3],"[0-9]{2}",simplify = T)
+idgnd<-stri_extract_all_regex(idkid[,3],"[A-Za-z]{1}",simplify = T)
+idkid[,3]<-idgnd
+m<-!is.na(idage)
+m
+idkid[m,4]<-idage[m]
+idkid2<-paste(idkid[,1],idkid[,2],idkid[,3],idkid[,4],sep  = "_")
+h2$`@ID`<-idkid2
+h2$`@Family Language(s)`<-gsub("ELL","greek",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("TUR","turkish",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("DEU","german",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-gsub("ARB","arabic",h2$`@Family Language(s)`)
+h2$`@Family Language(s)`<-tolower(h2$`@Family Language(s)`)
+h2["TAH",4]<-"female"
+sc<-c(2,4,5,7,8,13,14,15,16,18) #rm space in columns
+for (k in 1:length(h2$`@ID`)){
+  h2[k,sc]<-gsub(" ","",h2[k,s])
+}
+
+for (k in 1:length(h2)){
+  r1<-"^ "
+  m<-grep(r1,h2[,k])
+  repl<-""
+  h2[m,k]<-gsub(r1,repl,h2[m,k])
+}
+
+return(h2)
+}
+#############################
+# headertable<-headercoding()
+# h1<-headertable
+# h2<-t(h1)
+#h3<-cleandb(h2)
+#h5<-rbind(AAglobal=colnames(h3),h3[,0:length(h3)])
+#write.csv(h5,"local/HU-LX/SES/db_headertable_002t2x.csv")
+# writexl::write_xlsx(h5,"local/HU-LX/SES/db_headertable_20230321(18.55).xlsx")
+#############################
+#h6 <- read_delim("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+# h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",skip = 1)
+#writexl::write_xlsx(h6,"local/HU-LX/SES/20230321(18.55)_SES_headertable.xlsx")
+
+#write_clip(s)
+#write.csv(h3,"local/HU-LX/SES/db_headertable_002.csv",row.names = rownames(h3),col.names = colnames(h3))
+#typeof(h2[,9])
+#sum(h2$`@#0AR# zero article n = `)
+### transpose rows/columns
+
+#combine header of df and transcript
+k<-1
+f<-1
+set<-h6
+transcombine<-function(set){
+  h4<-set
+  #mode(h4$`@Duration`)<-"character"
+  chatlastoutdir<-paste(dirtext,dirchat,sep="/")
+  chatlastoutdir
+  filelist3<-list.files(chatlastoutdir)
+  filelist3
+  for (f in 1:length(filelist3)){
+  tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
+  #p3<-grep("@.egin",tbu)
+  #p3
+  #####################################
+  #find transcript start
+  mstart<-grep("\\*[A-Z]{3}",tbu)[1]
+  #mstart<-grep("^\\*",tbu)[1]
+  tbub<-tbu[mstart:length(tbu)] #transcript section
+  #kidsdf<-stri_split_regex(filelist3,"_",simplify = T)
+  kid<-filelist3[f]
+
+#  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
+  #r<-f+1
+  r<-f
+  h4[r,21]
+  m<-grep("@TIER.*?",colnames(set))
+  m<-m-1
+  headerentries<-colnames(set)
+  headerentries<-headerentries[2:m]
+  tbu_h2<-paste0(headerentries,": ",h4[r,2:m])
+  #tbu_h2<-tbu_h2[2:length(tbu_h2)]
+    tbu_t<-tbub
+  m2<-grep("@#.*?",tbu)
+  m3<-grep("@TIER.*?",tbu)
+  m3<-c(m3,m2)
+  tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)])
+    #tbu_cpt<-c(tbu_h2,tbu_t)
+  #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
+  #dir.create("local/HU-LX/SES/temp/tr")
+  version<-"v3_0"
+  chatoutparent<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/"
+  chatoutdir<-paste0(chatoutparent,"SES_transcripts_w_header_",version,"_",datestamp)
+  dir.create(chatoutdir)
+  writeLines(tbu_cpt,paste(chatoutdir,kid,sep = "/"))  
   }
 }
-#headercoding()
+#tbu_h2
+#chatlastoutdir
+
+#################
+h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
+               skip = 1)
+#mode(h6$`@Duration`)
+#transcombine(h6)
+#################
+
 
 getwd()
-source("local/R/askchatgpt.R")
+#source("local/R/askchatgpt.R")
 notrun<-function(){
     f
     k<-2
@@ -1275,7 +1484,6 @@ tna<-tn1[m2]
     }
 turns$tag
 }
- # write.csv(hdb,"local/HU-LX/SES/db_headertable.csv")
 ##########
 ### fetch codes in original transcript
 fcodes<-function(){
