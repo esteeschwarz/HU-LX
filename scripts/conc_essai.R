@@ -15,10 +15,12 @@ docscheme<-"sesCPT" #Sketchengine doc scheme
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table("ses_40_v2_9-2.vert")
+d1<-read_table(paste(datadir,"ses_40_v2_9-3.vert",sep = "/"))
 #d1<-read_table("ses_40_v2_9.csv")
-ruthtable<-"ruthtable_kidsmeta.csv"
-datestamp<-"13113"
+ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
+datestamp<-"13124"
+datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
+excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
 cleandb<-function(set){
   #set
@@ -654,9 +656,9 @@ dns
 
 library(writexl)
 getwd()
-dbname<-paste0("sesDB013_",datestamp,".csv")
+dbname<-paste0(datadir,"/sesDB013_",datestamp,".csv")
 write.csv(d8b,dbname)
-#write_xlsx(d8b,"20230313(17.37)_SES_database_by_tokens.xlsx")
+write_xlsx(d8b,excelns)
 
 ##############################################################################
 # DB created above, read DB from .csv to make queries and concordances
@@ -921,6 +923,6 @@ d8b[1:length(d91$interview),l1:l2]<-d92
 
 library(writexl)
 write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
-write_xlsx(d8b,"local/HU-LX/SES/20230220(10.37)_SES_database_by_tokens.xlsx")
+write_xlsx(d8b,"local/HU-LX/SES/20230321(19.18)_SES_database_by_tokens.xlsx")
 }
 
