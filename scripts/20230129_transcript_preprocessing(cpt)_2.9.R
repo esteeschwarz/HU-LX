@@ -24,9 +24,9 @@ library(xfun)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[2]
 datestamp<-"13141"
-version<-"v3_0"
+version<-"v3_1"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
@@ -57,6 +57,9 @@ codeusedir<-"local/HU-LX/SES"
 codesdir<-"gith/HU-LX/data"
 codesource<-"gith/HU-LX/data/codes_cpt5.csv"
 codesource<-"local/HU-LX/SES/codes_cpt6.csv"
+transdbns<-paste0("transdb_",datestamp,".json")
+transdbdir<-codeusedir
+transdb<-list()
 #codesource<-"local/HU-LX/SES/fcodes_cpt_unique_d24.csv"
 #codesource<-"local/HU-LX/SES/codes_cpt_usedv2_9.csv"
 
@@ -565,16 +568,17 @@ for (f in 1:length(filelist2)){
   lcodesmax<-length(unique(rpall$`codes_cpt4$regex[ii]`))
   ######### comment in for complete transcript with tier codes #########
   ### > add codes decription in header: ################################
-  if (scheme=="original"){
+  if (scheme=="original"|scheme=="inlineCodes"){
   tbu<-append(tbu,rp5,after = p2[1]+1) #removed for codeless transcripts
   }
   if (scheme=="sansCodes"){
   tbu[p2[1]+1]<-"@TIER descriptions: removed for unannotated transcript"
   }
+  scheme
   #scheme<-"original"
   ######################################################################
   tbu
-  rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3)
+  rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3|rpall$category==4) #WATCH
   #rptiers$
   #####################################
   ### this section main replacement ###
@@ -586,6 +590,10 @@ for (f in 1:length(filelist2)){
   tbusafe<-tbu
   tbuheader<-tbu[1:mstart-1] #header section
   tbu<-tbub
+  xcodes<-unique(rpall)
+  #xcodes<-unique(rpall$`codes_cpt4$regex[ii]`)
+rpall<-xcodes
+  #  for (k in 1:length(xcodes)) {
   for (k in 1:length(rpall[,1])) {
     flag<-1
     m<-grep(rpall[k,1],tbu)
@@ -621,7 +629,8 @@ for (f in 1:length(filelist2)){
 
           #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
           #  tbuheader<- gsub("#todeletespace#","",tbuheader)
-         rphead<-grep("headex",colnames(rpall))  
+         rphead<-grep("headex",colnames(rpall))
+         
          rpall[k,rphead+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
@@ -737,8 +746,8 @@ for (f in 1:length(filelist2)){
     }
   }#edn depr
   #only transcript 
-  postcodes<-subset(set,set$category==4|set$category==5|set$category==6)
-  transcodes<-subset(postcodes,postcodes$category==4|postcodes$category==5)
+  postcodes<-subset(set,set$category==5|set$category==5|set$category==6)
+  transcodes<-subset(postcodes,postcodes$category==5|postcodes$category==5)
   postcodes<-transcodes
   #postcodes$regex<-stri_unescape_unicode(postcodes$regex)
   typeof(postcodes)
@@ -772,7 +781,7 @@ for (f in 1:length(filelist2)){
   tbu_e[1:50]
   tbu_e
   tbum
-  postcodes<-subset(set,set$category==4|set$category==5|set$category==6)
+  postcodes<-subset(set,set$category==5|set$category==5|set$category==6)
   headcodes<-subset(postcodes,postcodes$category==6)
   
   postcodes<-headcodes
@@ -857,6 +866,7 @@ for (f in 1:length(filelist2)){
   #  transdb<-transfail
 #    transdb<-as.data.frame(transdb,check.names =F)
     transfail[[kidns]]<-tbu_js
+    transdb[[kidns]]<-tbu_enumb
     #transdb[,f+2]<-sp2
     tbu_cpt<-c(tbuheader,tbu_enumb)} #false end
   tbu_e<-tbu_cpt
@@ -873,7 +883,10 @@ for (f in 1:length(filelist2)){
   
 }
 getwd()
-write_json(transdb,paste(dirtext,"transdb001.json",sep = "/"))
+write_json(transfail,paste("local/HU-LX/SES","transdb001.json",sep = "/"))
+write_json(transdb,paste(dirtext,"transcript_database_by_turns_001.json",sep = "/"))
+
+write_json(transdb,paste(transdbdir,transdbns,sep = "/"))
 #write_csv(transdb,paste(dirtext,"transdb001.csv",sep = "/"))
 ### END replacement loop #########
 
@@ -1416,7 +1429,7 @@ return(h2)
 #combine header of df and transcript
 k<-1
 f<-1
-set<-h6
+#set<-h6
 transcombine<-function(set){
   h4<-set
   #mode(h4$`@Duration`)<-"character"
@@ -1450,7 +1463,9 @@ transcombine<-function(set){
   m2<-grep("@#.*?",tbu)
   m3<-grep("@TIER.*?",tbu)
   m3<-c(m3,m2)
-  tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)])
+  #tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)],"@end")
+  tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
+  
     #tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
@@ -1467,8 +1482,12 @@ transcombine<-function(set){
 #################
 h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
                skip = 1)
+h7<-transdb
+#h7$SES_GCA_f_8
+#htest<-c(h6["GCA",],"@header end",h7$SES_GCA_f_8,"@end")
+#unlist(htest)
 #mode(h6$`@Duration`)
-#transcombine(h6)
+transcombine(h6)
 #################
 
 
