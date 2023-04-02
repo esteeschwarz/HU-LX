@@ -17,7 +17,7 @@ library(stringi)
 library(clipr)
 library(fs)
 library(xfun)
-
+library(jsonlite)
 # 1. global variables
 #setwd("~")
 #getwd()
@@ -68,7 +68,7 @@ list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
 #version<-"v2_8_sketchE_INLINE_C"
-sketchversion<-"v2.9"
+sketchversion<-"v3.1"
 if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme==outputschemes[3]){
@@ -1469,7 +1469,7 @@ transcombine<-function(set){
     #tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
-  version<-"v3_0"
+  version<-"v3_1"
   chatoutparent<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/"
   chatoutdir<-paste0(chatoutparent,"SES_transcripts_w_header_",version,"_",datestamp)
   dir.create(chatoutdir)
