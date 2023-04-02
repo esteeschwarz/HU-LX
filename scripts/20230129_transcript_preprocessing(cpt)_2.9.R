@@ -197,16 +197,7 @@ linecor<-function(k,filelist){
   ###single run
   #  readtext(zz)
   cc<-readtext(paste(dirtext,filelist[k],sep = "/"))
-  #cc<-readtext(zzfil)
-  # cc1<-readtext(precodesfun(codes_cpt,f))
-  #cc<-precodesfun(codes_cpt,f)
   cc1<-cc$text
-  #cc1<-readChar(cc,nchars=nchar(cc))
-  #zzfil<-tempfile("kidschar")
-  #cc1
-  #   zz<-file(zzfil,"rb")
-  #readChar(zz,nc)
-  #    cc1<-readChar(zz,nchar(tburec)+8)
   #find obsolete whitespace range 2 to 200 blanks
   regx1<-"[ ]{2,200}"
   repl1<-" "
@@ -220,11 +211,24 @@ linecor<-function(k,filelist){
   regx1<-'"'
   repl1<-"'"
   cc3<-gsub(regx1,repl1,cc2,perl = T)
-  
-    regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
-  repl1<-" \\2"
-  cc3<-gsub(regx1,repl1,cc2,perl = T)
-  #write_clip(cc3)
+  regx1<-'\t'
+  repl1<-" "
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+   regx1<-"[^A-Za-z0-9.,=;\\-?:ß'+#*!§$%&/() @äöüÄÖÜ_…@]"
+   repl1<-""
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+
+    regx1<-"(§%#nl#§%)([A-Za-z.,=;\\-?:ß'+#*!§$%&/() äöüÄÖÜ_])" #newline starting with character or special character
+  repl1<-"\\2"
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+  #13142.
+  regx1<-":([A-Za-z#%\\.,;'-\\(\\)])"
+  repl1<-": \\1"
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+  regx1<-":  ([A-Za-z#%\\.,;'-\\(\\)])"
+  repl1<-": \\1"
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+    #write_clip(cc3)
   
   
   #only for linenumbered transcripts
@@ -673,6 +677,7 @@ for (f in 1:length(filelist2)){
   ################
   
   chatfilename<-paste0(kids4[[f]][1],transextension,chatfileextension)
+  kidns<-kids4[[f]][1]
   chatfilename
   #delete hardcoded linenumbers
   me<-grepl("([^@].*)",tbuheader)
@@ -765,6 +770,7 @@ for (f in 1:length(filelist2)){
   }
   tbub
   tbu_e[1:50]
+  tbu_e
   tbum
   postcodes<-subset(set,set$category==4|set$category==5|set$category==6)
   headcodes<-subset(postcodes,postcodes$category==6)
@@ -799,20 +805,59 @@ for (f in 1:length(filelist2)){
   mnew<-grep("^\\*",tbu)[1]
   #####13141.
   transcpt<-mnew:length(tbu_cpt)
+  transcpt<-tbu_e
+  tail(tbu_cpt)
+  
+  mend<-grep("@(E|end)",transcpt)
+  mend<-mend-1
+  #mend<-length(tbu_cpt)
+  transtxt<-tbu_e[1:mend]
+  transtxt
   # transfail<-list()
   #####
     if (numbered==T){
     #sp1<-stri_split_fixed(tbu_cpt[transcpt],pattern = "(*|%...:)",simplify = T)
-    sp2<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
-    sp1<-stri_extract_all_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
-    sp3<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:")
+    sp2<-stri_split_regex(transtxt,pattern  = "[*%](0[A-Z]{2}:|[A-Z]{3}:)",simplify = T)
+    dim(sp2)
+    sp1<-stri_extract_all_regex(transtxt,pattern  = "[*%](0[A-Z]{2}:|[A-Z]{3}:)",simplify = T)
     
-    transfail[f]<-sp2[1]
-    lt<-length(transcpt)
-    num<-sprintf("%04s", as.character(1:lt))
     dim(sp1)
+    sp3<-stri_split_regex(transtxt,pattern  = "[*%]...:")
+  #  transfail[[f]]<-sp3
+    sp2
+    spna<-!is.na(sp1[,1])
+    spna
+    spna2<-!is.na(sp2[,2])
+    spna2
+    lt1<-sum(spna==spna2)
+    sp1<-sp1[spna,1]
+    sp1<-gsub("\t","",sp1)
+    sp2<-sp2[spna2,2]
+    sp2<-gsub("\t","",sp2)
+    
+        tail(sp1)
+#    transfail[f]<-sp2[1]
+       # transdb<-matrix(ncol = 80,nrow = 500)
+    lt<-length(transtxt)
+    lt<-length(sp1)
+    lt<-lt1
+    num<-sprintf("%04s", as.character(1:lt))
+    tail(num)
+    tail(transfail$SES_GDC_m_8$num)
+    tail(transfail$SES_GDC_m_8$sp2)
+    tail(transfail$SES_GDC_m_8$sp1)
+    tail(transfail$SES_TAF_f_13$num)
+    
+    head(transfail$SES_GDC_m_8$sp2)
+    unique(transfail$SES_GDC_m_8$sp1)
+    dim(sp2)
     dim(transcpt)
-    tbu_enumb<-paste(sp1[,1],num,sp2[,2],sep = "\t")
+    tbu_enumb<-paste(sp1,num,sp2,sep = "\t")
+    tbu_js<-list(sp1=sp1,num=num,sp2=sp2)
+  #  transdb<-transfail
+#    transdb<-as.data.frame(transdb,check.names =F)
+    transfail[[kidns]]<-tbu_js
+    #transdb[,f+2]<-sp2
     tbu_cpt<-c(tbuheader,tbu_enumb)} #false end
   tbu_e<-tbu_cpt
   tail(tbu_e)
@@ -827,6 +872,9 @@ for (f in 1:length(filelist2)){
   #  postprocess(codes_cpt,tbum)
   
 }
+getwd()
+write_json(transdb,paste(dirtext,"transdb001.json",sep = "/"))
+#write_csv(transdb,paste(dirtext,"transdb001.csv",sep = "/"))
 ### END replacement loop #########
 
 # tail(codes_cpt["repl"])

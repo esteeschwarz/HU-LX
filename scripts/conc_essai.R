@@ -58,7 +58,7 @@ preprocess_temp<-function(set){
   
   l2<-as.double(m1)
   l3<-l2-1
-  d$token[m2]<-l3 #linenumbers minus 1
+  d$token[m2]<-l3 #linenumbers minus 1, TODO: revert with CHAT coded transcripts starting conventionally
   
   ms<-grep("(#[A-Z]{3})",d$token) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
   # distinct speakers:
