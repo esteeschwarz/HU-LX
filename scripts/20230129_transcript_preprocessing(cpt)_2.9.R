@@ -24,12 +24,17 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
-datestamp<-"13141"
+scheme<-outputschemes[1]
+sdelim<-F
+datestamp<-"13143_txt"
 version<-"v3_1"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
+chatfileextension<-".txt"
+#for export in .cha format to import into exmaralda
+#dirchat<-paste0(dirchat,"_cha_",version)
+#chatfileextension<-".cha"
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
@@ -96,10 +101,6 @@ transextension<-"_sketchE"
 if (scheme==outputschemes[4])
   transextension<-"_InlineCodes"
 
-chatfileextension<-".txt"
-#for export in .cha format to import into exmaralda
-#dirchat<-paste0(dirchat,"_cha_",version)
-#chatfileextension<-".cha"
 
 dirtext
 dirmod
@@ -1188,9 +1189,10 @@ sketchcoding<-function(){
   repl3<-"#\\1"
   tbub<-gsub(regx3,repl3,tbub[sent])
   tbub[sent]
-  tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
+  tbuwrap<-tbub[sent]
+  if (sdelim==T)
+     tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
     #tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[mkid]) # wrap only with child sentences
-  
     tbuheader
     k<-79
   #####################################
@@ -1463,8 +1465,10 @@ transcombine<-function(set){
   m2<-grep("@#.*?",tbu)
   m3<-grep("@TIER.*?",tbu)
   m3<-c(m3,m2)
-  #tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)],"@end")
-  tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
+  ifelse (numbered==F,
+     tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)]),
+     tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
+  )
   
     #tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
@@ -1683,6 +1687,55 @@ codes<-paste0(ccnst$pre,ccnst$keyword,ccnst$post)
 cd3<-bind_rows(cd3,tibble(codes))
 write.csv(cd3,"gith/HU-LX/data/codes_cptmissing.csv")
 }
+ftagging<-function(){
+  ##############13143.
+  library(koRpus)
+  install.koRpus.lang("de")
+  library(koRpus.lang.de)
+  
+    getwd()
+  dirtext
+  tagdir<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/sketchmode/v3.1/version without header for SketchEngine upload"
+  cha<-list.files(tagdir)
+  cha<-cha[grep("cha",cha)]
+  tagdf<-list()
+  kids4<-array()
+  for (k in 1:length(cha)){
+    # regx1<-"(.+_[0-9]{1,2}).+(\\.txt)"
+    # repl1<-"\\1\\2"
+    # filelist_ren<-gsub(regx1,repl1,filelist2[k])
+    #  regx3<-"(?<=(ELL|TUR)_)([A-Za-z]{3})"
+    regx3<-"SES_([A-Za-z]{3}).*"
+    repl2<-"\\1"
+    # filekids<-gsub(regx2,repl2,filelist_ren)
+    kids4[k]<-gsub(regx3,repl2,cha[k],perl = T)
+  }
+  kids4<-unique(kids4)
+  #k<-1
+    for (k in 1:length(cha)){
+  x<-treetag(paste(tagdir,cha[k],sep = "/"),treetagger = "manual",lang="de",
+             TT.options = list(path=file.path("~/pro/treetagger"),preset="de"),format = "file")
+  
+  # xf<-tempfile(fileext = ".txt")
+  # treetag(paste(dirout,cha[1],sep = "/"),treetagger = "manual",lang="de",
+  #         TT.options = list(path=file.path("~/pro/treetagger"),preset="de"),format = "file")
+  y<-taggedText(x)
+  summary(x)
+#  plot(x)
+  codesdir
+  codeusedir
+  tagoutdir<-"local/HU-LX/pepper/treeout2"
+  dir.create(tagoutdir)
+  y2<-y[,2:4]
+  colnames(y2)<-c("tok","tag","lemma")
+  y2$lemma<-gsub("<unknown>","N.A.",y2$lemma)
+  
+#  y2$lem<-gsub("<unknown>","N.A.",y2$lem)
+  tagfilens<-paste0(kids4[k],".xlsx")
 
+    writexl::write_xlsx(y2,paste(tagoutdir,tagfilens,sep="/"))
+#  write_delim(y2,paste(codeusedir,"GCAtokens.tt",sep = "/"),delim = "\t",)
+    }
+}
 
 
