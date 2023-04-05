@@ -11,14 +11,14 @@ codesdir<-"gith/HU-LX/data"
 getwd()
 list.files(getwd())
 #setwd(datadir)
-docscheme<-"sesCPT" #Sketchengine doc scheme
+docscheme<-"archive_file" #Sketchengine doc scheme
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table(paste(datadir,"ses_40_v2_9-3.vert",sep = "/"))
+d1<-read_table(paste(datadir,"ses_40_v3_1-3.vert",sep = "/"))
 #d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
-datestamp<-"13124"
+datestamp<-"13145"
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
 excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
@@ -57,7 +57,8 @@ preprocess_temp<-function(set){
   m2<-grep(regx1,d$token)
   
   l2<-as.double(m1)
-  l3<-l2-1
+  #l3<-l2-1 #remove for transcripts with linenumber before speaker
+  l3<-l2 #linenumber after speaker
   d$token[m2]<-l3 #linenumbers minus 1, TODO: revert with CHAT coded transcripts starting conventionally
   
   ms<-grep("(#[A-Z]{3})",d$token) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
@@ -262,10 +263,12 @@ head(d6)
 d6safe<-d6
 getwd()
 ### DEFINITELY SAFE AFTER RUN! ####
-dbname<-paste0("sesDB013_d6safe_",datestamp,".csv")
-write.csv(d6,dbname)
+dbname<-paste0("sesDB014_d6safe_",datestamp,".csv")
+#dbwritedir<-datadir
+write.csv(d6,paste(datadir,dbname,sep="/"))
 ###### finalise
 colnames(d6)
+#here stepback and run
 
 dns_x<-c("pos","category","funct","case","pers","num","gender","tense","mode")
 mxcolumns<-grep("x",colnames(d6))
@@ -295,10 +298,10 @@ colnames(d7)<-dns_n
 ### paste docscheme here
 regx1<-paste0("</",docscheme)
 m1<-grep(docscheme,d7$token)
-d7$token[m1[3]]
+d7$token[m1[1]]
 m4<-grep(regx1,d7$token) #transcript end
 # d7$token[m2[1]]
-regx2<-paste0("<",docscheme," id")
+regx2<-paste0("<",docscheme)
 m3<-grep(regx2,d7$token) #transcripts start
 regx3<-paste0("(SES_.*)(",filescheme,")")
 m5<-grep(regx3,d7$token,value = T)
@@ -306,7 +309,6 @@ m5<-grep(regx3,d7$token,value = T)
 regx4<-paste0(".*(SES_.*)(",filescheme,").*")
 m6<-gsub(regx4,"\\1",m5) #kids
 head(m6)
-#here stepback
 d8<-d7
 
 # m6
@@ -318,7 +320,7 @@ d8$interview<-0
 d8$part_L1<-0
 d8$part_sex<-0
 d8$part_age<-0
-
+m3
 for (l in 1:length(m6)){
   li<-array()
   #repl<-0
@@ -553,9 +555,12 @@ colnames(d9b)<-dns
 dns
 ### nice feature from correction issue: add column with transcript line numbers
 lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}$")
+lineextract<-function(x) stri_extract(x,regex=": [0-9]{1,3}")
+
 ln<-lapply(d9b$p_turn, lineextract)
 ln<-unlist(ln)
 ln[1661]
+ln<-gsub(": ","",ln)
 d9b$p_transcriptLine<-ln
 #d9c<-insert(d9b,d9b[,19],ln)
 getwd()
@@ -925,4 +930,37 @@ temprun<-function(){
   write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
   write_xlsx(d8b,"local/HU-LX/SES/20230321(19.18)_SES_database_by_tokens.xlsx")
 }
+annisprepare<-function(){
+  m<-grep("t_",colnames(d8b))
+colnames(d8b)[a]
+a<-c(1,2,3,5,m[3:11])
+m<-grep(docscheme,d8b$p_token,invert = T)
+d10<-d8b[m,a]
+cns<-c("int","spk","tok","lem","tag","cat","funct","case","pers","num","gender","tense","mode")
+colnames(d10)<-cns
+m<-unique(d10$p_interview)
+m<-m[1:40]
+annisdir<-"local/HU-LX/pepper/xl2/"
+dir.create(annisdir)
+a<-c(1,2,3,4,5)
+d11<-d10[,a]
+k<-1
+for (k in 1:length(m)){
+  a<-c(1,2,3,4,5)
+  d12<-subset(d11,d11$int==m[k])
+  d13<-d12[a]
+  ns<-paste0(annisdir,m[k],".xlsx")
+  write_xlsx(d13,ns)
+  
+}
+m
+m<-grep(0,d10$p_interview)
+m<-is.na(d10$p_interview)
+tail(d10)
+sum(m)
 
+write_xlsx(d8b,"local/HU-LX/SES/annis_d10.xlsx")
+
+
+
+}

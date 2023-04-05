@@ -24,9 +24,9 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
-sdelim<-F
-datestamp<-"13143_txt"
+scheme<-outputschemes[2]
+sdelim<-T #wrap SkE lines <s></s>
+datestamp<-"13145"
 version<-"v3_1"
 numbered<-T
 ske<-F #not change!
@@ -223,7 +223,7 @@ linecor<-function(k,filelist){
   cc3<-gsub(regx1,repl1,cc3,perl = T)
 
     regx1<-"(§%#nl#§%)([A-Za-z.,=;\\-?:ß'+#*!§$%&/() äöüÄÖÜ_])" #newline starting with character or special character
-  repl1<-"\\2"
+  repl1<-" \\2"
   cc3<-gsub(regx1,repl1,cc3,perl = T)
   #13142.
   regx1<-":([A-Za-z#%\\.,;'-\\(\\)])"
