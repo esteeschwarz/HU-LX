@@ -11,14 +11,18 @@ codesdir<-"gith/HU-LX/data"
 getwd()
 list.files(getwd())
 #setwd(datadir)
-docscheme<-"archive_file" #Sketchengine doc scheme
+docscheme<-"archive_file" #Sketchengine doc scheme with .zip upload (transcripts not alphabetical ordered in output db!)
+docscheme<-"sesCPT" #Sketchengine doc scheme with single file upload
+#regx<-"(#[A-Z]{3,3}|0[A-Z]{1,2})" #old inline coding, depr.
+codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
+
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table(paste(datadir,"ses_40_v3_1-3.vert",sep = "/"))
+d1<-read_table(paste(datadir,"ses_40_v3_1_2-13146.vert",sep = "/"),col_names = c("token","cat","lemma"))
 #d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
-datestamp<-"13145"
+datestamp<-"13147"
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
 excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
@@ -409,17 +413,22 @@ sent1<-gsub(spk_grep3,"%000%",d8$turn)
 d8$turn[3000]
 sent1[3000]
 regx<-"(#[A-Z]{3,3}|0[A-Z]{1,2})"
-ms5<-grep(regx,sent1) #grep #codes / coded features
-#ms5b<-grep("(#[A-Z]{3,3}|0[A-Z]{1,2})",sent1,value = T) #grep #codes / coded features
+codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
 
-ms6<-head(unique(ms5))
+#ms5<-grep(regx,sent1) #grep #codes / coded features
+ms5b<-grep(codescheme,sent1,value = T) #grep #codes / coded features
+#ms5b[1:500]
+#ms6<-head(unique(ms5))
+ms6<-head(unique(ms5b))
+
 ms6
 # x<-ms6
 # codec<-function(x){x+10}
 # l<-c(1,2,3,4,5)   
 # lapply(l,codec)
-codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
-codef<-function(x) stri_extract_all_regex(x,regx)
+# codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
+# codef<-function(x) stri_extract_all_regex(x,regx)
+codef<-function(x) stri_extract_all_regex(x,codescheme)
 
 #ms7<-lapply(ms6, codef)
 ms7<-lapply(sent1, codef)
@@ -428,7 +437,8 @@ ms7<-lapply(sent1, codef)
 ms8<-unique(unlist(ms7)) #unique coded features
 ms8
 ms8<-ms8[!is.na(ms8)]
-ms7[40]
+ns_codecolumns<-ms8
+#ms7[40]
 ##########################
 # d8[,22:34]<-"---"
 tend<-length(d8)
@@ -456,7 +466,8 @@ colnames(d8)[codecolumns]<-ms8
  # k<-1
   if (sum(!is.na(repl[1:l]))>0){
   for (k in 1:l){
-  d8[r,repl[k]]<-1
+  d8[r,repl[k]]<-1 ### >>>>>> here inserts 1 (TRUE) for every token that has a coding within the turn, cells
+  # within turns without code remain 0 (FALSE). 0/1 is put into the cell of the according code column
 #  print(repl[k])
   }
 #  d8[r]
@@ -680,6 +691,8 @@ d8b[1:length(d91$p_interview),l1:l2]<-d95
 # l2<-l1+length(d96)-1
 # d8b[1:length(d91$interview),l1:l2]<-d96
 dns<-colnames(d8b)
+mcodes<-grep("codes",dns)
+colnames(d8b)[mcodes]<-ns_codecolumns
 dns
 #dns[6]<-"transcript_line"
 #dns[31]<-"feature_eval"
@@ -970,35 +983,45 @@ temprun<-function(){
   write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
   write_xlsx(d8b,"local/HU-LX/SES/20230321(19.18)_SES_database_by_tokens.xlsx")
 }
-annisprepare<-function(){
-  m<-grep("t_",colnames(d8b))
-  m2<-grep("codes",colnames(d8b))
-  
+
+
+annisprepare<-function(set){
+d8b<-set
+    m<-grep("t_",colnames(d8b))
+m1<-grep("part",colnames(d8b))
+    m2<-grep("codes",colnames(d8b))
+  m2<-grep(codescheme,colnames(d8b))
+colnames(d8b)[m]  
 codens<-colnames(d8b)[m2]
 a<-c(1,2,3,5,m[3:11],m2)
+length(a)
 m3<-grep(docscheme,d8b$p_token,invert = T)
 d10<-d8b[m3,a]
 
 #codens<-grep("#",colnames(d10))
 cns<-c("int","spk","token","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
 colnames(d10)<-cns
-annisdir<-"local/HU-LX/pepper/xl4/"
+annisdir<-"local/HU-LX/pepper/xl5/"
 dir.create(annisdir)
 #a<-c(1,2,3,4,5)
 #d11<-d10[,a]
 d11<-d10
 k<-1
 #for (k in 1:length(d11$tok)){
-  n<-grep("[A-Z]{3}",d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
-  d11$tag[n]<-"" 
+  n<-grep("([A-Z]{3})|(0[A-Z]{2})",d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  n<-grep(codescheme,d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  
+    d11$tag[n]<-"" 
 #}
-  m<-unique(d10$int)
-  m<-m[1:40]
-for (k in 1:length(m)){
+  spk<-unique(d11$int)
+  kid<-spk[1:40]
+k<-1
+  for (k in 1:length(kid)){
   #a<-c(1,2,3,4,5)
-  d12<-subset(d11,d11$int==m[k])
+  d12<-subset(d11,d11$int==kid[k])
   #d13<-d12[a]
-  ns<-paste0(annisdir,m[k],".xlsx")
+  d13<-d12
+  ns<-paste0(annisdir,kid[k],".xlsx")
   write_xlsx(d13,ns)
 }
 
@@ -1011,6 +1034,16 @@ for (k in 1:length(m)){
 # write_xlsx(d8b,"local/HU-LX/SES/annis_d10.xlsx")
 
 
-
+  return(d13)
+  
 }
-annisprepare()
+annisprepare(d8b)
+
+code_add_next_token<-function(set){
+  #clean tokens
+  m<-grep("[^A-Za-z,?0-9]",)
+}
+
+
+
+
