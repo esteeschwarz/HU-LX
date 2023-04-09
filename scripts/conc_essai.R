@@ -999,19 +999,19 @@ m3<-grep(docscheme,d8b$p_token,invert = T)
 d10<-d8b[m3,a]
 
 #codens<-grep("#",colnames(d10))
-cns<-c("int","spk","token","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
+cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
 colnames(d10)<-cns
-annisdir<-"local/HU-LX/pepper/xl5/"
+annisdir<-"local/HU-LX/pepper/xl6/SES_40_3.3/"
 dir.create(annisdir)
 #a<-c(1,2,3,4,5)
 #d11<-d10[,a]
 d11<-d10
 k<-1
 #for (k in 1:length(d11$tok)){
-  n<-grep("([A-Z]{3})|(0[A-Z]{2})",d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
-  n<-grep(codescheme,d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
-  
-    d11$tag[n]<-"" 
+  n1<-grep("([A-Z]{3})|(0[A-Z]{2})",d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  n2<-grep(codescheme,d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  n3<-c(n1,n2)
+    d11$tag[n3]<-"" 
 #}
   spk<-unique(d11$int)
   kid<-spk[1:40]
@@ -1034,16 +1034,29 @@ k<-1
 # write_xlsx(d8b,"local/HU-LX/SES/annis_d10.xlsx")
 
 
-  return(d13)
+  return(d11)
   
 }
-annisprepare(d8b)
+d14<-annisprepare(d8b)
 
 code_add_next_token<-function(set){
   #clean tokens
   m<-grep("[^A-Za-z,?0-9]",)
 }
 
-
+pepperTT<-function(){
+  ##### treetagger scheme:
+  # <int int="TBB">
+  #   <lem lem="sie">
+  #     <spk spk="#TBB">
+  #       <tag tag="PRO">
+  #         Ich		
+  #       </tag>
+  #         </spk>
+  #         </lem>
+  #         </int>
+          
+  
+}
 
 
