@@ -17,19 +17,24 @@ library(stringi)
 library(clipr)
 library(fs)
 library(xfun)
-
+library(jsonlite)
 # 1. global variables
 #setwd("~")
 #getwd()
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
-datestamp<-"13141"
-version<-"v3_0"
+scheme<-outputschemes[2]
+sdelim<-T #wrap SkE lines <s></s>
+datestamp<-"13145"
+version<-"v3_1"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
+chatfileextension<-".txt"
+#for export in .cha format to import into exmaralda
+#dirchat<-paste0(dirchat,"_cha_",version)
+#chatfileextension<-".cha"
 boxfolderns<-"version without header for SketchEngine upload"
 #codesource<-paste0(path_home(),"/Documents/GitHub/DH_essais/sections/HU-LX/codes_cpt4mod.csv")
 #######
@@ -57,6 +62,9 @@ codeusedir<-"local/HU-LX/SES"
 codesdir<-"gith/HU-LX/data"
 codesource<-"gith/HU-LX/data/codes_cpt5.csv"
 codesource<-"local/HU-LX/SES/codes_cpt6.csv"
+transdbns<-paste0("transdb_",datestamp,".json")
+transdbdir<-codeusedir
+transdb<-list()
 #codesource<-"local/HU-LX/SES/fcodes_cpt_unique_d24.csv"
 #codesource<-"local/HU-LX/SES/codes_cpt_usedv2_9.csv"
 
@@ -65,7 +73,7 @@ list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
 #version<-"v2_8_sketchE_INLINE_C"
-sketchversion<-"v2.9"
+sketchversion<-"v3.1"
 if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme==outputschemes[3]){
@@ -93,10 +101,6 @@ transextension<-"_sketchE"
 if (scheme==outputschemes[4])
   transextension<-"_InlineCodes"
 
-chatfileextension<-".txt"
-#for export in .cha format to import into exmaralda
-#dirchat<-paste0(dirchat,"_cha_",version)
-#chatfileextension<-".cha"
 
 dirtext
 dirmod
@@ -197,16 +201,7 @@ linecor<-function(k,filelist){
   ###single run
   #  readtext(zz)
   cc<-readtext(paste(dirtext,filelist[k],sep = "/"))
-  #cc<-readtext(zzfil)
-  # cc1<-readtext(precodesfun(codes_cpt,f))
-  #cc<-precodesfun(codes_cpt,f)
   cc1<-cc$text
-  #cc1<-readChar(cc,nchars=nchar(cc))
-  #zzfil<-tempfile("kidschar")
-  #cc1
-  #   zz<-file(zzfil,"rb")
-  #readChar(zz,nc)
-  #    cc1<-readChar(zz,nchar(tburec)+8)
   #find obsolete whitespace range 2 to 200 blanks
   regx1<-"[ ]{2,200}"
   repl1<-" "
@@ -220,11 +215,24 @@ linecor<-function(k,filelist){
   regx1<-'"'
   repl1<-"'"
   cc3<-gsub(regx1,repl1,cc2,perl = T)
-  
-    regx1<-"(§%#nl#§%)([A-Za-z#%\\.,;'-\\(\\)])" #newline starting with character or special character
+  regx1<-'\t'
+  repl1<-" "
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+   regx1<-"[^A-Za-z0-9.,=;\\-?:ß'+#*!§$%&/() @äöüÄÖÜ_…@]"
+   repl1<-""
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+
+    regx1<-"(§%#nl#§%)([A-Za-z.,=;\\-?:ß'+#*!§$%&/() äöüÄÖÜ_])" #newline starting with character or special character
   repl1<-" \\2"
-  cc3<-gsub(regx1,repl1,cc2,perl = T)
-  #write_clip(cc3)
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+  #13142.
+  regx1<-":([A-Za-z#%\\.,;'-\\(\\)])"
+  repl1<-": \\1"
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+  regx1<-":  ([A-Za-z#%\\.,;'-\\(\\)])"
+  repl1<-": \\1"
+  cc3<-gsub(regx1,repl1,cc3,perl = T)
+    #write_clip(cc3)
   
   
   #only for linenumbered transcripts
@@ -561,16 +569,17 @@ for (f in 1:length(filelist2)){
   lcodesmax<-length(unique(rpall$`codes_cpt4$regex[ii]`))
   ######### comment in for complete transcript with tier codes #########
   ### > add codes decription in header: ################################
-  if (scheme=="original"){
+  if (scheme=="original"|scheme=="inlineCodes"){
   tbu<-append(tbu,rp5,after = p2[1]+1) #removed for codeless transcripts
   }
   if (scheme=="sansCodes"){
   tbu[p2[1]+1]<-"@TIER descriptions: removed for unannotated transcript"
   }
+  scheme
   #scheme<-"original"
   ######################################################################
   tbu
-  rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3)
+  rptiers<-subset(rpall,rpall$category==1|rpall$category==2|rpall$category==3|rpall$category==4) #WATCH
   #rptiers$
   #####################################
   ### this section main replacement ###
@@ -582,6 +591,10 @@ for (f in 1:length(filelist2)){
   tbusafe<-tbu
   tbuheader<-tbu[1:mstart-1] #header section
   tbu<-tbub
+  xcodes<-unique(rpall)
+  #xcodes<-unique(rpall$`codes_cpt4$regex[ii]`)
+rpall<-xcodes
+  #  for (k in 1:length(xcodes)) {
   for (k in 1:length(rpall[,1])) {
     flag<-1
     m<-grep(rpall[k,1],tbu)
@@ -617,7 +630,8 @@ for (f in 1:length(filelist2)){
 
           #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
           #  tbuheader<- gsub("#todeletespace#","",tbuheader)
-         rphead<-grep("headex",colnames(rpall))  
+         rphead<-grep("headex",colnames(rpall))
+         
          rpall[k,rphead+f]<-length(m)   
     #rpall$instance[k]<-c(f,length(m))
     } #replace coding with replacement + add extra tier with code below speakerline
@@ -673,6 +687,7 @@ for (f in 1:length(filelist2)){
   ################
   
   chatfilename<-paste0(kids4[[f]][1],transextension,chatfileextension)
+  kidns<-kids4[[f]][1]
   chatfilename
   #delete hardcoded linenumbers
   me<-grepl("([^@].*)",tbuheader)
@@ -732,8 +747,8 @@ for (f in 1:length(filelist2)){
     }
   }#edn depr
   #only transcript 
-  postcodes<-subset(set,set$category==4|set$category==5|set$category==6)
-  transcodes<-subset(postcodes,postcodes$category==4|postcodes$category==5)
+  postcodes<-subset(set,set$category==5|set$category==5|set$category==6)
+  transcodes<-subset(postcodes,postcodes$category==5|postcodes$category==5)
   postcodes<-transcodes
   #postcodes$regex<-stri_unescape_unicode(postcodes$regex)
   typeof(postcodes)
@@ -765,8 +780,9 @@ for (f in 1:length(filelist2)){
   }
   tbub
   tbu_e[1:50]
+  tbu_e
   tbum
-  postcodes<-subset(set,set$category==4|set$category==5|set$category==6)
+  postcodes<-subset(set,set$category==5|set$category==5|set$category==6)
   headcodes<-subset(postcodes,postcodes$category==6)
   
   postcodes<-headcodes
@@ -799,20 +815,60 @@ for (f in 1:length(filelist2)){
   mnew<-grep("^\\*",tbu)[1]
   #####13141.
   transcpt<-mnew:length(tbu_cpt)
+  transcpt<-tbu_e
+  tail(tbu_cpt)
+  
+  mend<-grep("@(E|end)",transcpt)
+  mend<-mend-1
+  #mend<-length(tbu_cpt)
+  transtxt<-tbu_e[1:mend]
+  transtxt
   # transfail<-list()
   #####
     if (numbered==T){
     #sp1<-stri_split_fixed(tbu_cpt[transcpt],pattern = "(*|%...:)",simplify = T)
-    sp2<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
-    sp1<-stri_extract_all_regex(tbu_cpt[transcpt],pattern  = "[*%]...:",simplify = T)
-    sp3<-stri_split_regex(tbu_cpt[transcpt],pattern  = "[*%]...:")
+    sp2<-stri_split_regex(transtxt,pattern  = "[*%](0[A-Z]{2}:|[A-Z]{3}:)",simplify = T)
+    dim(sp2)
+    sp1<-stri_extract_all_regex(transtxt,pattern  = "[*%](0[A-Z]{2}:|[A-Z]{3}:)",simplify = T)
     
-    transfail[f]<-sp2[1]
-    lt<-length(transcpt)
-    num<-sprintf("%04s", as.character(1:lt))
     dim(sp1)
+    sp3<-stri_split_regex(transtxt,pattern  = "[*%]...:")
+  #  transfail[[f]]<-sp3
+    sp2
+    spna<-!is.na(sp1[,1])
+    spna
+    spna2<-!is.na(sp2[,2])
+    spna2
+    lt1<-sum(spna==spna2)
+    sp1<-sp1[spna,1]
+    sp1<-gsub("\t","",sp1)
+    sp2<-sp2[spna2,2]
+    sp2<-gsub("\t","",sp2)
+    
+        tail(sp1)
+#    transfail[f]<-sp2[1]
+       # transdb<-matrix(ncol = 80,nrow = 500)
+    lt<-length(transtxt)
+    lt<-length(sp1)
+    lt<-lt1
+    num<-sprintf("%04s", as.character(1:lt))
+    tail(num)
+    tail(transfail$SES_GDC_m_8$num)
+    tail(transfail$SES_GDC_m_8$sp2)
+    tail(transfail$SES_GDC_m_8$sp1)
+    tail(transfail$SES_TAF_f_13$num)
+    
+    head(transfail$SES_GDC_m_8$sp2)
+    unique(transfail$SES_GDC_m_8$sp1)
+    dim(sp2)
     dim(transcpt)
-    tbu_enumb<-paste(sp1[,1],num,sp2[,2],sep = "\t")
+    tbu_enumb<-paste(sp1,num,sp2,sep = "\t")
+    tbu_js<-list(sp1=sp1,num=num,sp2=sp2)
+  #  transdb<-transfail
+#    transdb<-as.data.frame(transdb,check.names =F)
+    transfail[[kidns]]<-tbu_js
+    transdb[[kidns]]<-tbu_enumb
+    #transdb[,f+2]<-sp2
     tbu_cpt<-c(tbuheader,tbu_enumb)} #false end
   tbu_e<-tbu_cpt
   tail(tbu_e)
@@ -827,6 +883,12 @@ for (f in 1:length(filelist2)){
   #  postprocess(codes_cpt,tbum)
   
 }
+getwd()
+write_json(transfail,paste("local/HU-LX/SES","transdb001.json",sep = "/"))
+write_json(transdb,paste(dirtext,"transcript_database_by_turns_001.json",sep = "/"))
+
+write_json(transdb,paste(transdbdir,transdbns,sep = "/"))
+#write_csv(transdb,paste(dirtext,"transdb001.csv",sep = "/"))
 ### END replacement loop #########
 
 # tail(codes_cpt["repl"])
@@ -1127,9 +1189,10 @@ sketchcoding<-function(){
   repl3<-"#\\1"
   tbub<-gsub(regx3,repl3,tbub[sent])
   tbub[sent]
-  tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
+  tbuwrap<-tbub[sent]
+  if (sdelim==T)
+     tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
     #tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[mkid]) # wrap only with child sentences
-  
     tbuheader
     k<-79
   #####################################
@@ -1368,7 +1431,7 @@ return(h2)
 #combine header of df and transcript
 k<-1
 f<-1
-set<-h6
+#set<-h6
 transcombine<-function(set){
   h4<-set
   #mode(h4$`@Duration`)<-"character"
@@ -1402,11 +1465,15 @@ transcombine<-function(set){
   m2<-grep("@#.*?",tbu)
   m3<-grep("@TIER.*?",tbu)
   m3<-c(m3,m2)
-  tbu_cpt<-c(tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)])
+  ifelse (numbered==F,
+     tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)]),
+     tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
+  )
+  
     #tbu_cpt<-c(tbu_h2,tbu_t)
   #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
   #dir.create("local/HU-LX/SES/temp/tr")
-  version<-"v3_0"
+  version<-"v3_1"
   chatoutparent<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/"
   chatoutdir<-paste0(chatoutparent,"SES_transcripts_w_header_",version,"_",datestamp)
   dir.create(chatoutdir)
@@ -1419,8 +1486,12 @@ transcombine<-function(set){
 #################
 h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
                skip = 1)
+h7<-transdb
+#h7$SES_GCA_f_8
+#htest<-c(h6["GCA",],"@header end",h7$SES_GCA_f_8,"@end")
+#unlist(htest)
 #mode(h6$`@Duration`)
-#transcombine(h6)
+transcombine(h6)
 #################
 
 
@@ -1616,6 +1687,55 @@ codes<-paste0(ccnst$pre,ccnst$keyword,ccnst$post)
 cd3<-bind_rows(cd3,tibble(codes))
 write.csv(cd3,"gith/HU-LX/data/codes_cptmissing.csv")
 }
+ftagging<-function(){
+  ##############13143.
+  library(koRpus)
+  install.koRpus.lang("de")
+  library(koRpus.lang.de)
+  
+    getwd()
+  dirtext
+  tagdir<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/sketchmode/v3.1/version without header for SketchEngine upload"
+  cha<-list.files(tagdir)
+  cha<-cha[grep("cha",cha)]
+  tagdf<-list()
+  kids4<-array()
+  for (k in 1:length(cha)){
+    # regx1<-"(.+_[0-9]{1,2}).+(\\.txt)"
+    # repl1<-"\\1\\2"
+    # filelist_ren<-gsub(regx1,repl1,filelist2[k])
+    #  regx3<-"(?<=(ELL|TUR)_)([A-Za-z]{3})"
+    regx3<-"SES_([A-Za-z]{3}).*"
+    repl2<-"\\1"
+    # filekids<-gsub(regx2,repl2,filelist_ren)
+    kids4[k]<-gsub(regx3,repl2,cha[k],perl = T)
+  }
+  kids4<-unique(kids4)
+  #k<-1
+    for (k in 1:length(cha)){
+  x<-treetag(paste(tagdir,cha[k],sep = "/"),treetagger = "manual",lang="de",
+             TT.options = list(path=file.path("~/pro/treetagger"),preset="de"),format = "file")
+  
+  # xf<-tempfile(fileext = ".txt")
+  # treetag(paste(dirout,cha[1],sep = "/"),treetagger = "manual",lang="de",
+  #         TT.options = list(path=file.path("~/pro/treetagger"),preset="de"),format = "file")
+  y<-taggedText(x)
+  summary(x)
+#  plot(x)
+  codesdir
+  codeusedir
+  tagoutdir<-"local/HU-LX/pepper/treeout2"
+  dir.create(tagoutdir)
+  y2<-y[,2:4]
+  colnames(y2)<-c("tok","tag","lemma")
+  y2$lemma<-gsub("<unknown>","N.A.",y2$lemma)
+  
+#  y2$lem<-gsub("<unknown>","N.A.",y2$lem)
+  tagfilens<-paste0(kids4[k],".xlsx")
 
+    writexl::write_xlsx(y2,paste(tagoutdir,tagfilens,sep="/"))
+#  write_delim(y2,paste(codeusedir,"GCAtokens.tt",sep = "/"),delim = "\t",)
+    }
+}
 
 

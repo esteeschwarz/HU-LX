@@ -11,14 +11,18 @@ codesdir<-"gith/HU-LX/data"
 getwd()
 list.files(getwd())
 #setwd(datadir)
-docscheme<-"sesCPT" #Sketchengine doc scheme
+docscheme<-"archive_file" #Sketchengine doc scheme with .zip upload (transcripts not alphabetical ordered in output db!)
+docscheme<-"sesCPT" #Sketchengine doc scheme with single file upload
+#regx<-"(#[A-Z]{3,3}|0[A-Z]{1,2})" #old inline coding, depr.
+codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
+
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table(paste(datadir,"ses_40_v2_9-3.vert",sep = "/"))
+d1<-read_table(paste(datadir,"ses_40_v3_1_2-13146.vert",sep = "/"),col_names = c("token","cat","lemma"))
 #d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
-datestamp<-"13124"
+datestamp<-"13147"
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
 excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
@@ -57,8 +61,9 @@ preprocess_temp<-function(set){
   m2<-grep(regx1,d$token)
   
   l2<-as.double(m1)
-  l3<-l2-1
-  d$token[m2]<-l3 #linenumbers minus 1
+  #l3<-l2-1 #remove for transcripts with linenumber before speaker
+  l3<-l2 #linenumber after speaker
+  d$token[m2]<-l3 #linenumbers minus 1, TODO: revert with CHAT coded transcripts starting conventionally
   
   ms<-grep("(#[A-Z]{3})",d$token) #speaker lines #"(#[A-Z]{3})" = 4942 matches in raw data
   # distinct speakers:
@@ -262,10 +267,12 @@ head(d6)
 d6safe<-d6
 getwd()
 ### DEFINITELY SAFE AFTER RUN! ####
-dbname<-paste0("sesDB013_d6safe_",datestamp,".csv")
-write.csv(d6,dbname)
+dbname<-paste0("sesDB014_d6safe_",datestamp,".csv")
+#dbwritedir<-datadir
+write.csv(d6,paste(datadir,dbname,sep="/"))
 ###### finalise
 colnames(d6)
+#here stepback and run
 
 dns_x<-c("pos","category","funct","case","pers","num","gender","tense","mode")
 mxcolumns<-grep("x",colnames(d6))
@@ -295,10 +302,10 @@ colnames(d7)<-dns_n
 ### paste docscheme here
 regx1<-paste0("</",docscheme)
 m1<-grep(docscheme,d7$token)
-d7$token[m1[3]]
+d7$token[m1[1]]
 m4<-grep(regx1,d7$token) #transcript end
 # d7$token[m2[1]]
-regx2<-paste0("<",docscheme," id")
+regx2<-paste0("<",docscheme)
 m3<-grep(regx2,d7$token) #transcripts start
 regx3<-paste0("(SES_.*)(",filescheme,")")
 m5<-grep(regx3,d7$token,value = T)
@@ -306,7 +313,6 @@ m5<-grep(regx3,d7$token,value = T)
 regx4<-paste0(".*(SES_.*)(",filescheme,").*")
 m6<-gsub(regx4,"\\1",m5) #kids
 head(m6)
-#here stepback
 d8<-d7
 
 # m6
@@ -318,7 +324,7 @@ d8$interview<-0
 d8$part_L1<-0
 d8$part_sex<-0
 d8$part_age<-0
-
+m3
 for (l in 1:length(m6)){
   li<-array()
   #repl<-0
@@ -340,7 +346,7 @@ for (l in 1:length(m6)){
   
 }
 # wks., check:
-d8$interview[3650:4800]
+d8$interview[5550:7500]
 ##############
 # delete transcript references obsolete entries
 m<-grepl(docscheme,d8$token)
@@ -406,43 +412,84 @@ ms4<-grep("(#[A-Z]{3})",d8$turn,value = T)
 sent1<-gsub(spk_grep3,"%000%",d8$turn)
 d8$turn[3000]
 sent1[3000]
-ms5<-grep("(#[A-Z]{3,3}|0[A-Z]{1,2})",sent1)
-ms6<-head(unique(ms5))
+regx<-"(#[A-Z]{3,3}|0[A-Z]{1,2})"
+codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
+
+#ms5<-grep(regx,sent1) #grep #codes / coded features
+ms5b<-grep(codescheme,sent1,value = T) #grep #codes / coded features
+#ms5b[1:500]
+#ms6<-head(unique(ms5))
+ms6<-head(unique(ms5b))
+
 ms6
 # x<-ms6
 # codec<-function(x){x+10}
 # l<-c(1,2,3,4,5)   
 # lapply(l,codec)
-codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
+# codef<-function(x) stri_extract_all_regex(x,"(#[A-Z]{3})")
+# codef<-function(x) stri_extract_all_regex(x,regx)
+codef<-function(x) stri_extract_all_regex(x,codescheme)
+
 #ms7<-lapply(ms6, codef)
 ms7<-lapply(sent1, codef)
 # unlist(head(ms7[ms5][]))
 #ms7<-lapply(sent1, codef)
 ms8<-unique(unlist(ms7)) #unique coded features
+ms8
 ms8<-ms8[!is.na(ms8)]
-
+ns_codecolumns<-ms8
+#ms7[40]
 ##########################
 # d8[,22:34]<-"---"
 tend<-length(d8)
 tcodeend<-tend+length(ms8)
 tcodestart<-tend+1
 codecolumns<-tcodestart:tcodeend
-
 #codecolumns<-grep("V",colnames(d8))
-d8[,codecolumns]<-"---"
+d8[,codecolumns]<-0
 ########################## NOT CHECKED!
 #codem<-matrix(ms7[ms5])
-r<-115
-repl<-unlist(ms7[[r]])
-for (r in 1:length(sent1)){
+#r<-24077
+#repl<-unlist(ms7[[r]])
+colnames(d8)[codecolumns]<-ms8
+
+#fnewcodecolumns<-function(){
+#  m<-d8b[,22:30]!="---"
+#  head(d8b[m,22:30])
+  #r<-40
+  for (r in 1:length(sent1)){
+    
   repl<-unlist(ms7[[r]])
   l<-length(repl)
   #codecolumns<-mxcolumns
-  codestart<-codecolumns[1]
-  le<-codestart+l-1
+#  codestart<-codecolumns[1]
+ # k<-1
+  if (sum(!is.na(repl[1:l]))>0){
+  for (k in 1:l){
+  d8[r,repl[k]]<-1 ### >>>>>> here inserts 1 (TRUE) for every token that has a coding within the turn, cells
+  # within turns without code remain 0 (FALSE). 0/1 is put into the cell of the according code column
+#  print(repl[k])
+  }
+#  d8[r]
+#  le<-codestart+l-1
   print(r)
-  d8[r,codestart:le]<-repl
-}#TODO: put codes in unique column each code one column
+ # d8[r,codestart:le]<-repl
+  }
+  }
+#}
+d8[24078,]
+#fnewcodecolumns()
+########### removed 13145., substituted above
+# for (r in 1:length(sent1)){
+#   repl<-unlist(ms7[[r]])
+#   l<-length(repl)
+#   #codecolumns<-mxcolumns
+#   codestart<-codecolumns[1]
+#   le<-codestart+l-1
+#   print(r)
+#   d8[r,codestart:le]<-repl
+# }#TODO: put codes in unique column each code one column
+#############
 #ms8<-grep("([A-Z]{3,3})",sent1,value=T)
 #ms8<-grepl("([A-Z]{3,3})",sent1)
 #   head(ms7[ms5][][])
@@ -450,15 +497,21 @@ for (r in 1:length(sent1)){
 #   sent1[95]
 # 13024.
 mna<-is.na(d8[]) #global NA remove
+sum(mna)
 d8[mna]<-"---"
 #codecolumns<-grep("V",colnames(d8))
 #lns<-length(d8[1,])-22
-dns_code<-paste0("C",codecolumns)
-colnames(d8)[codecolumns]<-dns_code
+colnames(d8)
+m<-grep("#",colnames(d8)[codecolumns],invert = T)
+#dns_code<-paste0("C",codecolumns) #or
+colnames(d8)[codecolumns][m]<-paste0("#",colnames(d8)[codecolumns][m])
+
+#colnames(d8)[codecolumns]<-dns_code
 # TODO: sort columns priority
 # sentence preceding interviewer line
 # transcript lines references column, thus numbering lines in transkript
 ###
+getwd()
 dbname<-paste0("sesDB013_d8safe_",datestamp,".csv")
 write.csv(d8,dbname)
 #################
@@ -528,7 +581,7 @@ d9<-postprocess_precede(d8)
 #d8$lemma_c<-""
 #sort DB
 coldb<-colnames(d9)
-colcodes<-grep("C",colnames(d9))
+colcodes<-grep("#",colnames(d9))
 # d9b<-data.frame(interview=d9$interview,speaker=d9$speaker,token=d9$token,lemma=d9$lemma,lemma_c=d9$lemma_c,turn=d9$turn,turn_precede=d9$turn_precede,cat=d9$cat,PoS_ok=d9$PoS_ok,pos=d9$pos,category=d9$category,funct=d9$funct,case=d9$case,pers=d9$pers,num=d9$num,gender=d9$gender,tense=d9$tense,mode=d9$mode,part_L1=d9$part_L1,part_sex=d9$part_sex,part_age=d9$part_age,part_reside=d9$part_reside,part_family_language=d9$part_family_language,codes=d9[,colcodes],gilt=d9$gilt)
 d9b<-data.frame(p_interview=d9$interview,p_speaker=d9$speaker,p_token=d9$token,p_lemma_SkE=d9$lemma,
                 p_lemma=d9$lemma_c,p_turn=d9$turn,p_turn_preceding=d9$turn_precede,t_tag_SkE=d9$cat,
@@ -552,10 +605,13 @@ dns
 colnames(d9b)<-dns
 dns
 ### nice feature from correction issue: add column with transcript line numbers
-lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}$")
+#lineextract<-function(x) stri_extract(x,regex="[0-9]{1,3}$")
+lineextract<-function(x) stri_extract(x,regex=": [0-9]{1,3}")
+
 ln<-lapply(d9b$p_turn, lineextract)
 ln<-unlist(ln)
 ln[1661]
+ln<-gsub(": ","",ln)
 d9b$p_transcriptLine<-ln
 #d9c<-insert(d9b,d9b[,19],ln)
 getwd()
@@ -635,6 +691,8 @@ d8b[1:length(d91$p_interview),l1:l2]<-d95
 # l2<-l1+length(d96)-1
 # d8b[1:length(d91$interview),l1:l2]<-d96
 dns<-colnames(d8b)
+mcodes<-grep("codes",dns)
+colnames(d8b)[mcodes]<-ns_codecolumns
 dns
 #dns[6]<-"transcript_line"
 #dns[31]<-"feature_eval"
@@ -925,4 +983,80 @@ temprun<-function(){
   write.csv(d8b,"local/HU-LX/SES/sesDB010c.csv")
   write_xlsx(d8b,"local/HU-LX/SES/20230321(19.18)_SES_database_by_tokens.xlsx")
 }
+
+
+annisprepare<-function(set){
+d8b<-set
+    m<-grep("t_",colnames(d8b))
+m1<-grep("part",colnames(d8b))
+    m2<-grep("codes",colnames(d8b))
+  m2<-grep(codescheme,colnames(d8b))
+colnames(d8b)[m]  
+codens<-colnames(d8b)[m2]
+a<-c(1,2,3,5,m[3:11],m2)
+length(a)
+m3<-grep(docscheme,d8b$p_token,invert = T)
+d10<-d8b[m3,a]
+
+#codens<-grep("#",colnames(d10))
+cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
+colnames(d10)<-cns
+annisdir<-"local/HU-LX/pepper/xl6/SES_40_3.3/"
+dir.create(annisdir)
+#a<-c(1,2,3,4,5)
+#d11<-d10[,a]
+d11<-d10
+k<-1
+#for (k in 1:length(d11$tok)){
+  n1<-grep("([A-Z]{3})|(0[A-Z]{2})",d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  n2<-grep(codescheme,d11$tok) #remove obsolete PoS for codes/speaker codes in transcript
+  n3<-c(n1,n2)
+    d11$tag[n3]<-"" 
+#}
+  spk<-unique(d11$int)
+  kid<-spk[1:40]
+k<-1
+  for (k in 1:length(kid)){
+  #a<-c(1,2,3,4,5)
+  d12<-subset(d11,d11$int==kid[k])
+  #d13<-d12[a]
+  d13<-d12
+  ns<-paste0(annisdir,kid[k],".xlsx")
+  write_xlsx(d13,ns)
+}
+
+# m
+# m<-grep(0,d10$p_interview)
+# m<-is.na(d10$p_interview)
+# tail(d10)
+# sum(m)
+# 
+# write_xlsx(d8b,"local/HU-LX/SES/annis_d10.xlsx")
+
+
+  return(d11)
+  
+}
+d14<-annisprepare(d8b)
+
+code_add_next_token<-function(set){
+  #clean tokens
+  m<-grep("[^A-Za-z,?0-9]",)
+}
+
+pepperTT<-function(){
+  ##### treetagger scheme:
+  # <int int="TBB">
+  #   <lem lem="sie">
+  #     <spk spk="#TBB">
+  #       <tag tag="PRO">
+  #         Ich		
+  #       </tag>
+  #         </spk>
+  #         </lem>
+  #         </int>
+          
+  
+}
+
 
