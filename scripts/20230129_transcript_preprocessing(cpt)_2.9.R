@@ -24,9 +24,9 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
+scheme<-outputschemes[1]
 sdelim<-T #wrap SkE lines <s></s>
-datestamp<-"13145"
+datestamp<-"13155"
 version<-"v3_1"
 numbered<-T
 ske<-F #not change!
@@ -41,7 +41,7 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-setwd("~/boxHKW/UNI/21S/DH/")
+#setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
 datetime<-Sys.Date()
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
