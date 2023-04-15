@@ -24,13 +24,17 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[2]
 sdelim<-T #wrap SkE lines <s></s>
-datestamp<-"13155"
+sketchwrap<-c("<s>","</s>")
+
+datestamp<-"13146"
 version<-"v3_1"
+sketchversion<-"v3.1.2"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
+inlinecodewrap<-c("C_","_") #wrap for inline codes
 chatfileextension<-".txt"
 #for export in .cha format to import into exmaralda
 #dirchat<-paste0(dirchat,"_cha_",version)
@@ -41,7 +45,7 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/UNI/21S/DH/")
 getwd()
 datetime<-Sys.Date()
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
@@ -73,7 +77,6 @@ list.files(dirtext)
 #dirmod<-paste0(dirtext,"modified/")
 dirmod<-dirtext #after manual regex modifying in VSCode
 #version<-"v2_8_sketchE_INLINE_C"
-sketchversion<-"v3.1"
 if (scheme==outputschemes[1])
   dirchat<-paste("SES_transcripts",version,datestamp,"CHAT",sep  = "_")
 if (scheme==outputschemes[3]){
@@ -1165,8 +1168,10 @@ sketchcoding<-function(){
   chatlastoutdir
   filelist3<-list.files(chatlastoutdir)
   filelist3
-  f<-1
-
+  f<-4
+  inlinecodewrap<-c("c_","") #wrap for inline codes
+  sketchwrap<-c("<s>","</s>")
+textdf<-data.frame()
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(chatlastoutdir,filelist3[f],sep = "/"))
     p3<-grep("@.egin",tbu)
@@ -1185,16 +1190,39 @@ sketchcoding<-function(){
   mkid<-grep(regx1,tbub,invert = T) # *CHILD: lines    
   regx2<-"(.*)" # sentences
   sent<-grep(regx2,tbub)
-  regx3<-"\\*([A-Z]{3}:)"
+  regx3<-"\\*([A-Z]{3}:)" #speakerlines
   repl3<-"#\\1"
   tbub<-gsub(regx3,repl3,tbub[sent])
   tbub[sent]
-  tbuwrap<-tbub[sent]
-  if (sdelim==T)
-     tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
-    #tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[mkid]) # wrap only with child sentences
-    tbuheader
-    k<-79
+  #### 13146.
+  # regx4<-"(?<=(#[A-Z]{3}:))(.*)(#([A-Z]{3})#)"
+  # regx4<-"(?=(#([A-Z]{3}:)))(.*)(#([A-Z]{3})#)"
+  # repl4<-paste0("\\3",inlinecodewrap[1],"\\5",inlinecodewrap[2])
+  # #split text
+  textdf<-as.data.frame(stri_split_regex(tbub,"\t[0-9]{4}\t",simplify = T))
+  regx4<-"#([A-Z]{3}|0[A-Z]{2})#"
+  m<-grep(regx4,textdf$V2)
+  
+  repl4<-paste0(inlinecodewrap[1],"\\1",inlinecodewrap[2])
+  textdf$sub<-gsub(regx4,repl4,textdf[,2],perl = T)
+  #regx4<-"c_(([A-Z]{3})|(0[A-Z]{2}))"
+  regx4<-"(c_([A-Z]{3}|0[A-Z]{2}))([^ ].)"
+  repl4<-"\\1 \\3"
+  m<-grep(regx4,textdf$sub)
+  textdf$sub[m]
+  textdf$sub<-gsub(regx4,repl4,textdf$sub,perl = T)
+  #textdf$cpt<-paste()
+  lt<-length(textdf$V1)
+  num<-sprintf("%04s", as.character(1:lt))
+  textdf$cpt<-paste0(sketchwrap[1],textdf$V1,"\t",num,"\t",textdf$sub,sketchwrap[2]) # wrap with all sentences
+  tbuwrap<-textdf$cpt
+  #  tbub2<-gsub(regx4,repl4,tbub2[sent],perl = T)
+  # tbuwrap<-tbub[sent]
+  # if (sdelim==T)
+  #    tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[sent]) # wrap with all sentences
+  #   #tbuwrap<-gsub(regx2,"<s>\\1</s>",tbub[mkid]) # wrap only with child sentences
+  #   tbuheader
+  #   k<-79
   #####################################
   # kids<-strsplit(filelist3,"\\.")
   # kids[[1]][1]
