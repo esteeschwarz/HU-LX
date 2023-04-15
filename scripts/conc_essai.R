@@ -994,14 +994,17 @@ m1<-grep("part",colnames(d8b))
 colnames(d8b)[m]  
 codens<-colnames(d8b)[m2]
 a<-c(1,2,3,5,m[3:11],m2)
+a<-c(1,2,3,5,m[3:11])
+
 length(a)
 m3<-grep(docscheme,d8b$p_token,invert = T)
 d10<-d8b[m3,a]
 
 #codens<-grep("#",colnames(d10))
 cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
+cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode")
 colnames(d10)<-cns
-annisdir<-"local/HU-LX/pepper/xl6/SES_40_3.3/"
+annisdir<-"local/HU-LX/pepper/xl6/SES_40_3.3.1/"
 dir.create(annisdir)
 #a<-c(1,2,3,4,5)
 #d11<-d10[,a]
@@ -1015,7 +1018,17 @@ k<-1
 #}
   spk<-unique(d11$int)
   kid<-spk[1:40]
-k<-1
+  d11$codetag<-"0"
+  for (k in 1:length(codens)){
+    m<-grep(codens[k],d11$tok)
+    tag<-d11$tok[m]
+    pos<-m-1
+    #for (t in 1:length(m)){
+    d11$codetag[pos]<-tag
+  }
+  #}
+#}
+  k<-1
   for (k in 1:length(kid)){
   #a<-c(1,2,3,4,5)
   d12<-subset(d11,d11$int==kid[k])
@@ -1041,9 +1054,17 @@ d14<-annisprepare(d8b)
 
 code_add_next_token<-function(set){
   #clean tokens
-  m<-grep("[^A-Za-z,?0-9]",)
+  k<-1
+  d14$codetag<-"---"
+for (k in 1:length(codens)){
+  m<-grep(codens[k],d14$tok)
+  tag<-d14$tok[m]
+  pos<-m-1
+  #for (t in 1:length(m)){
+  d14$codetag[pos]<-tag
 }
-
+  #}
+}
 pepperTT<-function(){
   ##### treetagger scheme:
   # <int int="TBB">
@@ -1058,5 +1079,27 @@ pepperTT<-function(){
           
   
 }
-
+peppercall<-function(){
+  peppercon1<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl1.pepper"
+  peppercon2<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl2.pepper"
+  peppercon3<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl3_cpt.pepper"
+  pepperpath<-"/Users/guhl/pro/Pepper_2023/"
+  #peppercon1<-"../r-conxl1.pepper"
+  callpepper1<-paste0("./pepperStart.sh ",peppercon1)
+  callpepper2<-paste0("./pepperStart.sh ",peppercon2)
+  callpepper3<-paste0("./pepperStart.sh ",peppercon3)
+  setwd(pepperpath)
+  system(callpepper1) #cannot process 1+2 in one workflow file
+  system(callpepper2)
+  system(callpepper3) #if directly converted .xls to annis theres no html display of text in ANNIS, but just a tokenized line, rest similar of annotation
+  
+  library(utils)
+  annispath<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-annis3"
+  annisfiles<-list.files(annispath)
+  zippath<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/anniszip"
+dir.create(zippath)
+    nszip<-paste0(datetime,"_SES_annis_tagged_corpus.zip")
+  zipfile<-paste(zippath,nszip,sep = "/")
+  zip(zipfile = zipfile,paste(annispath,annisfiles,sep = "/"))
+}
 
