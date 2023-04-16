@@ -24,11 +24,11 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[2]
+scheme<-outputschemes[1]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
-datestamp<-"13146"
+datestamp<-"13161"
 version<-"v3_1"
 sketchversion<-"v3.1.2"
 numbered<-T
@@ -225,9 +225,11 @@ linecor<-function(k,filelist){
   repl1<-""
   cc3<-gsub(regx1,repl1,cc3,perl = T)
   
-  regx1<-"(§%#nl#§%)([A-Za-z.,=;\\-?:ß'+#*!§$%&/() äöüÄÖÜ_])" #newline starting with character or special character
+  regx1<-"(§%#nl#§%)([A-Za-z.,=;\\-?:ß'+#*!§$%&/()äöüÄÖÜ_])" #newline starting with character or special character
   repl1<-" \\2"
-  cc3<-gsub(regx1,repl1,cc3,perl = T)
+  #repl1<-"\\2"
+  
+    cc3<-gsub(regx1,repl1,cc3,perl = T)
   #13142.
   regx1<-":([A-Za-z#%\\.,;'-\\(\\)])"
   repl1<-": \\1"
@@ -369,7 +371,7 @@ codes_cpt$regexcor[55:67]
 ### correct codes with escaped characters, argument c() = categories, 1-4
 codes_cpt2<-regxcor(codes_cpt,c(1,2,3,4,3))
 
-
+####
 regxmean<-function(set){
   #get regex gefräszigkeit, sort array by
   #loop
@@ -398,6 +400,124 @@ regxmean<-function(set){
   # return(codes_cpt)
   return(codes_cpt[m,])
 }
+set<-codes_cpt2
+####
+regxmean2<-function(set){
+  #get regex gefräszigkeit, sort array by
+  #loop
+  #k<-15
+  f<-1
+  #codes_cpt<-codes_cptu
+  
+  #set<-set
+  regxout<-array()
+  nfiles<-length(filelist2)
+  regxmatrix<-matrix(nrow = length(set$codes),ncol = nfiles+1)
+  for (f in 1:length(filelist2)){
+    tbu<-readtext(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
+    k<-319
+    for (k in 1:length(set$codes)){
+      regx1<-set$regexcor[k]
+      regxout<-stri_extract_all(tbu$text,regex=regx1)
+      #m<-grep(regx1,tbu$text)
+      m<-length(regxout)
+      #sm<-sum(m)
+      #sm1<-sm+set$regexnr[k]
+      #+treffer = -pos
+      nchar<-stri_count_boundaries(regxout[[1]])
+      nchar<-stri_count_boundaries(regxout)
+    #  regxmatrix[k,f]<-mean(stri_count_boundaries(regxout[[1]],"character"),na.rm = T)
+      regxmatrix[k,f]<-sum(nchar,na.rm = T)
+      
+      #regxmatrix[k,f]<-(sum(stri_count_boundaries(regxout[[1]],"character"))+1)/m
+     # if(sm>0)
+     #    regxmatrix[k,f]<-sum(stri_count_boundaries(regxout[[1]],"character"))/sm
+     #  
+         regxmatrix[k,f]<-sum(stri_count_boundaries(regxout[[1]],"character"),na.rm = T)/m/set$regexnr[k]+set$regexnr[k] #/sm
+      rna<-!is.na(regxmatrix[k,])
+      #rs<-sample(0.01:0.02,2)
+      rna<-regxmatrix[k,]>0
+      rnas<-sum(rna,na.rm = T)+1
+      #rnas<-sm+1
+        # regxmatrix[k,nfiles+1]<-mean(regxmatrix[k,],na.rm = T)
+        # rna<-!is.na(regxmatrix[k,])
+         #rnas<-sum(rna)
+        # regxmatrix[k,nfiles+1]<-mean(regxmatrix[k,],na.rm = T)/rnas
+         regxmatrix[k,nfiles+1]<-sum(regxmatrix[k,],na.rm = T)/rnas
+#         regxmatrix[k,nfiles+1]<-rnas/sum(regxmatrix[k,],na.rm = T)
+         
+      # regxmatrix[is.na(regxmatrix)]<-0
+    }
+    #regxmatrix[,nfiles+1]<-lapply(regxmatrix,mean)
+    set$regxmean<-regxmatrix[,nfiles+1]
+  }
+  m<-!is.na(set$regxmean)
+  
+  sum(m)
+  # return(set)
+  return(set[m,])
+}
+set<-codes_cpt2
+######
+k<-set$codes=="9nst"
+regxmean3<-function(set){
+  #get regex gefräszigkeit, sort array by
+  #loop
+  #k<-15
+  f<-1
+  #codes_cpt<-codes_cptu
+  
+  #set<-set
+  regxout<-array()
+  nfiles<-length(filelist2)
+  regxmatrix<-matrix(nrow = length(set$codes),ncol = nfiles+1)
+  for (f in 1:length(filelist2)){
+    tbu<-readtext(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
+#    k<-40 #9nst
+    for (k in 1:length(set$codes)){
+      regx1<-set$regexcor[k]
+      regxout<-stri_extract_all(tbu$text,regex=regx1)
+      #m<-grep(regx1,tbu$text)
+      m<-length(regxout[[1]])
+      #sm<-sum(m)
+      #sm1<-sm+set$regexnr[k]
+      #+treffer = -pos
+      nchar<-stri_count_boundaries(regxout[[1]])
+      nchar<-stri_count_boundaries(regxout)
+      #  regxmatrix[k,f]<-mean(stri_count_boundaries(regxout[[1]],"character"),na.rm = T)
+      regxmatrix[k,f]<-sum(nchar,na.rm = T)
+      
+      #regxmatrix[k,f]<-(sum(stri_count_boundaries(regxout[[1]],"character"))+1)/m
+      # if(sm>0)
+      #    regxmatrix[k,f]<-sum(stri_count_boundaries(regxout[[1]],"character"))/sm
+      #  
+      regxmatrix[k,f]<-sum(stri_count_boundaries(regxout[[1]],"character"),na.rm = T)/m/set$regexnr[k]+set$regexnr[k] #/sm
+      rna<-!is.na(regxmatrix[k,])
+      #rs<-sample(0.01:0.02,2)
+      rna<-regxmatrix[k,]>0
+      rnas<-sum(rna,na.rm = T)+1
+      #rnas<-sm+1
+      # regxmatrix[k,nfiles+1]<-mean(regxmatrix[k,],na.rm = T)
+      # rna<-!is.na(regxmatrix[k,])
+      #rnas<-sum(rna)
+      # regxmatrix[k,nfiles+1]<-mean(regxmatrix[k,],na.rm = T)/rnas
+      regxmatrix[k,nfiles+1]<-sum(regxmatrix[k,],na.rm = T)/rnas
+      #         regxmatrix[k,nfiles+1]<-rnas/sum(regxmatrix[k,],na.rm = T)
+      
+      # regxmatrix[is.na(regxmatrix)]<-0
+    }
+    #regxmatrix[,nfiles+1]<-lapply(regxmatrix,mean)
+    set$regxmean<-regxmatrix[,nfiles+1]
+  }
+  m<-!is.na(set$regxmean)
+  
+  sum(m)
+  # return(set)
+  return(set[m,])
+}
+
+
+
 
 #wks.
 #
@@ -455,10 +575,12 @@ length(unique(codes_cpt$codes))
 #codesarray<-getcodes(codes_cpt2,regexcor)
 codesarray<-getcodescpt(codes_cpt2,regexcor)
 #157 cpt
+length(codesarray)
 codesarray[50,1]
 #
 ar<-unique(codesarray$V2)
 codes_cpt2["ar"]<-match(codes_cpt2$subst,ar)
+codes_cpt2["regexnr"]<-stri_count_boundaries(codes_cpt2$codes,"character")
 
 #for (k in 1:length(codes_cpt$regexcor)){
 # m<-codes_cpt$ar
@@ -466,8 +588,8 @@ codes_cpt2["regex"]<-codesarray$V1
 #13113.flaw
 m<-!duplicated(codes_cpt2$codes)
 codes_cptu<-codes_cpt2[m,]
-codes_cpt4<-regxmean(codes_cpt2) #cpt2
-#codes_cpt4<-regxmean(codes_cptu) #cpt2
+#codes_cpt4<-regxmean2(codes_cpt2) #cpt2
+codes_cpt4<-regxmean3(codes_cpt2) #cpt2
 #codes_cpt5<-!duplicated(codes_cpt$codes)
 
 #save codes table
@@ -476,9 +598,59 @@ getwd()
 write_csv2(codes_cpt4,paste(codeusedir,codesusedns,sep = "/"))
 
 #write_csv2(codes_cpt4,paste0(dirtemp,"/codes_cpt4",version,".csv"))
+m<-codes_cpt4$codes=="9nst"
+#codes_cpt4$regxmean[m]<-0
+m<-codes_cpt4$codes=="#9nst"
+#codes_cpt4$regxmean[m]<-0
+
 ii<-order(-codes_cpt4$regxmean)
-codes_cpt4$regexcor[ii]
-rpall<-as.data.frame(codes_cpt4$regex[ii])
+regxcodes<-regxmean(codes_cpt2)
+regxcodes2<-regxmean3(codes_cpt2)
+i2<-order(-regxcodes2$regxmean)
+regxcodes3<-regxcodes2[i2,]
+#regxcodes<-codes_cpt4[ii,]
+###GPT essai
+set<-codes_cpt2
+gpt<-function(set,st){
+  it<-st
+  regxcodesranked<-regxmean2(set)
+  ii<-order(regxcodesranked$regxmean)
+  ms<-array()
+  ms<-matrix(nrow = length(ii),ncol = 40)
+  f<-21
+  for (f in 1:length(filelist2)){
+    tbu<-readtext(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
+    #k<-319
+    t1<-tbu$text
+    proof<-function(its){
+      regx1<-regxcodesranked$regexcor[its]
+      regx1<-"9"
+      m<-unlist(stri_extract_all_regex(t1,regx1))
+      ms<-length(m)
+    }
+    for (k in 1:length(regxcodesranked$codes)){
+      regx2<-regxcodesranked$regexcor[k]
+#      regxout<-stri_extract_all(tbu$text,regex=regx1)
+      m<-grep(regx2,t1)
+      t1<-gsub(regx2,"DUMMY",t1)
+      ms[k,f]<-proof(k)    
+    }
+    
+  }
+  return(ms)
+  
+ # return(sum(ms,na.rm = T))
+}
+filelist2[21]
+#ms<-gpt(codes_cpt2,1)
+#sum(ms[length(ms[,1]),])
+
+
+#sum(ms[354,])
+###13161.
+#rpall<-as.data.frame(codes_cpt4$regex[ii])
+rpall<-as.data.frame(codes_cpt4$regexcor[ii])
+########
 #rpall[,1]
 rpall["subst"]<-codes_cpt4$subst[ii]
 rpall["category"]<-codes_cpt4$category[ii]
@@ -594,9 +766,9 @@ for (f in 1:length(filelist2)){
   tbusafe<-tbu
   tbuheader<-tbu[1:mstart-1] #header section
   tbu<-tbub
-  xcodes<-unique(rpall)
+  #xcodes<-unique(rpall)
   #xcodes<-unique(rpall$`codes_cpt4$regex[ii]`)
-  rpall<-xcodes
+  #rpall<-xcodes
   #  for (k in 1:length(xcodes)) {
   for (k in 1:length(rpall[,1])) {
     flag<-1
