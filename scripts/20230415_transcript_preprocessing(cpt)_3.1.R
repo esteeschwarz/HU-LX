@@ -28,9 +28,9 @@ scheme<-outputschemes[1]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
-datestamp<-"13161"
-version<-"v3_1"
-sketchversion<-"v3.1.2"
+datestamp<-"13162"
+version<-"v3_4"
+sketchversion<-"v3.4.1"
 numbered<-T
 ske<-F #not change!
 codesubstitute<-" "
@@ -697,7 +697,10 @@ headermeta<-c("Country of Birth","Years in Germany","Years of school heritage co
               "Language Proficiency Father","Language Use Mother","Language Use Father","Language Use Siblings","Language Use Friends")
 #transtart<-max(transtart)
 transfail<-list()
-
+codens<-unique(rpall$shortcode)
+codens<-codens[order(codens)]
+codecount<-matrix(nrow=length(codens),ncol=length(filelist2))
+codecount<-data.frame(codecount,row.names = codens)
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
@@ -770,7 +773,8 @@ for (f in 1:length(filelist2)){
   #xcodes<-unique(rpall$`codes_cpt4$regex[ii]`)
   #rpall<-xcodes
   #  for (k in 1:length(xcodes)) {
-  for (k in 1:length(rpall[,1])) {
+  
+    for (k in 1:length(rpall[,1])) {
     flag<-1
     m<-grep(rpall[k,1],tbu)
     tier<-rpall$category[k]
@@ -799,18 +803,37 @@ for (f in 1:length(filelist2)){
     #    tbu<-gsub(rpall[k,1],rpall[k,"repl"],tbu)
     #  ifelse(m!=0&tier!=4,tbuheader<-
     ### this adds number of occurences of code to header description of code, has to be formatted
-    ifelse (length(m)!=0,tbuheader<-gsub(rpall$headex[k],
-                                         #                       paste0(rpall$headex[k]," n = : ",length(m)),tbuheader),flag<-0)
-                                         paste0(rpall$headex[k],length(m)),tbuheader),flag<-0)
-    
+    # ifelse (length(m)!=0,tbuheader<-gsub(rpall$headex[k],
+    #                                      #                       paste0(rpall$headex[k]," n = : ",length(m)),tbuheader),flag<-0)
+    #                                      paste0(rpall$headex[k],length(m)),tbuheader),flag<-0)
+    # 
     #  tbuheader<- gsub(" #: 0","#todeletespace#",tbuheader)
     #  tbuheader<- gsub("#todeletespace#","",tbuheader)
     rphead<-grep("headex",colnames(rpall))
-    
-    rpall[k,rphead+f]<-length(m)   
-    #rpall$instance[k]<-c(f,length(m))
+    rpall[k,rphead+f]<-length(m)
+    codeact<-rpall$shortcode[k]
+    codeit<-codecount[codeact,f]
+    if(is.na(codeit)){codeit<-0}
+    codeit<-length(m)+codeit
+    codecount[codeact,f]<-codeit
+    ### this adds number of occurences of code to header description of code, has to be formatted
+  #  k<-1
+    #for (k in 1:length(codecount[,1])){
+    # m3<-grep(codeact,tbuheader)
+    # f
+    # tbuheader[m3]<-paste0(tbuheader[m3],codecount[codeact,f])
+    # 
+    #}
+  
+      #rpall$instance[k]<-c(f,length(m))
   } #replace coding with replacement + add extra tier with code below speakerline
   tbu
+  for (k in 1:length(codecount[,1])){
+    codeact<-rownames(codecount)[k]
+  m3<-grep(codeact,tbuheader)
+  f
+  tbuheader[m3]<-paste0(tbuheader[m3],codecount[codeact,f])
+  }
   #### end replacement loop
   #TODO: create table of code instances in transcript:
   #scheme<-"sansCodes"
@@ -1115,7 +1138,7 @@ postchatcoding<-function(){
   ##############################
   filelist3<-filelist[chatv1]
   
-  
+#f<-1  
   for (f in 1:length(filelist3)){
     tbu<-readLines(paste(dirtext,filelist3[f],sep = "/"))
     # p1<-grep(".ctivities",tbu)
@@ -1631,7 +1654,7 @@ cleandb<-function(set){
 #combine header of df and transcript
 k<-1
 f<-1
-#set<-h6
+set<-h6
 transcombine<-function(set){
   h4<-set
   #mode(h4$`@Duration`)<-"character"
@@ -1669,11 +1692,11 @@ transcombine<-function(set){
             tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)]),
             tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
     )
-    
+    tbu_cpt
     #tbu_cpt<-c(tbu_h2,tbu_t)
     #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
     #dir.create("local/HU-LX/SES/temp/tr")
-    version<-"v3_1"
+  #  version<-"v3_1"
     chatoutparent<-"local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/"
     chatoutdir<-paste0(chatoutparent,"SES_transcripts_w_header_",version,"_",datestamp)
     dir.create(chatoutdir)
