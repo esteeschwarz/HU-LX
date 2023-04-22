@@ -24,7 +24,7 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[1]
+scheme<-outputschemes[3]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
@@ -752,6 +752,7 @@ for (f in 1:length(filelist2)){
   }
   if (scheme=="sansCodes"){
     tbu[p2[1]+1]<-"@TIER descriptions: removed for unannotated transcript"
+    tbu[p2[1]+2]<-paste0(tbu[p2[1]+2]," feature coding/annotation removed")
   }
   scheme
   #scheme<-"original"
@@ -1654,7 +1655,7 @@ cleandb<-function(set){
 #combine header of df and transcript
 k<-1
 f<-1
-set<-h6
+#set<-h6
 transcombine<-function(set){
   h4<-set
   #mode(h4$`@Duration`)<-"character"

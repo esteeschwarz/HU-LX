@@ -19,10 +19,10 @@ codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table(paste(datadir,"ses_40_v3_1_2-13146.vert",sep = "/"),col_names = c("token","cat","lemma"))
+d1<-read_table(paste(datadir,"ses_40_v3_1_2-3.vert",sep = "/"),col_names = c("token","cat","lemma"))
 #d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
-datestamp<-"13147"
+datestamp<-"13171"
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
 excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
@@ -148,7 +148,11 @@ preprocess_temp<-function(set){
   m1<-grep(docscheme,d4$token) #join filedescription columns
   f1<-paste(d4$token[m1],d4$cat[m1],d4$lemma[m1],sep = " ")
   d4$token[m1]<-f1
-  return(data.frame(d4))
+  m1<-grep(filescheme,d4$cat) #join filedescription columns
+  f1<-paste(d4$token[m1],d4$cat[m1],d4$lemma[m1],sep = " ")
+  d4$token[m1]<-f1
+  
+    return(data.frame(d4))
 } # end preprocess
 ###### wks.
 #d3<-data.frame(d2)
@@ -310,7 +314,10 @@ m3<-grep(regx2,d7$token) #transcripts start
 regx3<-paste0("(SES_.*)(",filescheme,")")
 m5<-grep(regx3,d7$token,value = T)
 #m5<-grepl("(SES_.*)(sketchE)",d7$token)
+#regx2<-paste0("<",filescheme)
+#m3<-grep(regx2,d7$token) #transcripts start
 regx4<-paste0(".*(SES_.*)(",filescheme,").*")
+#m4<-grep(regx4,d7$token) #transcripts start
 m6<-gsub(regx4,"\\1",m5) #kids
 head(m6)
 d8<-d7
@@ -325,6 +332,7 @@ d8$part_L1<-0
 d8$part_sex<-0
 d8$part_age<-0
 m3
+m6
 for (l in 1:length(m6)){
   li<-array()
   #repl<-0
@@ -1004,7 +1012,7 @@ d10<-d8b[m3,a]
 cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
 cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode")
 colnames(d10)<-cns
-annisdir<-"local/HU-LX/pepper/xl6/SES_40_3.3.1/"
+annisdir<-paste("local/HU-LX/pepper/xl6",datestamp,sep = "/")
 dir.create(annisdir)
 #a<-c(1,2,3,4,5)
 #d11<-d10[,a]
@@ -1034,7 +1042,7 @@ k<-1
   d12<-subset(d11,d11$int==kid[k])
   #d13<-d12[a]
   d13<-d12
-  ns<-paste0(annisdir,kid[k],".xlsx")
+  ns<-paste0(annisdir,"/",kid[k],".xlsx")
   write_xlsx(d13,ns)
 }
 
@@ -1091,7 +1099,7 @@ peppercall<-function(){
   setwd(pepperpath)
   system(callpepper1) #cannot process 1+2 in one workflow file
   system(callpepper2)
-  system(callpepper3) #if directly converted .xls to annis theres no html display of text in ANNIS, but just a tokenized line, rest similar of annotation
+ # system(callpepper3) #if directly converted .xls to annis theres no html display of text in ANNIS, but just a tokenized line, rest similar of annotation
   
   library(utils)
   annispath<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-annis3"
@@ -1102,4 +1110,4 @@ dir.create(zippath)
   zipfile<-paste(zippath,nszip,sep = "/")
   zip(zipfile = zipfile,paste(annispath,annisfiles,sep = "/"))
 }
-
+#peppercall()
