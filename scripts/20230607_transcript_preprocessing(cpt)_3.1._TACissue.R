@@ -24,11 +24,11 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[4]
+scheme<-outputschemes[3]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
-datestamp<-"13235"
+datestamp<-"13245.2"
 version<-"v3_4"
 sketchversion<-"v3.4.1"
 numbered<-T
@@ -106,9 +106,10 @@ if (scheme=="sketchE")
 if (scheme==outputschemes[4])
   transextension<-"_InlineCodes"
 
-
+dirchat
 dirtext
 dirmod
+#chatlastoutdir
 #dirout<-paste(dirtext,"out2",sep = "/")
 dirout<-paste(dirtext,dirchat,sep = "/")  
 dir.create(dirout)
@@ -720,7 +721,7 @@ for (f in 1:length(filelist2)){
   tbu<-insert(tbu,p1[1]+1,head1)
   p1<-grep(".ctivities",tbu)
   tbu[p1[1]]
-  tbu<-insert(tbu,p1[1]+1,"@Elicitation files: box.FU folder:00_SES Documents (to revise) for BERLANGDEV")
+  tbu<-insert(tbu,p1[1]+1,"@Elicitation files: box.HU folder:00_SES Documents (to revise) for BERLANGDEV")
   p2<-grep("@.oding",tbu)
   tbu[p2[1]]
   tbu<-insert(tbu,p2[1]+1,"@TIER descriptions:")
@@ -1592,7 +1593,7 @@ headercoding<-function(){
 }
 
 #TAC issue:
-dbtac<-headercoding() #output db seems okay with metadata for kids
+#dbtac<-headercoding() #output db seems okay with metadata for kids
 
 cleandb<-function(set){
   h2<-as.data.frame(h2)
@@ -1662,7 +1663,7 @@ cleandb<-function(set){
 k<-1
 f<-1
 f<-16
-#set<-h6
+#h4<-h6
 transcombine<-function(set){
   h4<-set
   #mode(h4$`@Duration`)<-"character"
@@ -1685,11 +1686,12 @@ transcombine<-function(set){
     #  tbu_h2<-paste(rownames(headertable),headertable[,k],sep  = ":")
     #r<-f+1
     r<-f
-    h4[r,21]
+    h4[r,1]
     m<-grep("@TIER.*?",colnames(set))
     m<-m-1
     headerentries<-colnames(set)
-    headerentries<-headerentries[2:m]
+    m2<-grep("@Participant",headerentries)
+    headerentries<-headerentries[m2:m]
     tbu_h2<-paste0(headerentries,": ",h4[r,2:m])
     #tbu_h2<-tbu_h2[2:length(tbu_h2)]
     tbu_t<-tbub
@@ -1715,8 +1717,11 @@ transcombine<-function(set){
 #chatlastoutdir
 
 #################
-h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
-               skip = 1)
+# h6 <- read_csv("local/HU-LX/SES/db_headertable_002t2x_m.csv",  col_types = cols(`@Duration` = col_character()), 
+#                skip = 1)
+#expo .csv from numbers, the duration = character is important to preserve xx:xx format
+h6<- read_delim("local/HU-LX/SES/db_headertable_002t2x_m.csv", 
+                                          delim = ";", escape_double = FALSE, trim_ws = TRUE,skip = 1,col_types = cols(`@Duration` = col_character()))
 h7<-transdb
 #h7$SES_GCA_f_8
 #htest<-c(h6["GCA",],"@header end",h7$SES_GCA_f_8,"@end")
