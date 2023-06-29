@@ -3,6 +3,7 @@
 ################
 library(readr)
 library(stringi)
+library(writexl)
 
 root<-"~/Documents/GIT/HU-LX"
 src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
@@ -33,7 +34,7 @@ for (k in kids){
   d1$combined.in.hu.box[m]<-d2$cut.renamed.in.BOX[m2]
   d1$anon.in.berlangedev[m]<-d2$anonymised.in.BERLANGDEV[m2]
 }
-
+write_xlsx(d1,paste(local,"meta/20230629(20.23)_SES_status-table_v1.0.xlsx",sep = "/"))
 
 
 
