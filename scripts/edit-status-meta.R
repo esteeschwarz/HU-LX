@@ -5,12 +5,18 @@ library(readr)
 library(stringi)
 library(writexl)
 
-root<-"~/Documents/GIT/HU-LX"
+root<-"~/Documents/Github/HU-LX"
 src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
 d1<-read.csv(src)
+#src<-paste(root,"meta/metadata_export_collection14_20230705-06_27.csv",sep = "/")
+d1<-read.csv(src)
+
 local<-"~/boxHKW/UNI/21S/DH/local/HU-LX"
 src2<-paste(local,"meta/20230627(17.29)_SES audio status table.csv",sep = "/")
 d2<-read.csv(src2,sep = ";",skip = 1)
+src2<-paste(local,"meta/metadata_export_collection14__20230705-06_27.csv",sep = "/")
+d3<-read.csv(src2,sep = ",")
+"~/boxHKW/UNI/21S/DH/local/HU-LX/meta"
 kids<-unique(d2$Child.code)
 kids<-kids[kids!=""]
 audio.raw<-data.frame(child=kids)
