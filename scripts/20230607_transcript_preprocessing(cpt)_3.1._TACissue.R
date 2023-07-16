@@ -24,11 +24,11 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[3]
+scheme<-outputschemes[4]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
-datestamp<-"13245.2"
+datestamp<-"13302"
 version<-"v3_4"
 sketchversion<-"v3.4.1"
 numbered<-T
@@ -45,9 +45,9 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/UNI/21S/DH/")
 #minirig
-setwd("/Volumes/EXT/boxHKW/UNI/21S/DH/")
+#setwd("/Volumes/EXT/boxHKW/UNI/21S/DH/")
 getwd()
 datetime<-Sys.Date()
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
@@ -1973,5 +1973,16 @@ ftagging<-function(){
     #  write_delim(y2,paste(codeusedir,"GCAtokens.tt",sep = "/"),delim = "\t",)
   }
 }
-
+cleanupraw<-function(){
+  m<-list.files(dirtext)
+  k<-grep("Tae",m)
+tbu<-readLines(paste(dirtext,m[k],sep="/"))
+tbu1<-gsub("[^A-Za-z 0-9,\\.;:-\\(\\)#@\\*_]"," ",tbu)  
+tbu1
+for (r in 1:10){
+tbu1<-gsub("  "," ",tbu1)
+}
+tbu1
+writeLines(tbu1,paste(dirtext,m[k],sep="/"))
+}
 
