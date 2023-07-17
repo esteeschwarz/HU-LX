@@ -1075,7 +1075,7 @@ for (f in 1:length(filelist2)){
   tbu_e<-tbu_cpt
   tail(tbu_e)
   head(tbu_e)
-  
+  filelist3
   tbu_e[52:60]
   #tbu_e[148]
   ### final write transformed transcript according to scheme:
@@ -1702,6 +1702,7 @@ transcombine<-function(set){
             tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",tbu[mstart:length(tbu)]),
             tbu_cpt<-c("@begin",tbu_h2,tbu[m3],"@header end",h7[[f]],"@end")
     )
+    h7[[42]]
     tbu_cpt
     #tbu_cpt<-c(tbu_h2,tbu_t)
     #writeLines(tbu_cpt,paste(chatlastoutdir,kid,sep = "/"))
@@ -1713,6 +1714,7 @@ transcombine<-function(set){
     writeLines(tbu_cpt,paste(chatoutdir,kid,sep = "/"))  
   }
 }
+getwd()
 #tbu_h2
 #chatlastoutdir
 
@@ -1721,7 +1723,8 @@ transcombine<-function(set){
 #                skip = 1)
 #expo .csv from numbers, the duration = character is important to preserve xx:xx format
 h6<- read_delim("local/HU-LX/SES/db_headertable_002t2x_m.csv", 
-                                          delim = ";", escape_double = FALSE, trim_ws = TRUE,skip = 1,col_types = cols(`@Duration` = col_character()))
+                                          delim = ",", escape_double = FALSE, trim_ws = TRUE,skip = 1,col_types = cols(`@Duration` = col_character()))
+#critical: observe .csv separator! numbers export: ","
 h7<-transdb
 #h7$SES_GCA_f_8
 #htest<-c(h6["GCA",],"@header end",h7$SES_GCA_f_8,"@end")
@@ -1985,4 +1988,20 @@ tbu1<-gsub("  "," ",tbu1)
 tbu1
 writeLines(tbu1,paste(dirtext,m[k],sep="/"))
 }
+chkfiles<-function(){
+  getwd()
+l1<-list.files(dirtext)  
+trtext<-grep(".txt",l1)  
+trname<-stri_split_regex(l1[trtext],"_",simplify = T)  
+trname<-toupper(trname[,3])
+l2<-list.files(dirout)
+l2
+trtext<-grep(".txt",l2)  
+trname2<-stri_split_regex(l2[trtext],"_",simplify = T)  
+trname2<-toupper(trname2[,2])
+match(trname,trname2)
+mn<-cbind(trname,trname2)
 
+
+
+}
