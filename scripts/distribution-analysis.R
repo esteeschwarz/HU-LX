@@ -1,5 +1,14 @@
 getwd()
 root<-"local/HU-LX"
+getwd()
+root<-"local/HU-LX/SES"
+#minirig:
+root<-"/Volumes/EXT/boxHKW/UNI/21S/DH/local/HU-LX"
+
+src<-paste(root,"SES/distribution_analysis_all-codes_all-kids.csv",sep = "/")
+src<-paste(root,"eval/annis_export_all_codes_all_kids.csv",sep = "/")
+src<-paste(root,"eval/frequency-2.txt",sep = "/")
+
 src<-paste(root,"SES/distribution_analysis_all-codes_all-kids.csv",sep = "/")
 library(readr)
 library(lme4)
@@ -19,6 +28,7 @@ s<-lmer(count~feature+(1|L1),d1)
 #s<-lmer(count~L1+(1|feature),d1)
 
 s1<-summary(s)
+s1
 coef<-s1$coefficients
 coef<-round(coef,3)
 #coef[,1:5][order(coef[,5])]
