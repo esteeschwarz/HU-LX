@@ -4,15 +4,29 @@
 library(readr)
 library(stringi)
 library(writexl)
+library(clipr)
 getwd()
 root<-"~/Documents/Github/HU-LX"
-root<-"local/HU-LX"
-src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
-d1<-read.csv(src)
-#src<-paste(root,"meta/metadata_export_collection14_20230705-06_27.csv",sep = "/")
-d1<-read.csv(src)
+root<-"~/boxHKW/21S/DH/local/HU-LX"
+#src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
+src<-paste(root,"meta/metadata_export_collection14_20230821-11_46.csv",sep = "/")
 
-local<-"~/boxHKW/UNI/21S/DH/local/HU-LX"
+d1<-read.csv(src)
+k.u<-unique(d1$Target.child[d1$Ressourcen.Typ=="Transcript"]) #42
+g.pdf<-grepl("pdf",d1$Original.filename)
+d11<-d1[!g.pdf,] # only resources not pdf
+k.u<-unique(d11$Target.child[d11$Ressourcen.Typ=="Transcript"]) #32
+k.u<-unique(d11$Target.child[d11$Ressourcen.Typ=="Audio"]) #32
+
+write_clip(k.u)
+
+
+
+
+#src<-paste(root,"meta/metadata_export_collection14_20230705-06_27.csv",sep = "/")
+#d1<-read.csv(src)
+
+local<-"~/boxHKW/21S/DH/local/HU-LX"
 src2<-paste(local,"meta/20230627(17.29)_SES audio status table.csv",sep = "/")
 d2<-read.csv(src2,sep = ";",skip = 1)
 src2<-paste(local,"meta/metadata_export_collection14__20230705-06_27.csv",sep = "/")
