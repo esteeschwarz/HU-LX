@@ -6,3 +6,5 @@ the .cha (chat) file is generated from a transcript sample with exmaralda partit
 ## stages
 - 20221023(22.47): generated .cha named output files of transformation; import to exmaralda partitur editor works cvd. the transformation is successful.  
 - 20230305(19.01): script (conc_essai) to create database of lemmatized corpus (via SketchEngine). database final allows corpus analysis independent of sketchengine framework. base for the sketchengine lemmatization are standardized transcripts created with above transformation script.
+## class workflow/wrapup
+- <https://pinghook.dh-index.org?page=ses-wrapup>
