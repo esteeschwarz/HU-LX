@@ -4,6 +4,7 @@ library(readr)
 library(stringi)
 library(R.utils)
 getwd()
+setwd("~/boxHKW/21S/DH")
 datadir<-"local/HU-LX/SES" #database
 codesdir<-"gith/HU-LX/data"
 
@@ -12,17 +13,19 @@ getwd()
 list.files(getwd())
 #setwd(datadir)
 docscheme<-"archive_file" #Sketchengine doc scheme with .zip upload (transcripts not alphabetical ordered in output db!)
-docscheme<-"sesCPT" #Sketchengine doc scheme with single file upload
+docscheme<-"sesCPT" #Sketchengine doc scheme with single file upload # change in compiler settings!
 #regx<-"(#[A-Z]{3,3}|0[A-Z]{1,2})" #old inline coding, depr.
 codescheme<-"c_([A-Z]{3}|0[A-Z]{2})"
 
 filescheme<-"_InlineCodes_SkE.txt" #transcript version extension
 #list.files(datadir)
 #d1<-read_delim("ses_vert.csv")
-d1<-read_table(paste(datadir,"ses_40_v3_1_2-3.vert",sep = "/"),col_names = c("token","cat","lemma"))
+#d1<-read_table(paste(datadir,"ses_40_v3_1_2-3.vert",sep = "/"),col_names = c("token","cat","lemma"))
+d1<-read_table(paste(datadir,"ses_42_3_4_1.vert",sep = "/"),col_names = c("token","cat","lemma"))
+
 #d1<-read_table("ses_40_v2_9.csv")
 ruthtable<-paste(datadir,"ruthtable_kidsmeta.csv",sep = "/")
-datestamp<-"13171"
+datestamp<-"13356"
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
 excelns<-paste0(datadir,"/",datetime,"_SES_database_by_tokens.xlsx")
 #set<-d2
@@ -52,8 +55,15 @@ cleandb<-function(set){
 spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
              "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
              "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV","INT")
+sketchdir<-"~/boxHKW/21S/DH/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/sketchmode/v3.4.1/version without header for SketchEngine upload"
 
-preprocess_temp<-function(set){
+chkspk<-list.files(sketchdir)
+spkns<-stri_split_regex(chkspk,"_",simplify = T)
+length(spkns[,2])
+spk_array<-c(spkns[,2],"INT")
+  
+  
+  preprocess_temp<-function(set){
   d<-set
   #grep linenumbers
   regx1<-"[0-9]{4}"
@@ -1007,12 +1017,12 @@ a<-c(1,2,3,5,m[3:11])
 length(a)
 m3<-grep(docscheme,d8b$p_token,invert = T)
 d10<-d8b[m3,a]
-
+getwd()
 #codens<-grep("#",colnames(d10))
 cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode",codens)
 cns<-c("int","spk","tok","lemma","tag","cat","funct","case","pers","num","gender","tense","mode")
 colnames(d10)<-cns
-annisdir<-paste("local/HU-LX/pepper/xl6",datestamp,sep = "/")
+annisdir<-paste("~/boxHKW/21S/DH/local/HU-LX/pepper/xl6",datestamp,sep = "/")
 dir.create(annisdir)
 #a<-c(1,2,3,4,5)
 #d11<-d10[,a]
@@ -1025,7 +1035,11 @@ k<-1
     d11$tag[n3]<-"" 
 #}
   spk<-unique(d11$int)
+  spk<-unique(d11$int)
+  
   kid<-spk[1:40]
+  kid<-spk
+  
   d11$codetag<-"0"
   for (k in 1:length(codens)){
     m<-grep(codens[k],d11$tok)
@@ -1088,9 +1102,9 @@ pepperTT<-function(){
   
 }
 peppercall<-function(){
-  peppercon1<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl1.pepper"
-  peppercon2<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl2.pepper"
-  peppercon3<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-conxl3_cpt.pepper"
+  peppercon1<-"/Users/guhl/boxHKW/21S/DH/local/HU-LX/pepper/r-conxl1.pepper"
+  peppercon2<-"/Users/guhl/boxHKW/21S/DH/local/HU-LX/pepper/r-conxl2.pepper"
+  peppercon3<-"/Users/guhl/boxHKW/21S/DH/local/HU-LX/pepper/r-conxl3_cpt.pepper"
   pepperpath<-"/Users/guhl/pro/Pepper_2023/"
   #peppercon1<-"../r-conxl1.pepper"
   callpepper1<-paste0("./pepperStart.sh ",peppercon1)
@@ -1102,9 +1116,9 @@ peppercall<-function(){
  # system(callpepper3) #if directly converted .xls to annis theres no html display of text in ANNIS, but just a tokenized line, rest similar of annotation
   
   library(utils)
-  annispath<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/r-annis3"
+  annispath<-"/Users/guhl/boxHKW/21S/DH/local/HU-LX/pepper/r-annis3"
   annisfiles<-list.files(annispath)
-  zippath<-"/Users/guhl/boxHKW/UNI/21S/DH/local/HU-LX/pepper/anniszip"
+  zippath<-"/Users/guhl/boxHKW/21S/DH/local/HU-LX/pepper/anniszip"
 dir.create(zippath)
     nszip<-paste0(datetime,"_SES_annis_tagged_corpus.zip")
   zipfile<-paste(zippath,nszip,sep = "/")
