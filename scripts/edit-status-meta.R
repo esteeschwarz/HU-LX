@@ -98,7 +98,7 @@ for(k in 1:length(df.md[,1])){
 
 df.md.x
 #df.md.c<-c(df.md.h,df.md.x)
-df.md.head<-"## SES: BERLANGDEV media status
+df.md.head<-"## csv to md table
 "
 return(df.md.c<-c(df.md.head,df.md.h,df.md.1,df.md.x))
 }
