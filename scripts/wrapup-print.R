@@ -28,7 +28,7 @@ f.df$head[k]<-readLines(paste(srcdir,f[f.md.w[k]],sep = "/"))[1]
 f.df$page[k]<-  readtext(paste(srcdir,f[f.md.w[k]],sep = "/"))$text
 
 }
-f.df.o<-f.df[order(f.df$pos),]
+f.df.o<-d[order(d$pos.m),]
 
 f.df.o$page<-gsub("^#{2,4}","#",f.df.o$page) #turn all top header to h1 header
 ###
@@ -38,20 +38,27 @@ f.df.o$file.index<-letters[1:length(f.df.o$file)]
 f.df.o$file.sort<-paste0(f.df.o$file.index,"_",f.df.o$file)
 dir.create("ulysses")
 for(k in 1:length(f.df.o$file)){
-  writeLines(f.df.o$page[k],paste("ulysses",f.df.o$file.sort[k],sep = "/"))
+  writeLines(f.df.o$page[k],paste("ses-md",f.df.o$file.sort[k],sep = "/"))
 }
-write_csv(f.df.o,"ses-wrapup.csv")
+write_csv(f.df.o,"/volumes/ext/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
 
-d<-read_csv("ses-wrapup.csv")
+d<-read_csv("/volumes/ext/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
 m<-which(d$pos.m!=0)
 k<-20
 for(k in m[1]:length(d$file)){
-  writeLines(d$page[k],paste("ulysses",d$file.sort[k],sep = "/"))
+  writeLines(d$page[k],paste("ses-mdb",d$file[k],sep = "/"))
+}
+for(k in 1:length(d$file)){
+  writeLines(d$page[k],paste("ses-mdb",d$file[k],sep = "/"))
 }
 regx<-"((?<=:\t)(.*)(?=.png))"
 repl<-"https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/\\1"
 d$page[1:19]<-gsub(regx,repl,d$page[1:19],perl = T)
-d$page[20]<-f.df.o$page[20]
+d$page[1]
+md.sum<-readtext("ses-mdb/SUMMARY.md")$text
+md.sum
+f.df.o$page[1]<-md.sum
+#d$page[20]<-f.df.o$page[20]
 # regx19i<-"((?<=:)(.*)(?=.png))"
 # repl19i<-"<head>\\3</head>\\4"
 
