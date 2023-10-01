@@ -7,20 +7,28 @@ library(writexl)
 library(clipr)
 getwd()
 root<-"~/Documents/Github/HU-LX"
-root<-"~/boxHKW/21S/DH/local/HU-LX"
+root<-"~/boxHKW/21S/DH/local/HU-LX/meta"
 #src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
 src<-paste(root,"meta/metadata_export_collection14_20230821-11_46.csv",sep = "/")
 src<-paste(root,"meta/metadata_export_collection14_20230821-17_45.csv",sep = "/")
 src<-paste(root,"meta/metadata_export_collection14_20230904-09_22.csv",sep = "/")
 src<-paste(root,"meta/metadata_export_collection14_20230904-11_30.csv",sep = "/")
+src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_36.csv",sep = "/")
+src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_57.csv",sep = "/")
+src<-paste(root,"metadata_export_collection14_20230930-16_11.csv",sep = "/")
+
 
 d1<-read.csv(src)
 k.u<-unique(d1$Target.child[d1$Ressourcen.Typ=="Transcript"]) #42
 g.pdf<-grepl("pdf",d1$Original.filename)
+sum(g.pdf)
+#14401.status
+d1
 d11<-d1[!g.pdf,] # only resources not pdf
+d11<-d1
 k.u.sp<-unique(d11$Target.child[d11$Ressourcen.Typ=="Transcript"]) #32
 k.u.au<-unique(d11$Target.child[d11$Ressourcen.Typ=="Audio"]) #32
-
+k.u.pdf<-unique(d11$Target.child[d11$Ressourcen.Typ=="PDF"])
 # spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
 #              "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
 #              "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV")
