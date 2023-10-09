@@ -8,14 +8,14 @@ library(clipr)
 getwd()
 root<-"~/Documents/Github/HU-LX"
 root<-"~/boxHKW/21S/DH/local/HU-LX/meta"
-#src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
-src<-paste(root,"meta/metadata_export_collection14_20230821-11_46.csv",sep = "/")
-src<-paste(root,"meta/metadata_export_collection14_20230821-17_45.csv",sep = "/")
-src<-paste(root,"meta/metadata_export_collection14_20230904-09_22.csv",sep = "/")
-src<-paste(root,"meta/metadata_export_collection14_20230904-11_30.csv",sep = "/")
-src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_36.csv",sep = "/")
-src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_57.csv",sep = "/")
-src<-paste(root,"metadata_export_collection14_20230930-16_11.csv",sep = "/")
+# #src<-paste(root,"data/metadata_export_collection14_20230629-18_50.csv",sep = "/")
+# src<-paste(root,"meta/metadata_export_collection14_20230821-11_46.csv",sep = "/")
+# src<-paste(root,"meta/metadata_export_collection14_20230821-17_45.csv",sep = "/")
+# src<-paste(root,"meta/metadata_export_collection14_20230904-09_22.csv",sep = "/")
+# src<-paste(root,"meta/metadata_export_collection14_20230904-11_30.csv",sep = "/")
+# src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_36.csv",sep = "/")
+# src<-paste(root,"metadata_export_propertiesfextpdf_titleses_20230930-15_57.csv",sep = "/")
+src<-paste(root,"metadata_export_collection14_20231009-09_34.csv",sep = "/")
 
 
 d1<-read.csv(src)
@@ -23,19 +23,19 @@ k.u<-unique(d1$Target.child[d1$Ressourcen.Typ=="Transcript"]) #42
 g.pdf<-grepl("pdf",d1$Original.filename)
 sum(g.pdf)
 #14401.status
-d1
+#d1
 d11<-d1[!g.pdf,] # only resources not pdf
 d11<-d1
 k.u.sp<-unique(d11$Target.child[d11$Ressourcen.Typ=="Transcript"]) #32
 k.u.au<-unique(d11$Target.child[d11$Ressourcen.Typ=="Audio"]) #32
-k.u.pdf<-unique(d11$Target.child[d11$Ressourcen.Typ=="PDF"])
-# spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
-#              "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
-#              "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV")
+#k.u.pdf<-unique(d11$Target.child[d11$Ressourcen.Typ=="PDF"])
+spk_array<-c("GCA","GCB","GCC","GCD","GCE","GCF","GCG","GDA","GDB","GDC","GDD","GDE","GDF","TAA",
+             "TAB","TAD","TAF","TAG","TAH","TAI","TBB","TBC","TBD","TBE","TBF","TBG","TBH","TBI",
+             "TBK","TBL","TBM","TBN","TBO","TBP","TBQ","TBR","TBS","TBT","TBU","TBV")
 sketchdir<-"~/boxHKW/21S/DH/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/sketchmode/v3.4.1/version without header for SketchEngine upload"
 headerdir<-"~/boxHKW/21S/DH/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt/SES_transcripts_w_header_v3_4_13302"
 #all available transformed and uploaded transcripts:
-
+spk_array<-k.u.sp
 chkspk<-list.files(sketchdir)
 spkns<-stri_split_regex(chkspk,"_",simplify = T)
 length(spkns[,2])
@@ -73,23 +73,35 @@ for(k in 1:length(df.md[,1])){
 }
 library(xfun)
 df.status<-data.frame(child=spk_array,CHAT=0,sanscodes=0,pdf=0,audio=0,missing=0)
-k<-24
-for(k in 1:length(d1$Ressourcen.ID.s.)){
-  file.ns<-file_ext(d1$Original.filename[k])
-  file.sep<-stri_split_regex(d1$Title[k],"_",simplify = T)
-  file.pdf<-grep("pdf",d1$Original.filename[k])
-  kid<-d1$Target.child[k]
-  pos<-which(df.status$child==kid)
-  ifelse ("CHAT" %in% file.sep,
-    df.status$CHAT[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"CHAT",collapse = "/"))
-  ifelse ("sanscodes" %in% file.sep,
-    df.status$sanscodes[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"sanscodes",collapse = "/"))
-  ifelse ("anon" %in% file.sep,
-    df.status$audio[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"audio",collapse = "/"))
-  ifelse (length(file.pdf)>=1,
-    df.status$pdf[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"pdf",collapse = "/"))
-}
+# k<-24
+# for(k in 1:length(d1$Ressourcen.ID.s.)){
+#   file.ns<-file_ext(d1$Original.filename[k])
+#   file.sep<-stri_split_regex(d1$Title[k],"_",simplify = T)
+#   file.pdf<-grep("pdf",d1$Original.filename[k])
+#   kid<-d1$Target.child[k]
+#   pos<-which(df.status$child==kid)
+#   ifelse ("CHAT" %in% file.sep,
+#     df.status$CHAT[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"CHAT",collapse = "/"))
+#   ifelse ("sanscodes" %in% file.sep,
+#     df.status$sanscodes[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"sanscodes",collapse = "/"))
+#   ifelse ("anon" %in% file.sep,
+#     df.status$audio[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"audio",collapse = "/"))
+#   ifelse (length(file.pdf)>=1,
+#     df.status$pdf[pos]<-1,df.status$missing[pos]<-paste(df.status$missing[pos],"pdf",collapse = "/"))
+# }
 df.status.c<-df.status[,1:5]
+df.status.c<-df.status.c[order(df.status.c$child),]
+df.status.c<-cbind(id=1:length(df.status.c[,1]),df.status.c)
+library(knitr)
+library(clipr)
+rownames(df.status.c)<-1:length(df.status.c[,1])
+n.ses.status.head<-"# SES: BERLANGDEV media status
+"
+n.ses.status.c<-c(n.ses.status.head,kable(df.status.c))
+writeLines(n.ses.status.c,"~/Documents/GitHub/school/pr/2023-04-15/ses_wrapup/src/n_ses-status.md")
+write_clip(kable(df.status.c))
+
+
 getmd<-function(set){
   
 df.md<-set
@@ -114,6 +126,11 @@ df.md.c<-getmd(df.status.c)
 #df.md.c.o<-df.md.c[order(df.md.c[,2])]
 
 write_clip(df.md.c)
+library(knitr)
+library(clipr)
+rownames(df.status.c)<-1:length(df.status.c[,1])
+write_clip(kable(df.status.c))
+
 getwd()
 writeLines(df.md.c,"ses-status.md")
 #src<-paste(root,"meta/metadata_export_collection14_20230705-06_27.csv",sep = "/")
