@@ -2,43 +2,49 @@
 #### prerequisites
 - download and install [audacity][1]
 - if you will using headphones to listen, make sure to FIRST plug in the headphones and THEN start audacity. that will enable your core audio to use the headphones as standard output.
-#### 1. anonymise
+## 1. anonymise
 - first download audiofiles to anonymize from the HU box. folder: [SES audio cut/renamed][2]. note: the file will probably (depending on your operating system) pop up/open automatically in your default media player application after download. close that application.
 - in audacity import audio from downloads folder:
-- *[datei] \> [öffnen] \> datei in downloads auswählen \> [öffnen] *
+- *[datei] \> [öffnen] \> datei in downloads auswählen \> [öffnen]*
+
 ![][image-1]
 
 - listen to the audio and find occurences of clear names
 - the example here shows the workflow for two instances
 - generally zoom in before *[play] *to be able to follow the moving cursor position. 
 - if you want to stop playing, hit the [pause] button instead of the [stop] button. that will prevent the cursor from returning to 0-position.
+
 ![][image-2]
 
 - e.g first instance at roughly  `0:09`
 - ausschnitt vergröszern to specify location:
 - mark location with pointer (*click \> move right \> release click*)
 - *[ansicht] \> [zoom] \> [heranzoomen] [cmd+1]*
+
 ![][image-3]
 
 ![the white field shows the selected (markierte) range in the audio][image-4]
 
 - repeat/narrow mark location with pointer (*click \> move right \> release click*)
+
 ![][image-5]
 
 - insert BEEP sound over location:
 - *[erzeugen] \> [klang]*
+
 ![][image-6]
 
 ![][image-7]
 
 - change amplitude dB to `0,2`
+
 ![][image-8]
 
 - voila. first sinuscurve inserted.
-
 - repeat for every instance.
 - second instance at `11:53`
 - zoom in
+
 ![][image-9]
 
 ![][image-10]
@@ -47,35 +53,45 @@
 
 ![][image-12]
 
-#### 2. combine
-how to copy content of 2nd & 3rd audio after end of 1st
+## 2. combine
+- how to copy content of 2nd & 3rd audio after end of 1st
+
 ![][image-13]
 
 - click into wave of 2nd audio
 - select complete wave:
 - *[auswählen] \> [alles] [cmd-A]*
+
 ![][image-14]
 
 - copy selected wave
 - *[bearbeiten] \> [kopieren] [cmd-C]*
+
 ![][image-15]![][image-16]
 
 - now change to wave of 1st audio
+
 ![][image-17]![][image-18]
 
 - hover cursor over end of the track
 - click. should appear one yellow line
+
 ![][image-19]
 
 - insert the audio you copied before:
 - *[bearbeiten] \> [einfügen] [cmd-V]*
+
 ![][image-20]
 
-now second audio should appear after first audio.
+- now second audio should appear after first audio.
 - repeat for every audio which is to be added (e.g. 3rd, 4th audio)
-![][image-21]![][image-22]![][image-23]![][image-24]![][image-25]![][image-26]
+
+![][image-21]![][image-22]![][image-23]![][image-24]
+
+![][image-25]![][image-26]
 
 #### 3. export mp3
+
 ![][image-27]
 
 - select complete wave
@@ -84,7 +100,6 @@ now second audio should appear after first audio.
 - choose filename (renamed kid!) according to scheme of anonymised & combined
 - choose *constant bitrate* for (export bitrate) at 128kbps (its more compressed then to lesser size)
 - upload to HU box anonymised, combined.
-#### 4. have bit fun.
 
 [1]:	https://audacityteam.org
 [2]:	https://box.hu-berlin.de/smart-link/04099902-f842-4a14-985c-5e9ec29d917a/

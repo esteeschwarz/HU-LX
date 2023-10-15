@@ -1,25 +1,3 @@
-# Summary
-
-- [content](a_intro.md)
-- [SES Database](c_sesdb01.md)
-	- [columns explained](d_sesdb002.md)
-	- [possibilities](e_sesdb003.md)
-- [anonymize interview audios](f_audacity.md)
-- [Sketch Engine](g_pageske0.md)
-	- [log in to Sketch Engine](h_page001.md)
-	- [create new corpus](i_page003.md)
-	- [import texts](j_page004.md)
-	- [compile corpus](k_page005.md)
-- [ANNIS framework](l_annis01.md)
-- [BERLANGDEV workflow](m_berlangdev01.md)
-- [BERLANGDEV media status](n_ses-status.md)
-- [SES findings](o_findings00.md)
-	- [001](p_findings01.md)
-	- [002](q_findings02.md)
-	- [003](r_findings03.md)
-	- [accountability](s_sesdb004.md)
-	- [distribution analysis](t_sesdist001.md)
-
 # content
 - SketchEngine import corpus
 - explanations to the SES database
@@ -131,43 +109,49 @@ you can do simple queries for token, lemma or PoS tag or refine your query apply
 #### prerequisites
 - download and install [audacity](https://audacityteam.org)
 - if you will using headphones to listen, make sure to FIRST plug in the headphones and THEN start audacity. that will enable your core audio to use the headphones as standard output.
-#### 1. anonymise
+## 1. anonymise
 - first download audiofiles to anonymize from the HU box. folder: [SES audio cut/renamed](https://box.hu-berlin.de/smart-link/04099902-f842-4a14-985c-5e9ec29d917a/). note: the file will probably (depending on your operating system) pop up/open automatically in your default media player application after download. close that application.
 - in audacity import audio from downloads folder:
-- *[datei] \> [öffnen] \> datei in downloads auswählen \> [öffnen] *
+- *[datei] \> [öffnen] \> datei in downloads auswählen \> [öffnen]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.47.01.png)
 
 - listen to the audio and find occurences of clear names
 - the example here shows the workflow for two instances
 - generally zoom in before *[play] *to be able to follow the moving cursor position. 
 - if you want to stop playing, hit the [pause] button instead of the [stop] button. that will prevent the cursor from returning to 0-position.
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.48.40.png)
 
 - e.g first instance at roughly  `0:09`
 - ausschnitt vergröszern to specify location:
 - mark location with pointer (*click \> move right \> release click*)
 - *[ansicht] \> [zoom] \> [heranzoomen] [cmd+1]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.48.40.png)
 
 ![the white field shows the selected (markierte) range in the audio](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.57.50.png)
 
 - repeat/narrow mark location with pointer (*click \> move right \> release click*)
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.58.25.png)
 
 - insert BEEP sound over location:
 - *[erzeugen] \> [klang]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.58.45.png)
 
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.59.35.png)
 
 - change amplitude dB to `0,2`
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2020.59.51.png)
 
 - voila. first sinuscurve inserted.
-
 - repeat for every instance.
 - second instance at `11:53`
 - zoom in
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.03.20.png)
 
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.03.32.png)
@@ -176,35 +160,45 @@ you can do simple queries for token, lemma or PoS tag or refine your query apply
 
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.11.51.png)
 
-#### 2. combine
-how to copy content of 2nd & 3rd audio after end of 1st
+## 2. combine
+- how to copy content of 2nd & 3rd audio after end of 1st
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.14.12.png)
 
 - click into wave of 2nd audio
 - select complete wave:
 - *[auswählen] \> [alles] [cmd-A]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.14.26.png)
 
 - copy selected wave
 - *[bearbeiten] \> [kopieren] [cmd-C]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.14.42.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.15.08.png)
 
 - now change to wave of 1st audio
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.15.34.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.16.11.png)
 
 - hover cursor over end of the track
 - click. should appear one yellow line
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.16.43.png)
 
 - insert the audio you copied before:
 - *[bearbeiten] \> [einfügen] [cmd-V]*
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.17.30.png)
 
-now second audio should appear after first audio.
+- now second audio should appear after first audio.
 - repeat for every audio which is to be added (e.g. 3rd, 4th audio)
-![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.18.41.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.18.54.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.19.07.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.19.22.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.20.19.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.20.40.png)
+
+![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.18.41.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.18.54.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.19.07.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.19.22.png)
+
+![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.20.19.png)![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.20.40.png)
 
 #### 3. export mp3
+
 ![](https://ada-sub.dh-index.org/school/pr/2022-07-15/Bildschirmfoto%202022-07-13%20um%2021.21.33.png)
 
 - select complete wave
@@ -213,7 +207,6 @@ now second audio should appear after first audio.
 - choose filename (renamed kid!) according to scheme of anonymised & combined
 - choose *constant bitrate* for (export bitrate) at 128kbps (its more compressed then to lesser size)
 - upload to HU box anonymised, combined.
-#### 4. have bit fun.
 
 # Sketch Engine
 this is a short tutorial of how to import texts to [Sketch Engine](https://auth.sketchengine.eu/#login) to create a corpus of your own. you can then do researches in this corpus via the SketchEngine exploration tools.
