@@ -1,10 +1,11 @@
 # meta
-version: 20231015(16.25)
+version: 20231024(19.17)
 authored: st. schwarz, FUB
-### content
+#### content
 - SketchEngine import corpus
 - explanations to the SES database
 - ANNIS framework
+- EXMARALDA
 - audacity how to anonymise interview audio
 - BERLANGDEV workflow
 - BERLANGDEV media status
