@@ -24,11 +24,11 @@ library(jsonlite)
 path_home()
 # set version:
 outputschemes<-c("original","sketchE","sansCodes","inlineCodes","temp")
-scheme<-outputschemes[3]
+scheme<-outputschemes[4]
 sdelim<-T #wrap SkE lines <s></s>
 sketchwrap<-c("<s>","</s>")
 
-datestamp<-"13275"
+datestamp<-"14444.kct"
 version<-"v3_4"
 sketchversion<-"v3.4.1"
 numbered<-T
@@ -45,9 +45,9 @@ boxfolderns<-"version without header for SketchEngine upload"
 #mini
 #setwd("~/boxHKW/21S/DH/")
 #lapsi
-#setwd("~/boxHKW/UNI/21S/DH/")
+setwd("~/boxHKW/21S/DH/")
 #minirig
-setwd("/Volumes/EXT/boxHKW/UNI/21S/DH/")
+#setwd("/Volumes/EXT/boxHKW/UNI/21S/DH/")
 getwd()
 datetime<-Sys.Date()
 datetime<-format(Sys.time(),"%Y%m%d(%H.%m)")
@@ -60,7 +60,7 @@ if (scheme==outputschemes[2]){
 #2nd run with all 32 transcripts formatted from docx > txt
 dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/Formatted with header info/text/docx-txt")
 getwd()
-dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/NT2")
+#dirtext<-paste0(getwd(),"/local/HU-LX/000_SES_REFORMATTED_transcripts/NT2")
 
 #codesource<-"/r-temp/codes_cpt3mod.csv"
 #codesource<-"gith/DH_essais/sections/HU-LX/codes_cpt4mod.csv"
@@ -725,6 +725,10 @@ codens<-unique(rpall$shortcode)
 codens<-codens[order(codens)]
 codecount<-matrix(nrow=length(codens),ncol=length(filelist2))
 codecount<-data.frame(codecount,row.names = codens)
+### 14444.
+codes.u<-data.frame(code=codens,freq=0)
+###
+
 for (f in 1:length(filelist2)){
   tbu<-readLines(paste(trans_mod_tempdir,filelist2[f],sep = "/"))
   #kidname<-stri_extract(filelist2[k],regex="(?<=SES_..._)(.+?)(?<=(_))")
@@ -841,6 +845,9 @@ for (f in 1:length(filelist2)){
     if(is.na(codeit)){codeit<-0}
     codeit<-length(m)+codeit
     codecount[codeact,f]<-codeit
+    # cd.cl<-gsub("#","",codeact)
+    # m.c<-grep(cd.cl,codesarray$V2)
+    # codecount$long[codeact]<-codesarray$V2[m.c]
     ### this adds number of occurences of code to header description of code, has to be formatted
   #  k<-1
     #for (k in 1:length(codecount[,1])){
@@ -912,6 +919,24 @@ for (f in 1:length(filelist2)){
   chatfilename<-paste0(kids4[[f]][1],transextension,chatfileextension)
   kidns<-kids4[[f]][1]
   chatfilename
+  
+  #save kidscodestable
+  # codes.u<-data.frame(code=unique(rpall$shortcode),freq=0)
+  k<-1
+  codes.k<-data.frame(freq=1:length(codes.u$freq))
+  codes.k$freq<-0
+  for (k in 1:length(codes.u$code)){
+    code<-codes.u$code[k]
+    m<-grep(code,rpall$shortcode)
+    m.sum<-sum(rpall$V8[m])
+    codes.k$freq[k]<-m.sum
+  }
+  #kidname
+  #kid.u<-stri_split_regex(kidns)
+  colnames(codes.k)<-kidname  
+  codes.u<-cbind(codes.u,codes.k[,1])
+  colnames(codes.u)[length(codes.u)]<-kidname
+  #########
   #delete hardcoded linenumbers
   me<-grepl("([^@].*)",tbuheader)
   tbuheader<-tbuheader[me]
@@ -1106,6 +1131,22 @@ for (f in 1:length(filelist2)){
   #  postprocess(codes_cpt,tbum)
   
 }
+#kids3
+colnames(codecount)<-kids3
+#k<-53
+k
+for (k in 1:length(codecount[,1])){
+codeact<-row.names(codecount)[k]
+cd.cl<-gsub("#","",codeact)
+m.c<-grep(cd.cl,codesarray$V2)
+codecount$feature[k]<-codesarray$V2[m.c]
+}
+m<-grep("COM",codecount$feature)
+codecount$feature[m]<-"%COM: comment"
+#rownames(codecount)<-codecount$long
+c.nr<-c(length(codecount),1:(length(codecount)-1))
+codecount.nr<-codecount[,c.nr]
+write.csv(codecount.nr,"~/boxHKW/21S/DH/local/HU-LX/SES/kidscodestable.m1.csv")
 
 getwd()
 write_json(transfail,paste("local/HU-LX/SES","transdb001.json",sep = "/"))
