@@ -28,7 +28,7 @@ you cannot open the .exb (exmaralda format) directly from the HU box, you have t
 ## transcribe the text from the .pdf:
 - click into a segment
 - type the text
-	- at the end of one unit (which is still to define: either sentence, word or syntactic unit) type a \<space:leerzeichen\> to signal the chat processor, that this is a segment. when you done and the end of available empty segments of the transcription tier is reached, one new segment is opened and you can type in the next unit.
+	- at the end of one unit (which is still to define: either sentence, word or syntactic unit) type a \<space:leerzeichen\> to signal the chat processor, that this is a segment. when you done with one segment and the end of available empty segments of the transcription tier is reached, one new segment is opened when you type \<return:enter\> and you can type in the next unit.
 
 ![][image-6]
 
