@@ -3,7 +3,7 @@ authors = ["esteeschwarz"]
 language = "en"
 multilingual = false
 src = "./mdbook/workflow/src"
-title = "Corpus Class: SES WrapUp"
+title = "Corpus Class WrapUp"
 
 
 [output.html]
