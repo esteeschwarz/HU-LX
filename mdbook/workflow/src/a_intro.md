@@ -1,5 +1,5 @@
 # meta
-version: 20231024(19.17)
+version: 20231108(19.51)
 authored: st. schwarz, FUB
 #### content
 - SketchEngine import corpus

@@ -1,13 +1,13 @@
-# EXMARALDA 
+# EXMARALDA exkurs
 info/download: [EXMARALDA Partitur Editor][1]
 #### how to export .exb (EXMARALDA-files) to .txt CHAT format
 - open .exb file in partitur editor
 - *\<file\>:\<export\>*
 - choose HIAT segmentation
-	- the transcripts are segmented per token, so choosing CHAT-segmention as export option will put each token in a single line in the textfile
+	- the transcripts (as for YAS) are segmented per token, so choosing CHAT-segmention as export option would put each token in a single line in the textfile. to have a convenient reading view, choosing the HIAT segmentation export disables the segmentation in this case.
 - choose location
 - choose *\<dateiformat\>:\<CHAT\>*
-- name the file with .txt extension
+- name the file with .txt extension (to conveniently open it in a texteditor. you could also save it with the .cha (CHAT) file extension since the document structure is CHAT format, it doesnt matter, you can open .cha files in a texteditor also...)
 
 ![][image-1]
 
