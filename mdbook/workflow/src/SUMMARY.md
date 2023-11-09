@@ -22,6 +22,7 @@
 	- [003][20]
 	- [accountability][21]
 	- [distribution analysis][22]
+- [Glossary / Annex][23]
 
 [1]:	a_intro.md
 [2]:	c_sesdb01.md
@@ -45,3 +46,4 @@
 [20]:	r_findings03.md
 [21]:	s_sesdb004.md
 [22]:	t_sesdist001.md
+[23]:	z1_annex.md
