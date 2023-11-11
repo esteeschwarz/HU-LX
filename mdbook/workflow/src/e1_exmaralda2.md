@@ -68,8 +68,8 @@ use a .txt extension for the file instead of the .cha extension, this will open 
 [image-5]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_3.png
 [image-6]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_3b.png
 [image-7]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_4.png
-[image-8]:	exm_2_4bb.png
-[image-9]:	exm_2_4cc.png
+[image-8]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_4bb.png
+[image-9]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_4cc.png
 [image-10]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5a.png
 [image-11]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5b.png
 [image-12]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_6.png
