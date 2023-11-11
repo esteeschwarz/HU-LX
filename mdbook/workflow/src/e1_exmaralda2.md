@@ -34,19 +34,27 @@ you cannot open the .exb (exmaralda format) directly from the HU box, you have t
 
 ![][image-7]
 
+if you need to insert an empty segment in the middle of the transcript (because you forgot to transcribe a word e.g.) you can split an event which creates an empty segment.
+
+![][image-8]
+
+![][image-9]
+
+you can also, for easier transcription, write the whole sentence into on segment an then split like above the segments after each whitespace by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)
+
 - save your transcription, it will save it as .exb
 
 #### export:
 you can export the transcription to various formats to e.g. view it in a texteditor. try the CHAT export. for further explanation see section on export [here.][2]
 
-![][image-8]
+![][image-10]
 
 **important** if you chose to transcribe the text segmented per token (word) i.e. you have one segment/token choose here \<based on HIAT segmentation\> as option in the dialogue, not CHAT segmentation. this will combine all tokens between sentence final characters (?|.|!) to one sentence/line in the exported output.
-![][image-9]
+![][image-11]
 
 use a .txt extension for the file instead of the .cha extension, this will open the exported file automatically in a texteditor like this:
 
-![][image-10]
+![][image-12]
 
 
 
@@ -60,6 +68,8 @@ use a .txt extension for the file instead of the .cha extension, this will open 
 [image-5]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_3.png
 [image-6]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_3b.png
 [image-7]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_4.png
-[image-8]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5a.png
-[image-9]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5b.png
-[image-10]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_6.png
+[image-8]:	exm_2_4bb.png
+[image-9]:	exm_2_4cc.png
+[image-10]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5a.png
+[image-11]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_5b.png
+[image-12]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_6.png
