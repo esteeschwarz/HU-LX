@@ -28,7 +28,7 @@
 [2]:	c_sesdb01.md
 [3]:	d_sesdb002.md
 [4]:	e_sesdb003.md
-[5]:	e1_exmaralda.md
+[5]:	e1_exmaralda2.md
 [6]:	e1_exmaralda2.md
 [7]:	e1_exmaralda.md
 [8]:	f_audacity.md
