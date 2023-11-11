@@ -2,12 +2,21 @@
 info/download: [EXMARALDA Partitur Editor][1]
 #### how to export .exb (EXMARALDA-files) to .txt CHAT format
 - open .exb file in partitur editor
-- *\<file\>:\<export\>*
+	- this is only relevant if you dont have the exported file (with which you work in the moment and that you want to export) opened in exmaralda.
+- open the export dialogue:
+	- *\<file\>:\<export\>*
 - choose HIAT segmentation
-	- the transcripts (as for YAS) are segmented per token, so choosing CHAT-segmention as export option would put each token in a single line in the textfile. to have a convenient reading view, choosing the HIAT segmentation export disables the segmentation in this case.
-- choose location
+	- if you have the transcript segmented per token (word)
+		- e.g. the transcripts for YAS are segmented per token, so choosing CHAT-segmention as export option would put each token in a single line in the textfile. 
+	- to have a convenient reading view with, choosing the HIAT segmentation export disables the segmentation in this case.
+		- for this to work, there has to be a full-stop (.) at the end of each sequence to segment the output into sentence lines
+- choose a location in your filesystem
 - choose *\<dateiformat\>:\<CHAT\>*
-- name the file with .txt extension (to conveniently open it in a texteditor. you could also save it with the .cha (CHAT) file extension since the document structure is CHAT format, it doesnt matter, you can open .cha files in a texteditor also...)
+- name the file with a .txt extension (to conveniently open it in a texteditor
+	- the name scheme is then as follows: 
+`{filename(childcode, e.g. MIM)}_{language(DE/EN)}_{textversion(WN/WE)}_{venue(SESB/RKO)}_{10/12}.txt`
+- like e.g.: `MIM_DE_WN_SESB_12.txt` 
+	- this is not obligatory, you could also save it with the .cha (CHAT) file extension since the document structure is CHAT format, it doesnt matter, you can open .cha files in a texteditor also...)
 
 ![][image-1]
 

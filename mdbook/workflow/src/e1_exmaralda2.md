@@ -37,7 +37,7 @@ you cannot open the .exb (exmaralda format) directly from the HU box, you have t
 - save your transcription, it will save it as .exb
 
 #### export:
-you can export the transcription to various formats to e.g. view it in a texteditor. try the CHAT export. 
+you can export the transcription to various formats to e.g. view it in a texteditor. try the CHAT export. for further explanation see section on export [here.][2]
 
 ![][image-8]
 
@@ -50,6 +50,7 @@ use a .txt extension for the file instead of the .cha extension, this will open 
 
 
 [1]:	https://exmaralda.org/de/partitur-editor-de/
+[2]:	e1_exmaralda.md
 
 [image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_1.png
 [image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_2.png
