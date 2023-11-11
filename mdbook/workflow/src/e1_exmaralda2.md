@@ -41,6 +41,7 @@ you can export the transcription to various formats to e.g. view it in a textedi
 
 ![][image-8]
 
+**important** if you chose to transcribe the text segmented per token (word) i.e. you have one segment/token choose here \<based on HIAT segmentation\> as option in the dialogue, not CHAT segmentation. this will combine all tokens between sentence final characters (?|.|!) to one sentence/line in the exported output.
 ![][image-9]
 
 use a .txt extension for the file instead of the .cha extension, this will open the exported file automatically in a texteditor like this:
