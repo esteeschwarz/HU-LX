@@ -40,12 +40,13 @@ if you need to insert an empty segment in the middle of the transcript (because 
 
 ![][image-9]
 
-you can also, for easier transcription, write the whole sentence into on segment an then split like above the segments after each whitespace by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)
+you can also write the whole sentence into on segment an then split like above the segments where you want by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)   
+the reverse operation (combining segments) is also possible; mark the segments you want to combine (like cells in an excel table, not with SHIFT-hold, but by moving over them mouse-clicked) and choose \<event:merge\>.
 
-- save your transcription, it will save it as .exb
+- save your transcription, it will be saved as .exb
 
 #### export:
-you can export the transcription to various formats to e.g. view it in a texteditor. try the CHAT export. for further explanation see section on export [here.][2]
+you can export the transcription to various formats to e.g. view it in a texteditor.   try the CHAT export. for further explanation see section on export [here.][2]
 
 ![][image-10]
 
