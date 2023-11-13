@@ -25,7 +25,7 @@
 - [Glossary / Annex][23]
 
 [1]:	a_intro.md
-[2]:	e1_exmaralda2.md
+[2]:	e1_exmaralda0.md
 [3]:	e1_exmaralda2.md
 [4]:	e1_exmaralda.md
 [5]:	f_audacity.md
