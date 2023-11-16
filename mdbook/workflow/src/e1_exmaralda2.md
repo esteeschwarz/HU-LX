@@ -14,14 +14,14 @@ you cannot open the .exb (exmaralda format) directly from the HU box, you have t
 
 ![][image-2]
 
-- edit the transcript metadata
+- here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire
+- edit the transcript metadata:
 
 ![][image-3]
 
 ![][image-4]
 
-- here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire
-**actualisation:** import the file \<LLDM\_metadata-template.exb\> from the box according to the following:
+**actualisation:** to manage the transcript metadata you can import the file \<LLDM\_metadata-template.exb\> from the box according to the following:
 
 ![][image-5]
 
