@@ -10,5 +10,7 @@ you will first add a tier, where a normalised version of the text will be the co
 
 now you have a copy of the speakerline called X [norm] with the same text.    
 *normalisation* in this context means that you correct the text in that tier for and **just for** spelling (orthographic) errors (exluding interpunctuation mistakes).
+#### insert a part of speech tier
+**follows**
 
 [image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_10a.png
