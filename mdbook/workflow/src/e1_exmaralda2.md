@@ -8,6 +8,7 @@
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
 - in the editor choose *\<file\>:\<new\>*
 	- opens a blank document with 1 tier which is labelel  [X]
+- **actualisation:** instead open the template \<LLDM\_exmaralda\_basictemplate.exb\> to start the transcription of your text in that. in there you have already the necessary tears for the annotation created. (without content)
 - edit the speakertable to relabel the tier:
 
 ![][image-1]
@@ -15,14 +16,14 @@
 ![][image-2]
 
 - here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire.    
-- **actualisation: ** follow below mentioned routine to import the \<speaker+metadata\_template\>
+- **actualisation: obsolete ** follow below mentioned routine to import the \<speaker+metadata\_template\>
 - edit the transcript metadata:
 
 ![][image-3]
 
 ![][image-4]
 
-**actualisation:** to manage the transcript metadata you can import the file \<LLDM\_metadata+speaker\_template.exb\> from the box according to the following: (apply the same routine for the speakertable, use the same template!)
+**actualisation:obsolete** to manage the transcript metadata you can import the file \<LLDM\_metadata+speaker\_template.exb\> from the box according to the following: (apply the same routine for the speakertable, use the same template!)
 
 ![][image-5]
 
