@@ -1,9 +1,9 @@
 # EXMARALDA workflow
 #### general
-- info/download: [EXMARALDA Partitur Editor][1]   
-assuming you have successfully installed exmaralda on your system here follow some instructions on how to work with it.    
-you cannot open the .exb (exmaralda format) directly from the HU box, you have to download and open them in the partitureditor.   
-#### transcription
+- info/download: [EXMARALDA Partitur Editor][1]  
+	assuming you have successfully installed exmaralda on your system here follow some instructions on how to work with it.  
+	you cannot open the .exb (exmaralda format) directly from the HU box, you have to download and open them in the partitureditor.   
+	#### transcription
 ## preliminary
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
 - in the editor choose *\<file\>:\<new\>*
@@ -14,14 +14,15 @@ you cannot open the .exb (exmaralda format) directly from the HU box, you have t
 
 ![][image-2]
 
-- here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire
+- here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire.    
+- **actualisation: ** follow below mentioned routine to import the \<speaker+metadata\_template\>
 - edit the transcript metadata:
 
 ![][image-3]
 
 ![][image-4]
 
-**actualisation:** to manage the transcript metadata you can import the file \<LLDM\_metadata-template.exb\> from the box according to the following:
+**actualisation:** to manage the transcript metadata you can import the file \<LLDM\_metadata+speaker\_template.exb\> from the box according to the following: (apply the same routine for the speakertable, use the same template!)
 
 ![][image-5]
 
@@ -51,7 +52,7 @@ if you need to insert an empty segment in the middle of the transcript (because 
 
 ![][image-13]
 
-you can also write the whole sentence into on segment an then split like above the segments where you want by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)   
+you can also write the whole sentence into on segment an then split like above the segments where you want by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)  
 the reverse operation (combining segments) is also possible; mark the segments you want to combine (like cells in an excel table, not with SHIFT-hold, but by moving over them mouse-clicked) and choose \<event:merge\>.
 
 - save your transcription, it will be saved as .exb
