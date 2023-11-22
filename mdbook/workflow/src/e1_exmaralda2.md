@@ -34,7 +34,7 @@
 ![][image-8]
 
 - then fill in the values of the template attributes with the corresponding values of the transcript. 
-- NEXT: add a comment tier for annotation
+- **actualisation:obsolete** NEXT: add a comment tier for annotation
 
 ![][image-9]
 
