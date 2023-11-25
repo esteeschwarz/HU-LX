@@ -34,9 +34,9 @@ info/download: [EXMARALDA Partitur Editor][1]
 
 [1]:	https://exmaralda.org/de/partitur-editor-de/
 
-[image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_01.png
-[image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_02.png
-[image-3]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_03.png
-[image-4]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_04.png
-[image-5]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_05.png
-[image-6]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/exm_2_6.png
+[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_01.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_02.png
+[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_03.png
+[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_04.png
+[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_05.png
+[image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_6.png

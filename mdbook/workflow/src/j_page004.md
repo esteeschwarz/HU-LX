@@ -15,7 +15,7 @@
 
 ![][image-4]
 
-[image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/./mdb-01-005.png
-[image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/./mdb-01-006.png
-[image-3]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/./mdb-01-007.png
-[image-4]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/./mdb-01-008.png
+[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/mdb-01-005.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/./mdb-01-006.png
+[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/./mdb-01-007.png
+[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/./mdb-01-008.png

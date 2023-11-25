@@ -38,10 +38,10 @@ this part will include workflow description of how to upload content to BERLANGD
 
 [1]:	https://rs.cms.hu-berlin.de/berlangdev/pages/collection_manage.php
 
-[image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_re_type.png
-[image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_res_coll.png
-[image-3]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_ed_meta.png
-[image-4]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_copy_meta.png
-[image-5]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_res_name.png
-[image-6]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_res_filename.png
-[image-7]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/berlang_rel_res.png
+[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_res_type.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_res_coll.png
+[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_ed_meta.png
+[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_copy_meta.png
+[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_res_name.png
+[image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_res_filename.png
+[image-7]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/berlang_rel_res.png

@@ -1,11 +1,11 @@
 ## principle of accountability [^1]
 roughly: the number of occurences of one (coded nonstandard) feature over the number of total instances of the feature (including standard + nonstandard realisations). e.g.:
 
-| token  | instances | standard       | nonstandard                | normalised             |
-| ------ | --------- | -------------- | -------------------------- | ---------------------- |
-| schnee | 54        | 33             | 21                         | 38.8888889             |
-|        |           |                |                            |                        |
-|        | all       | coded "FALSCH" | coded "1" (feature = TRUE) | percent (D2/B2\\\*100) |
+| token  | instances | standard       | nonstandard                | normalised                 |
+| ------ | --------- | -------------- | -------------------------- | -------------------------- |
+| schnee | 54        | 33             | 21                         | 38.8888889                 |
+|        |           |                |                            |                            |
+|        | all       | coded "FALSCH" | coded "1" (feature = TRUE) | percent (D2/B2\\\\\\\*100) |
 
 workflow:
 
@@ -29,7 +29,7 @@ workflow:
 
 [^1]:	Labov, William. Sociolinguistic Patterns / William Labov. 1. publ. Oxford: Blackwell, 1972. Print.
 
-[image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/sesdb004-INT.png
-[image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/sesdb004-schnee.png
-[image-3]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/sesdb004-schnee2.png
-[image-4]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/sesdb004-schnee3.png
+[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-INT.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee.png
+[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee2.png
+[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee3.png

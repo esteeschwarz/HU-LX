@@ -7,5 +7,5 @@
 
 ![][image-2]
 
-[image-1]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/mdb-01-003.png
-[image-2]:	https://ada-sub.dh-index.org/school/pr/2023-04-15/ses_wrapup/src/mdb-01-004.png
+[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/mdb-01-003.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/mdb-01-004.png
