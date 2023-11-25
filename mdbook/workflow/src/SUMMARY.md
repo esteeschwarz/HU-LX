@@ -31,7 +31,7 @@
 [3]:	be1_exmaralda-021.md
 [4]:	be1_exmaralda-022.md
 [5]:	be1_exmaralda-031.md
-[6]:	e1_exmaralda3a.md
+[6]:	be1_exmaralda-041.md
 [7]:	c_audacity.md
 [8]:	c_sesdb01.md
 [9]:	d_sesdb002.md
