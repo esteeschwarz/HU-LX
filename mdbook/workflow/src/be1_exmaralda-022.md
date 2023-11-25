@@ -89,9 +89,15 @@ note: for this method some technical skills are needed, but you definitely save 
 
 ![][image-17]
 
+- choose \<template\> and open the LLDM\_basictemplate
+
 ![][image-18]
 
-- like above fill in the values of the template attributes for the metadata with the corresponding values of the transcript (from the questionaire)
+![][image-19]
+
+![][image-20]
+
+- like above replace the values of the template attributes for the metadata with the corresponding values of the transcript (from the questionaire)
 	- left is the attribute name, right the value which is to adapt
 
 #### voila.
@@ -116,4 +122,6 @@ note: for this method some technical skills are needed, but you definitely save 
 [image-15]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22m.png
 [image-16]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22n.png
 [image-17]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7a.png
-[image-18]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
+[image-18]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7b.png
+[image-19]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7c.png
+[image-20]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
