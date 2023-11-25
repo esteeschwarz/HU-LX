@@ -8,7 +8,7 @@ note: for this method some technical skills are needed, but you definitely save 
 #### transcription
 - transcribe (type) the text as is is written in the .pdf into a plain text file in the editor
 - transcribe *every* written form, including stroke through words or phrases, i.e. every information that could be later on analysed
-	- you can mark up information like this or use or own (consistent!) system, important is, that you later be able to transfer your marked up information into an annotation in the transcript, e.g. like this where "an" was stroke through in the original text:
+	- you can mark up information like this or use your own (consistent!) system, important is, that you later (see [sec. 2.4][3])be able to transfer your marked up information into an annotation in the transcript, e.g. like here where "an" was stroke through in the original text:
 
 `gut erinnern an die Zeit in der Grundschule und _an-strike_ die ersten Jahre auf dem Gymnasium, in der immer viel abgeschrieben wurde`
 
@@ -106,6 +106,7 @@ dont forget to save your work.
 
 [1]:	https://code.visualstudio.com
 [2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
+[3]:	be1_exmaralda-041.md
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22a.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22b.png

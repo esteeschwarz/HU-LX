@@ -1,5 +1,5 @@
 # meta
-version: 20231125(11.50)  
+version: 20231125(13.00)  
 authored: st. schwarz, FUB
 #### content
 - EXMARALDA
@@ -18,5 +18,5 @@ to make sure you are viewing the most recent version of the wrap up, reload the 
 
 for trouble with technical terms/expressions used please consult the glossary at the end.
 
-[1]:	https://box.fu-berlin.de/s/tJNBadWwD5b3fJM
+[1]:	https://box.fu-berlin.de/s/Hr7Fad5bTjSmtKT
 [2]:	https://pinghook.dh-index.org?page=pfaff-corpusclass-overview

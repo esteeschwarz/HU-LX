@@ -51,7 +51,7 @@ the reverse operation (combining segments) is also possible; mark the segments y
 [2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_2.png
+[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
 [image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7a.png
 [image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
 [image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4.png
