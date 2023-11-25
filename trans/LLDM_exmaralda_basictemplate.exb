@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.exmaralda.org -->
+<basic-transcription>
+<head>
+<meta-information><project-name>LLDM</project-name><transcription-name>--add filename like: SESB-12_MIM_DE-WN</transcription-name><referenced-file url=""/><ud-meta-information><ud-information attribute-name="project">LLDM</ud-information><ud-information attribute-name="school"></ud-information><ud-information attribute-name="year"></ud-information><ud-information attribute-name="source transcript">CHAT / pdf / exb</ud-information><ud-information attribute-name="original filename">--add complete filename of pdf/exb/cha--</ud-information><ud-information attribute-name="source location">--add e.g. box library folder</ud-information><ud-information attribute-name="data collection site"></ud-information><ud-information attribute-name="New3"></ud-information><ud-information attribute-name="originally transcribed/date">--add initials if available</ud-information><ud-information attribute-name="transcriber/date">--add your initials--</ud-information><ud-information attribute-name="annotator/date">--add initials--</ud-information></ud-meta-information><comment></comment><transcription-convention></transcription-convention></meta-information><speakertable><speaker id="SPK0">
+<abbreviation>X</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+<ud-information attribute-name="pseudonym"></ud-information><ud-information attribute-name="code"></ud-information><ud-information attribute-name="sex"></ud-information><ud-information attribute-name="age"></ud-information><ud-information attribute-name="date of birth"></ud-information><ud-information attribute-name="place of birth"></ud-information><ud-information attribute-name="father place of birth"></ud-information><ud-information attribute-name="mother place of birth"></ud-information></ud-speaker-information>
+<comment></comment>
+</speaker>
+</speakertable></head>
+<basic-body>
+<common-timeline>
+<tli id="T0"/>
+<tli id="T1"/>
+</common-timeline>
+<tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="X [v]"></tier><tier id="TIE5" speaker="SPK0" category="ZH" type="a" display-name="X [ZH]"></tier><tier id="TIE6" speaker="SPK0" category="ERRTXT" type="a" display-name="X [ERRTXT]"></tier><tier id="TIE1" speaker="SPK0" category="ERRSYN" type="a" display-name="X [ERRSYN]"></tier><tier id="TIE2" speaker="SPK0" category="ERRMORPH" type="a" display-name="X [ERRMORPH]"></tier><tier id="TIE3" speaker="SPK0" category="ERRLEX" type="a" display-name="X [ERRLEX]"></tier><tier id="TIE4" speaker="SPK0" category="ERRORTHO" type="a" display-name="X [ERRORTHO]"></tier><tier id="TIE7" speaker="SPK0" category="REPAIR" type="a" display-name="X [REPAIR]"></tier><tier id="TIE8" speaker="SPK0" category="com" type="a" display-name="X [com]"></tier></basic-body>
+</basic-transcription>
