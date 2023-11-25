@@ -3,8 +3,8 @@
 note: this method is demanding fewer technical skills, but takes longer to transcribe = type the text. if you decide to do use a more technical demanding method, which allows for easy and fast transkription, skip to [section 2.2][1].
 #### preliminary
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
-- open the template \<LLDM\_exmaralda\_basictemplate.exb\> which you download from the HU box.
-- in this template you have already the necessary tears for the transkription and annotation created. (without content)
+- open the template \<LLDM\_exmaralda\_basictemplate.exb\> which you download from the HU box or [here][2]. 
+- in this template you have already the necessary tiers for the transkription and annotation created. (without content)
 #### speakertable
 - edit the speakertable to relabel the tiers:
 
@@ -48,6 +48,7 @@ the reverse operation (combining segments) is also possible; mark the segments y
 - save your transcription, it will be saved as .exb
 
 [1]:	e1_exmaralda-022.md
+[2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_2.png

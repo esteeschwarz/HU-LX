@@ -2,7 +2,10 @@
 ## transcription: by merge imported text and template
 note: for this method some technical skills are needed, but you definitely save effort transcribing.
 #### preliminary
-- open the original .pdf you want to transcribe and a simple text editor, rather not word. best is to have a parallel view of the .pdf and the editor in horizontal split
+- open the original .pdf you want to transcribe and a simple text editor, rather not word, use [this one (VS Code)][1] for example. 
+- best is to have a parallel view of the .pdf and the editor in horizontal split
+- download the template \<LLDM\_exmaralda\_basictemplate.exb\> from the HU box or [here][2]
+#### transcription
 - transcribe (type) the text as is is written in the .pdf into a plain text file in the editor
 - transcribe *every* written form, including stroke through words or phrases, i.e. every information that could be later on analysed
 	- you can mark up information like this or use or own (consistent!) system, important is, that you later be able to transfer your marked up information into an annotation in the transcript, e.g. like this where "an" was stroke through in the original text:
@@ -92,6 +95,9 @@ note: for this method some technical skills are needed, but you definitely save 
 	- left is the attribute name, right the value which is to adapt
 
 #### voila.
+
+[1]:	https://code.visualstudio.com
+[2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22a.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22b.png
