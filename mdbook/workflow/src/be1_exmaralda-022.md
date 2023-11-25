@@ -78,7 +78,7 @@ note: for this method some technical skills are needed, but you definitely save 
 
 ![][image-14]
 
-- instead, assign the correct speaker to your [v] tier:
+- instead, assign the correct speaker to your \<TXT\> tier:
 
 ![][image-15]
 
@@ -99,8 +99,10 @@ note: for this method some technical skills are needed, but you definitely save 
 
 - like above replace the values of the template attributes for the metadata with the corresponding values of the transcript (from the questionaire)
 	- left is the attribute name, right the value which is to adapt
+- add project name and transcription name according to scheme
 
 #### voila.
+dont forget to save your work.
 
 [1]:	https://code.visualstudio.com
 [2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
