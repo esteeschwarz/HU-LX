@@ -24,8 +24,8 @@ note: for this method some technical skills are needed, but you definitely save 
 - for that you choose: \<split at regular expression\> with the following input (regex formula) (which is very important to be exactly copied into the field:
 
 ```r
-( |[,.;:!?()]|[a-zäöüß](?=[,.;:?!()]))
-```
+( |[,.;:!?()]|[a-zäöüß](?=[,.;:?!()]))```
+
 - in the angle brackets (left and right) you see all the punctuation signs after and before which a new segment should be created. NOTE: if you discovered (transcribed) more of these, you should put them into the brackets to the left and right (1st and 3rd bracket), not in the middle one.
 	 
 ![][image-3]
