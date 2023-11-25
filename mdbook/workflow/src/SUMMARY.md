@@ -2,50 +2,52 @@
 
 - [content][1]
 - [EXMARALDA][2]
-	- [transcription workflow][3]
-	- [export .exb to CHAT][4]
-	- [annotation/coding][5]
-- [anonymize interview audios][6]
-- [SES Database][7]
-	- [columns explained][8]
-	- [possibilities][9]
-- [Sketch Engine][10]
-	- [log in to Sketch Engine][11]
-	- [create new corpus][12]
-	- [import texts][13]
-	- [compile corpus][14]
-- [ANNIS framework][15]
-- [BERLANGDEV workflow][16]
-- [BERLANGDEV media status][17]
-- [SES findings][18]
-	- [001][19]
-	- [002][20]
-	- [003][21]
-	- [accountability][22]
-	- [distribution analysis][23]
-- [Glossary / Annex][24]
+	- [transcription using basic template][3]
+	- [transcription using imported text][4]
+	- [export .exb transcript to CHAT][5]
+	- [annotation/coding][6]
+- [anonymize interview audios][7]
+- [SES Database][8]
+	- [columns explained][9]
+	- [possibilities][10]
+- [Sketch Engine][11]
+	- [log in to Sketch Engine][12]
+	- [create new corpus][13]
+	- [import texts][14]
+	- [compile corpus][15]
+- [ANNIS framework][16]
+- [BERLANGDEV workflow][17]
+- [BERLANGDEV media status][18]
+- [SES findings][19]
+	- [001][20]
+	- [002][21]
+	- [003][22]
+	- [accountability][23]
+	- [distribution analysis][24]
+- [Glossary / Annex][25]
 
 [1]:	a_intro.md
-[2]:	e1_exmaralda0.md
-[3]:	e1_exmaralda2.md
-[4]:	e1_exmaralda.md
-[5]:	e1_exmaralda3a.md
-[6]:	f_audacity.md
-[7]:	c_sesdb01.md
-[8]:	d_sesdb002.md
-[9]:	e_sesdb003.md
-[10]:	g_pageske0.md
-[11]:	h_page001.md
-[12]:	i_page003.md
-[13]:	j_page004.md
-[14]:	k_page005.md
-[15]:	l_annis01.md
-[16]:	m_berlangdev01.md
-[17]:	n_ses-status.md
-[18]:	o_findings00.md
-[19]:	p_findings01.md
-[20]:	q_findings02.md
-[21]:	r_findings03.md
-[22]:	s_sesdb004.md
-[23]:	t_sesdist001.md
-[24]:	z1_annex.md
+[2]:	be1_exmaralda-0.md
+[3]:	be1_exmaralda-021.md
+[4]:	be1_exmaralda-022.md
+[5]:	be1_exmaralda-031.md
+[6]:	e1_exmaralda3a.md
+[7]:	c_audacity.md
+[8]:	c_sesdb01.md
+[9]:	d_sesdb002.md
+[10]:	e_sesdb003.md
+[11]:	g_pageske0.md
+[12]:	h_page001.md
+[13]:	i_page003.md
+[14]:	j_page004.md
+[15]:	k_page005.md
+[16]:	l_annis01.md
+[17]:	m_berlangdev01.md
+[18]:	n_ses-status.md
+[19]:	o_findings00.md
+[20]:	p_findings01.md
+[21]:	q_findings02.md
+[22]:	r_findings03.md
+[23]:	s_sesdb004.md
+[24]:	t_sesdist001.md
+[25]:	z1_annex.md

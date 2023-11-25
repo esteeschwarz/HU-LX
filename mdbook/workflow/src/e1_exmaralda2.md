@@ -1,9 +1,5 @@
-# EXMARALDA workflow
-#### general
-- info/download: [EXMARALDA Partitur Editor][1]  
-	assuming you have successfully installed exmaralda on your system here follow some instructions on how to work with it.  
-	you cannot open the .exb (exmaralda format) directly from the HU box, you have to download and open them in the partitureditor.   
-	#### transcription
+# EXMARALDA workflow 
+#### transcription
 ## preliminary
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
 - in the editor choose *\<file\>:\<new\>*
@@ -59,7 +55,7 @@ the reverse operation (combining segments) is also possible; mark the segments y
 - save your transcription, it will be saved as .exb
 
 #### export:
-you can export the transcription to various formats to e.g. view it in a texteditor.   try the CHAT export. for further explanation see section on export [here.][2]
+you can export the transcription to various formats to e.g. view it in a texteditor.   try the CHAT export. for further explanation see section on export [here.][1]
 
 ![][image-14]
 
@@ -72,8 +68,7 @@ use a .txt extension for the file instead of the .cha extension, this will open 
 
 
 
-[1]:	https://exmaralda.org/de/partitur-editor-de/
-[2]:	e1_exmaralda.md
+[1]:	e1_exmaralda.md
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_2.png
