@@ -46,7 +46,7 @@ the reverse operation (combining segments) is also possible; mark the segments y
 
 - save your transcription, it will be saved as .exb
 
-[1]:	e1_exmaralda-022.md
+[1]:	be1_exmaralda-022.md
 [2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
