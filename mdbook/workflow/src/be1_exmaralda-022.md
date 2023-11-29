@@ -1,20 +1,20 @@
-# EXMARALDA workflow
 ## transcription: by merge imported text and template
 note: for this method some technical skills are needed, but you definitely save effort transcribing.   
-#### preliminary
+### preliminary
 - open the original .pdf you want to transcribe and a simple text editor, rather not word, use [this one (VS Code)][1] for example. 
 - best is to have a parallel view of the .pdf and the editor in horizontal split
 - download the template \<LLDM\_exmaralda\_basictemplate.exb\> from the HU box or [here][2]   
-#### transcription
+### transcription
 - transcribe (type) the text as is is written in the .pdf into a plain text file in the editor
 - transcribe *every* written form, including stroke through words or phrases, i.e. every information that could be later on analysed
-	- you can mark up information like this or use your own (consistent!) system, important is, that you later (see [sec. 2.4][3])be able to transfer your marked up information into an annotation in the transcript, e.g. like here where "an" was stroke through in the original text:
+	- you can mark up information like this or use your own (consistent!) system, important is, that you later (see [sec. 2.4][3]) be able to transfer your marked up information into an annotation in the transcript, e.g. like here where "an" was stroke through in the original text:
 
 `gut erinnern an die Zeit in der Grundschule und _an-strike_ die ersten Jahre auf dem Gymnasium, in der immer viel abgeschrieben wurde`
 
 - you can type the whole text in one paragraph, include punctuation etc., be careful transcribing whitespaces, there mustnt be double-whitespaces, be sure of that.
 - save the file as .txt   
-#### import text to EXMARaLDA
+
+### import text to EXMARaLDA
 
 ![][image-1]
 
@@ -32,7 +32,7 @@ note: for this method some technical skills are needed, but you definitely save 
 - you should now have a partitur with one transcription line containing your text tokenized
 - save that transcript, its just a temporary step
 
-#### merge with basic template
+### merge with basic template
 
 - first, remove the speaker:
 
@@ -59,7 +59,7 @@ note: for this method some technical skills are needed, but you definitely save 
 
 
 
-#### speakertable
+### speakertable
 - edit the speakertable to relabel the tiers:
 
 ![][image-11]
@@ -83,7 +83,7 @@ note: for this method some technical skills are needed, but you definitely save 
 
 ![][image-16]
 
-#### metadata
+### metadata
 - edit the transcript metadata:
 
 ![][image-17]

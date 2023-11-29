@@ -1,8 +1,9 @@
-# how to anonymize/combine audios using audacity
+# how to anonymise/combine audios using audacity
 #### prerequisites
 - download and install [audacity][1]
 - if you will using headphones to listen, make sure to FIRST plug in the headphones and THEN start audacity. that will enable your core audio to use the headphones as standard output.
-## 1. anonymise
+
+## anonymise
 - first download audiofiles to anonymize from the HU box. folder: [SES audio cut/renamed][2]. note: the file will probably (depending on your operating system) pop up/open automatically in your default media player application after download. close that application.
 - in audacity import audio from downloads folder:
 - *[datei] \> [öffnen] \> datei in downloads auswählen \> [öffnen]*
@@ -53,7 +54,7 @@
 
 ![][image-12]
 
-## 2. combine
+## combine
 - how to copy content of 2nd & 3rd audio after end of 1st
 
 ![][image-13]
@@ -100,18 +101,17 @@
 
 ![][image-25]
 
-![][image-26]
-
-#### 3. export mp3
-
-![][image-27]
-
+## export mp3
 - select complete wave
 - eport audio to file:
 - *[datei]\>[exportieren]\>[als mp3 exportieren]*
 - choose filename (renamed kid!) according to scheme of anonymised & combined
 - choose *constant bitrate* for (export bitrate) at 128kbps (its more compressed then to lesser size)
 - upload to HU box anonymised, combined.
+
+![][image-26]
+
+![][image-27]
 
 [1]:	https://audacityteam.org
 [2]:	https://box.hu-berlin.de/smart-link/04099902-f842-4a14-985c-5e9ec29d917a/

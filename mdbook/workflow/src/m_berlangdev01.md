@@ -1,6 +1,7 @@
 # BERLANGDEV
 this part will include workflow description of how to upload content to BERLANGDEV and edit metadata.
-#### shortfast overview of basic workflow:
+
+## short overview of basic workflow:
 - login to [BERLANGDEV][1]
 - click \<upload\>
 - upload dialogue opens.
