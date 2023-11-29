@@ -1,7 +1,8 @@
 # meta
 version: 20231126(18.38)  
 authored: st. schwarz, FUB   
-#### content
+
+## content
 - EXMARALDA
 - audacity: how to anonymise interview audio
 - explanations to the SES database
@@ -11,7 +12,7 @@ authored: st. schwarz, FUB
 - BERLANGDEV media status
 - class findings
 
-#### info:
+## info:
 please find [here][1] a .docx / pdf version of the pages.  
 **mdbook instance:** you can also use the \<print\> button on the top right side to generate an uptodate printed version.  
 to make sure you are viewing the most recent version of the wrap up, reload the pages by visiting: [https://pinghook.dh-index.org?page=pfaff-corpusclass-overview][2]  

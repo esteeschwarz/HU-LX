@@ -8,10 +8,11 @@ library(readtext)
 library(xfun)
 library(readr)
 srcdir<-"~/Documents/GitHub/school/pr/2023-04-15/ses_wrapup/src"
+srcdir<-"~/Documents/GitHub/HU-LX/mdbook/workflow/src"
 f<-list.files(srcdir)
 f.md<-file_ext(f)
 f.md.w<-grep("md",f.md)
-rm(f.df)
+#rm(f.df)
 #f.df<-array()
 m<-grep("SUMMARY",f)
 f.sum<-readLines(paste(srcdir,f[m],sep = "/"))
@@ -29,15 +30,22 @@ f.df$page[k]<-  readtext(paste(srcdir,f[f.md.w[k]],sep = "/"))$text
 
 }
 dir.git<-"~/Documents/GitHub/HU-LX"
-d<-read_csv("~/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
+#d<-read_csv("~/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
 
-f.df.o<-d[order(d$pos.m),]
+#f.df.o<-d[order(d$pos.m),]
 f.df.o<-f.df[order(f.df$pos),]
 
 #f.df.o$page<-gsub("^#{2,4}","#",f.df.o$page) #turn all top header to h1 header
 ###
 #combine pages
-writeLines(f.df.o$page[2:length(f.df.o$page)],paste(dir.git,"doc/mdbook","ses-wrapup-raw.md",sep = "/"))
+yamlheader<-readLines(paste(dir.git,"doc/overview.yaml",sep = "/"))
+rmd.out<-c(yamlheader,f.df.o$page[2:length(f.df.o$page)])
+regx<-"((?<=:\t)(.*/)(.*)(?=.png))" # replace image refs local
+repl<-"~/Documents/github/school/api/png/ses-overview/\\3"
+rmd.out.2<-gsub(regx,repl,rmd.out,perl = T)
+rmd.out.2
+#writeLines(f.df.o$page[2:length(f.df.o$page)],paste(dir.git,"doc","ses-wrapup-raw.Rmd",sep = "/"))
+writeLines(rmd.out,paste(dir.git,"doc","ses-wrapup-raw.Rmd",sep = "/"))
 #f.df.o$file.index<-letters[1:length(f.df.o$file)]
 #f.df.o$file.sort<-paste0(f.df.o$file.index,"_",f.df.o$file)
 dir.create(paste(dir.git,"doc/mdbook/ulysses",sep = "/"))
@@ -45,7 +53,7 @@ k<-1
 for(k in 1:length(f.df.o$file)){
   writeLines(f.df.o$page[k],paste(dir.git,"doc/mdbook/ulysses",f.df.o$file[k],sep = "/"))
 }
-#write_csv(f.df.o,"/volumes/ext/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
+write_csv(f.df.o,"/volumes/ext/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
 
 #d<-read_csv("/volumes/ext/boxhkw/21s/dh/local/hu-lx/doc/ses-wrapup.csv")
 m<-which(d$pos.m!=0)
@@ -86,4 +94,13 @@ k<-1
 which(f.df$file[k]==f.sum.o.cl)
 
 library(rmarkdown)
-render(paste(dir.git,"doc/mdbook/ses-wrapup-raw.Rmd",sep = "/"))
+
+render(paste(dir.git,"doc/ses-wrapup-raw.md",sep = "/"),output_format = pdf_document(toc=T,toc_depth = 2,
+                                                                                     dev = "pdf",keep_tex = T,df_print = "tibble",
+
+                                                                                                                                                                          ))
+
+
+
+
+render(paste(dir.git,"doc/ses-wrapup-raw.md",sep = "/"))

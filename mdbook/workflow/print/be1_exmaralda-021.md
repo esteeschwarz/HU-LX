@@ -1,10 +1,12 @@
 # EXMARALDA workflow
 ## transcription: from scratch in template
-note: this method is demanding fewer technical skills, but takes longer to transcribe = type the text. if you decide to do use a more technical demanding method, which allows for easy and fast transkription, skip to [section 2.2][1].   
+note: this method is demanding fewer technical skills, but takes longer to transcribe = type the text. if you decide to do use a more technical demanding method, which allows for easy and fast transkription, skip to [section 2.2][1].
+
 #### preliminary
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
 - open the template \<LLDM\_exmaralda\_basictemplate.exb\> which you download from the HU box or [here][2]. 
 - in this template you have already the necessary tiers for the transkription and annotation created. (without content)
+
 #### speakertable
 - edit the speakertable to relabel the tiers:
 
@@ -15,6 +17,7 @@ note: this method is demanding fewer technical skills, but takes longer to trans
 - here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire.
 - then fill in the values of the template attributes for the speaker with the corresponding values of the transcript (from the questionaire)
 	- left is the attribute name, right the value which is to adapt
+
 #### metadata
 - edit the transcript metadata:
 
@@ -50,10 +53,10 @@ the reverse operation (combining segments) is also possible; mark the segments y
 [1]:	e1_exmaralda-022.md
 [2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
-[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7a.png
-[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
-[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4.png
-[image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4bb.png
-[image-7]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4cc.png
+[image-1]:	~/Documents/github/school/api/png/ses-overview/exm_2_1.png
+[image-2]:	~/Documents/github/school/api/png/ses-overview/exm_2_7d.png
+[image-3]:	~/Documents/github/school/api/png/ses-overview/exm_2_7a.png
+[image-4]:	~/Documents/github/school/api/png/ses-overview/exm_2_7d.png
+[image-5]:	~/Documents/github/school/api/png/ses-overview/exm_2_4.png
+[image-6]:	~/Documents/github/school/api/png/ses-overview/exm_2_4bb.png
+[image-7]:	~/Documents/github/school/api/png/ses-overview/exm_2_4cc.png
