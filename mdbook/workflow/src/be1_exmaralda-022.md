@@ -101,13 +101,9 @@ note: for this method some technical skills are needed, but you definitely save 
 - add project name and transcription name according to scheme
 
 #### fin
-```rust
-#![allow(unused)]
-fn main() {
-println!("voila:");
-// com :D
-println!("dont forget to save your work!");
-}
+```r
+print("voila:")
+print("dont forget to save your work!")
 ```
 
 [1]:	https://code.visualstudio.com
