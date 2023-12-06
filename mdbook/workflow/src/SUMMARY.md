@@ -6,7 +6,7 @@
 	- [transcription using imported text][4]
 	- [export .exb transcript to CHAT][5]
 	- [annotation/coding][6]
-- [anonymize interview audios][7]
+- [anonymise interview audios][7]
 - [SES Database][8]
 	- [columns explained][9]
 	- [possibilities][10]
