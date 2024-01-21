@@ -150,32 +150,58 @@ format.array<-c("exb","pdf","mp3","docx","cha")
 ###
 p.df.c<-particip.df.cpt
 g.type<-function(x)sum(grepl("WN",x))
-p.df.c$WN<-lapply(p.df.c$file,g.type)
+p.df.c$WN<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("WE",x))
-p.df.c$WE<-lapply(p.df.c$file,g.type)
+p.df.c$WE<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("OE",x))
-p.df.c$OE<-lapply(p.df.c$file,g.type)
+p.df.c$OE<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("ON",x))
-p.df.c$ON<-lapply(p.df.c$file,g.type)
+p.df.c$ON<-as.character(lapply(p.df.c$file,g.type))
 ###
 g.type<-function(x)sum(grepl("DE",x))
-p.df.c$DE<-lapply(p.df.c$file,g.type)
+p.df.c$DE<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("EN",x))
-p.df.c$EN<-lapply(p.df.c$file,g.type)
+p.df.c$EN<-as.character(lapply(p.df.c$file,g.type))
 ###
 g.type<-function(x)sum(grepl("\\.exb",x))
-p.df.c$exb<-lapply(p.df.c$file,g.type)
+p.df.c$exb<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("\\.pdf",x))
-p.df.c$pdf<-lapply(p.df.c$file,g.type)
-g.type<-function(x)sum(grepl("\\.mp3",x))
-p.df.c$mp3<-lapply(p.df.c$file,g.type)
+p.df.c$pdf<-as.character(lapply(p.df.c$file,g.type))
+g.type<-function(x)sum(grepl("\\.mp3|MP3",x))
+p.df.c$mp3<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("\\.docx",x))
-p.df.c$docx<-lapply(p.df.c$file,g.type)
+p.df.c$docx<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("\\.cha",x))
-p.df.c$cha<-lapply(p.df.c$file,g.type)
+p.df.c$cha<-as.character(lapply(p.df.c$file,g.type))
 g.type<-function(x)sum(grepl("$\\..*",x))
-p.df.c$alii<-lapply(p.df.c$file,g.type)
-
-#save(p.df.c,file="work/particip.df.cpt_all-p-onecolumn.RData")
+p.df.c$alii<-as.character(lapply(p.df.c$file,g.type))
+###
+library(purrr)
+p.df.c$total<-0
+p.dfsum<-function(x)sum(as.double(x[3:15]))
+for(k in 1:length(p.df.c$participant)){
+  p.df.c$total[k]<-sum(as.double(p.df.c[k,3:length(p.df.c)]))
+}
+p.df.c$total<-lapply(p.df.c,p.dfsum)
+save(p.df.c,file="particip.df.cpt_all-p-onecolumn.RData")
 library(writexl)
-#write_xlsx(p.df.c,"20240120(19.16)_table_check-files.xlsx")
+write_xlsx(p.df.c,"20240121(10.07)_table_check-files.xlsx")
+library(readr)
+write_csv(p.df.c,"20240121(10.07)_table_check-files.csv")
+typeof(p.df.c[2,3])
+mode(p.df.1[2,3])<-"character"
+rm(p.df.c)
+load("particip.df.cpt_all-p-onecolumn.RData")
+p.df.sf<-p.df.c
+p.df.1<-as.data.frame(p.df.c)
+k<-1
+p.df.n1<-p.df.c
+for(k in 1:length(p.df.c$participant)){
+  part<-p.df.c$participant[k]
+  file<-p.df.c$file[k]
+  values<-unlist(p.df.c[k,])
+  p.df.n1[k,]<-as.character(values)
+
+  }
+typeof(values)
+values
