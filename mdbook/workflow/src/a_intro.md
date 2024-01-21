@@ -1,7 +1,9 @@
 # meta
-version: 20240112(08.01)  
-authored: st. schwarz, FUB   
+version: 20240121(07.21)  
+authored: st. schwarz, FUB
+
 #### content
+
 - EXMARALDA
 - audacity: how to anonymise interview audio
 - explanations to the SES database

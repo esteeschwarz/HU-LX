@@ -1,9 +1,11 @@
 ## transcription: from scratch in template
 note: this method is demanding fewer technical skills, but takes longer to transcribe = type the text. if you decide to do use a more technical demanding method, which allows for easy and fast transkription, skip to [section 2.2][1].   
+
 ### preliminary
 - open the original .pdf you want to transcribe and the partitur editor. best is to have a parallel view of the .pdf and the partitur in horizontal split
 - open the template \<LLDM\_exmaralda\_basictemplate.exb\> which you download from the HU box or [here][2]. 
 - in this template you have already the necessary tiers for the transkription and annotation created. (without content)
+
 ### speakertable
 - edit the speakertable to relabel the tiers:
 
@@ -14,6 +16,7 @@ note: this method is demanding fewer technical skills, but takes longer to trans
 - here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire.
 - then fill in the values of the template attributes for the speaker with the corresponding values of the transcript (from the questionaire)
 	- left is the attribute name, right the value which is to adapt
+	
 ### metadata
 - edit the transcript metadata:
 

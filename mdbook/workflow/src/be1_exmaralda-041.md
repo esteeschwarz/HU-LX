@@ -3,6 +3,7 @@
 ## normalisation
 if you have finished transcribing the primary text, it is necessary to add further tiers (rows) for annotation.  
 you will first add a tier, with a normalised version of the text as content. for that:
+
 - add a new tier
 - choose to \<copy events from\> the speaker tier and label it [norm]   
 
