@@ -16,8 +16,6 @@ jobs:
       with:
        cache-version: 2
        extra-packages: |
-         # ggplot2
-         # rcmdcheck
           rmarkdown
           markdown
     - name: chk
