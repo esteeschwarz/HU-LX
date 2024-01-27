@@ -1,6 +1,7 @@
 name: run cache check+install deps+process rmd
 on:
   push:
+   # paths: ['**workflow/src']
     branches: [ pages ]
   pull_request:
     branches: [ main ]
@@ -130,7 +131,7 @@ jobs:
         uses: actions/configure-pages@v4
       - name: build text
         run: |
-             source("scripts/testrun.R")
+             source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - name: getlibs
         run: |
