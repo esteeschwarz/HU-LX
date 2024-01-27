@@ -144,7 +144,7 @@ jobs:
         run: mdbook build -d ./pages  
       - run: |
            ls ./mdbook/workflow
-           ls ./mdbook/workflow/book
+          
       - name: getlibs
         run: |
              print("libs da?")
