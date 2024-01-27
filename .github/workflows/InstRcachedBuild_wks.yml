@@ -141,10 +141,10 @@ jobs:
         run: |
              test<-"testartifact"
              print(list.files())
-            # writeLines(test,"./book/testart.md")
-            # print(list.files("book"))
+             writeLines(test,"./book/testart.md")
+             print(list.files("book"))
             # source("scripts/overview_render-docx.R")
-        shell: Rscript {0}- 
+        shell: Rscript {0}
       - run: |
            ls ./book
            ls ./pages
