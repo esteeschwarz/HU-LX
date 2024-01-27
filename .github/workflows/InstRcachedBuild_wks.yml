@@ -145,7 +145,7 @@ jobs:
              print(list.files("book"))
             # source("scripts/overview_render-docx.R")
         shell: Rscript {0}- 
-        run: |
+      - run: |
            ls ./book
            ls ./pages
           
