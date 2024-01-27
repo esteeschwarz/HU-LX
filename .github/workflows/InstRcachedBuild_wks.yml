@@ -148,6 +148,7 @@ jobs:
       - run: |
            ls ./book
            ls ./pages
+           cp ./pages/testart.md ./book/testart.md
           
       - name: getlibs
         run: |
