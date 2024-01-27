@@ -154,12 +154,16 @@ jobs:
       #      source("pages/knitpagesrmd.R")
       #   shell: Rscript {0} 
       
-      - name: Upload artifact
+      - name: Upload mdbook
+        uses: actions/upload-pages-artifact@v2
+        with:
+          paths: |
+             ./mdbook/workflow/book
+      - name: Upload docx
         uses: actions/upload-pages-artifact@v2
         with:
           paths: |
              ./pages
-             ./mdbook/workflow/book
       # Deployment job
       - name: Check
         run: |
