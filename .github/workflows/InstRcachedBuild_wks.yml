@@ -132,7 +132,7 @@ jobs:
       - name: build text
         run: |
              test<-"testartifact"
-             writeLines(test,"testart.md")
+             writeLines(test,"pages/testart.md")
              #source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - name: getlibs
