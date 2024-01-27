@@ -2,7 +2,7 @@ name: run cache check+install deps+process rmd
 on:
   push:
    # paths: ['**workflow/src']
-    branches: [ pages ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 #name: R-CMD-check
