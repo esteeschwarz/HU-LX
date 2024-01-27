@@ -93,6 +93,11 @@ jobs:
         shell: Rscript {0}
       - name: show libs after installing
         run: ls rlibs
+      - name: Install mdBook
+        uses: extractions/setup-crate@v1
+        with:
+          owner: rust-lang
+          name: mdBook
 
 #       - name: Cache R packages
 #         id: cache-r
