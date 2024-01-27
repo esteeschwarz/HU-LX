@@ -22,8 +22,7 @@ jobs:
        cache-version: 2
      #  extra-packages: |
        packages: |
-         'ggplot2'
-         'cmdcheck'
+         remotes
        needs: |
          website
          coverage
