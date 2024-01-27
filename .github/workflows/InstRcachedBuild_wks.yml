@@ -135,6 +135,8 @@ jobs:
              writeLines(test,"pages/testart.md")
              #source("scripts/overview_render-docx.R")
         shell: Rscript {0}
+      - name: build book
+        run: mdbook build -d ./mdbook/workflow/book
       - name: getlibs
         run: |
              print("libs da?")
@@ -150,7 +152,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./pages
+          path: |
+             ./pages
+             ./mdbook/workflow/book
       # Deployment job
       - name: Check
         run: |
