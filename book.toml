@@ -4,7 +4,7 @@ language = "en"
 multilingual = false
 src = "./mdbook/workflow/src"
 title = "Corpus Class Overview"
-build.build-dir = ./pages
+build-dir = "./pages"
 
 [output.html]
 git-repository-url = "https://github.com/esteeschwarz/HU-LX"
