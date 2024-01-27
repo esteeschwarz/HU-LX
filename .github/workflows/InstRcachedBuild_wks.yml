@@ -131,7 +131,9 @@ jobs:
         uses: actions/configure-pages@v4
       - name: build text
         run: |
-             source("scripts/overview_render-docx.R")
+             test<-"testartifact"
+             writeLines(test,"testart.md")
+             #source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - name: getlibs
         run: |
