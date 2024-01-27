@@ -16,8 +16,8 @@ jobs:
       with:
        cache-version: 2
        extra-packages: |
-          rmarkdown
-          markdown
+          any::rmarkdown
+          any::markdown
     - name: chk
       run: |
           print("from here on, fresh")
