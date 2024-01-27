@@ -141,7 +141,7 @@ jobs:
         run: |
              test<-"testartifact"
              print(list.files())
-             writeLines(test,"./book/testart.md")
+            # writeLines(test,"./book/testart.md")
             # print(list.files("book"))
             # source("scripts/overview_render-docx.R")
         shell: Rscript {0}- 
