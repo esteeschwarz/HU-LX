@@ -16,13 +16,16 @@ jobs:
     # - name: install deps for pak
     #   run: install.packages("deps")
     #   shell: Rscript {0}
+    - name: Install libcurl on Linux
+      if: runner.os == 'Linux'
+      run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
     - name: Install dependencies
-      uses: esteeschwarz/r-actions/setup-r-dependencies@v2
+      uses: r-lib/actions/setup-r-dependencies@v2
       with:
        cache-version: 2
      #  extra-packages: |
        packages: |
-         remotes
+          yaml
        needs: |
          website
          coverage
