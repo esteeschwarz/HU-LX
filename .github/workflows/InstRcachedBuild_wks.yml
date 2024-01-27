@@ -136,15 +136,17 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: build book
-        run: mdbook build -d ./pages  
+        run: mdbook build -d ./book  
       - name: build text
         run: |
              test<-"testartifact"
              print(list.files())
-             writeLines(test,"./pages/testart.md")
-             print(list.files("pages"))
+             writeLines(test,"./book/testart.md")
+             print(list.files("book"))
             # source("scripts/overview_render-docx.R")
-        shell: Rscript {0}- run: |
+        shell: Rscript {0}- 
+        run: |
+           ls ./book
            ls ./pages
           
       - name: getlibs
@@ -166,7 +168,7 @@ jobs:
       - name: Upload docx
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./pages
+          path: ./book
       # Deployment job
       - name: Check
         run: |
