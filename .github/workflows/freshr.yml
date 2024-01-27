@@ -10,12 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up R
-      uses: r-lib/actions/setup-r@v2
+      uses: r-lib/actions/setup-r@r-devel-linux
+      with: 
+       r-version: '3.5.3'
     - name: install deps for pak
       run: install.packages("deps")
       shell: Rscript {0}
     - name: Install dependencies
-      uses: r-lib/actions/setup-r-dependencies@v2
+      uses: r-lib/actions/setup-r-dependencies@r-devel-linux
       with:
        cache-version: 2
        #extra-packages: |
