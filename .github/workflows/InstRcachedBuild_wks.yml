@@ -137,6 +137,7 @@ jobs:
       - name: build text
         run: |
              test<-"testartifact"
+             print(list.files())
              writeLines(test,"./pages/testart.md")
             # source("scripts/overview_render-docx.R")
         shell: Rscript {0}
