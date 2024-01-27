@@ -143,12 +143,12 @@ jobs:
              print(list.files())
              writeLines(test,"./pages/testart.md")
              print(list.files("pages"))
-            # source("scripts/overview_render-docx.R")
+             source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - run: |
            ls ./book
            ls ./pages
-           cp ./pages/testart.md ./book/testart.md
+           cp ./pages/* ./book/
           
       - name: getlibs
         run: |
