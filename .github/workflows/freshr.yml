@@ -12,7 +12,7 @@ jobs:
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
     - name: install deps for pak
-      run: pak::pkg_install("deps")
+      run: install.packages("deps")
       shell: Rscript {0}
     - name: Install dependencies
       uses: r-lib/actions/setup-r-dependencies@v2
