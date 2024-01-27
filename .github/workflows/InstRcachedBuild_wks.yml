@@ -157,11 +157,11 @@ jobs:
       - name: Upload mdbook
         uses: actions/upload-pages-artifact@v2
         with:
-          paths: ./mdbook/workflow/book
+          path: ./mdbook/workflow/book
       - name: Upload docx
         uses: actions/upload-pages-artifact@v2
         with:
-          paths: ./pages
+          path: ./pages
       # Deployment job
       - name: Check
         run: |
