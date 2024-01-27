@@ -138,12 +138,12 @@ jobs:
         run: |
              test<-"testartifact"
              writeLines(test,"pages/testart.md")
-             #source("scripts/overview_render-docx.R")
+            # source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - name: build book
         run: mdbook build -d ./pages  
       - run: |
-           ls ./mdbook/workflow
+           ls ./pages
           
       - name: getlibs
         run: |
