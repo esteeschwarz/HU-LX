@@ -157,7 +157,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: |
+          paths: |
              ./pages
              ./mdbook/workflow/book
       # Deployment job
