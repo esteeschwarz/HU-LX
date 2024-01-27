@@ -134,6 +134,9 @@ jobs:
       - name: build pages
         id: pages
         uses: actions/configure-pages@v4
+      
+      - name: build book
+        run: mdbook build -d ./pages  
       - name: build text
         run: |
              test<-"testartifact"
@@ -141,10 +144,7 @@ jobs:
              writeLines(test,"./pages/testart.md")
              print(list.files("pages"))
             # source("scripts/overview_render-docx.R")
-        shell: Rscript {0}
-      - name: build book
-        run: mdbook build -d ./pages  
-      - run: |
+        shell: Rscript {0}- run: |
            ls ./pages
           
       - name: getlibs
