@@ -38,7 +38,7 @@ jobs:
         check-dir: '"check"'  
     - name: chk
       run: |
-          print("from here on, fresh")
+          print("from here on, fresh.1.")
           #  installed.libraries()
           print("checkout")
       shell: Rscript {0}
