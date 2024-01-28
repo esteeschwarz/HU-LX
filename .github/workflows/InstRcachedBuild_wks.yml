@@ -1,7 +1,7 @@
 name: run cache check+install deps+process rmd
 on:
   push:
-    paths: ['mdbook/workflow/src']
+    paths: ['mdbook/workflow/src/**.md']
    # branches: [ main ]
   pull_request:
     branches: [ main ]
