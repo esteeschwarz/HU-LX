@@ -21,18 +21,18 @@ knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
 
 rsnc:ref,
 
-```{r echo=TRUE,warning=F}
+```{r echo=F,warning=F}
 #plot(pressure)
 mdf<-list.files("mdbook/workflow/src")
-print(mdf)
+#print(mdf)
 #mdtemp<-tempdir("tmd")
 k<-1
 #sort(mdf)
 m<-grepl("SUMMARY",mdf)
 mdf<-mdf[!m]
 mdf.d<-paste0("mdbook/workflow/src/",mdf)
-print(getwd())
-print(mdf.d)
+#print(getwd())
+#print(mdf.d)
 #md<-readLines(mdf.d[2])
 #print(md)
 dir.create("mdbook/workflow/md")
