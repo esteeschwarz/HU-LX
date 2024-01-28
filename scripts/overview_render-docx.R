@@ -10,7 +10,7 @@ m<-grep("\\\\\\[[a-zA-Z.]{1,12}\\\\\\]",tmd)
 tmd[m]
 #gsub("\\\\\\[([a-zA-Z.]{1,9})\\\\\\]","[\\1]",tmd[m])
 tmd[m]<-gsub("\\\\\\[([a-zA-Z.]{1,12})\\\\\\]","[\\1]",tmd[m]) # replace relative image links ![][image-1] with abs
-writeLines(tmd,"./pages/pfaff_corpus-class-overwiew.md")
+writeLines(tmd,"./pages/pfaff_corpus-class-overview.md")
 print(list.files("./pages"))
 render("./pages/pfaff_corpus-class-overview.Rmd")
 #file.copy("..pages/overview.docx.parent.docx","../pages/pfaff-corpusclass-overview.docx",overwrite = T)
