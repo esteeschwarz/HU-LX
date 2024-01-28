@@ -49,12 +49,12 @@ jobs:
       #   run: |
       #        install.packages('xfun',lib="rlibs",repos = 'https://cloud.r-project.org')
       #   shell: Rscript {0}  
-      # - uses: r-lib/actions/setup-pandoc@v2
-      # - name: Install mdBook
-      #   uses: extractions/setup-crate@v1
-      #   with:
-      #     owner: rust-lang
-      #     name: mdBook
+     # - uses: r-lib/actions/setup-pandoc@v2
+      - name: Install mdBook
+        uses: extractions/setup-crate@v1
+        with:
+          owner: rust-lang
+          name: mdBook
       - name: Cache R packages
         id: cache-r
 #        if: runner.os != 'Windows'
