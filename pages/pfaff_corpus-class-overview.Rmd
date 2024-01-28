@@ -10,5 +10,5 @@ output: word_document
 
 snc:child.doc1.Rmd
 
-```{r, child=c("pfaff-corpus-class.md")}
+```{r, child=c("./pages/pfaff-corpus-class.md")}
 ```
