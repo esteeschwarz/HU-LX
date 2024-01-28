@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 rsnc:ref,
 
-```{r echo=FALSE,warning=F}
+```{r echo=TRUE,warning=F}
 #plot(pressure)
 mdf<-list.files("mdbook/workflow/src")
 print(mdf)
