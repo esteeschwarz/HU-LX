@@ -10,5 +10,12 @@ output: word_document
 
 snc:child.doc1.Rmd
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# knitr::opts_knit$set(root.dir = normalizePath("~/documents/github/hu-lx"))
+knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
+
+```
+
 ```{r, child=c("pages/pfaff-corpus-class.md")}
 ```
