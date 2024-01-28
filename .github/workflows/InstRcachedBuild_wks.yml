@@ -137,10 +137,10 @@ jobs:
       
       - name: build book
         run: mdbook build -d ./book  
-      - name: build text
+      - name: build texdocx
         run: |
              test<-"testartifact"
-             print(list.files())
+             test<-(list.files())
              writeLines(test,"./pages/testart.md")
              print(list.files("pages"))
              source("scripts/overview_render-docx.R")
@@ -149,7 +149,15 @@ jobs:
            ls ./book
            ls ./pages
            cp ./pages/* ./book/
-          
+           echo "copied"
+           ls ./book
+      - name: upload docx
+        #- run: mkdir -p path/to/artifact
+        #- run: echo hello > /world.txt
+        - uses: actions/upload-artifact@v4
+          with:
+           name: pfaff_corpus-class-overview
+           path: ./pages/pfaff_corpus-class-overview.docx
       - name: getlibs
         run: |
              print("libs da?")
