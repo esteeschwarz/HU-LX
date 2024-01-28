@@ -19,12 +19,12 @@ knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
 
 ```
 
-rsnc:ref,
+rsnc:ref
 
 ```{r echo=F,warning=F}
 #plot(pressure)
 mdf<-list.files("mdbook/workflow/src")
-#print(mdf)
+print(mdf)
 #mdtemp<-tempdir("tmd")
 k<-1
 #sort(mdf)
