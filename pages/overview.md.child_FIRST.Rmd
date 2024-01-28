@@ -14,7 +14,9 @@ output:
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#knitr::opts_knit$set(root.dir = normalizePath("~/documents/github/hu-lx"))
+# knitr::opts_knit$set(root.dir = normalizePath("~/documents/github/hu-lx"))
+knitr::opts_knit$set(root.dir = normalizePath("~/HU-LX/HU-LX"))
+
 ```
 
 rsnc:ref,
