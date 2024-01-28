@@ -1,4 +1,4 @@
-name: run cache check+install deps+process rmd
+name: build mdbook+docx of mdbook/workflow/src
 on:
   push:
     paths: ['mdbook/workflow/src/**.md']
@@ -93,11 +93,11 @@ jobs:
         shell: Rscript {0}
       - name: show libs after installing
         run: ls rlibs
-      - name: Install mdBook
-        uses: extractions/setup-crate@v1
-        with:
-          owner: rust-lang
-          name: mdBook
+      # - name: Install mdBook
+      #   uses: extractions/setup-crate@v1
+      #   with:
+      #     owner: rust-lang
+      #     name: mdBook
 
 #       - name: Cache R packages
 #         id: cache-r
