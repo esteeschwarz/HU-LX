@@ -15,7 +15,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # knitr::opts_knit$set(root.dir = normalizePath("~/documents/github/hu-lx"))
-knitr::opts_knit$set(root.dir = normalizePath("~/HU-LX/HU-LX"))
+knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
 
 ```
 
