@@ -154,7 +154,7 @@ jobs:
       - name: upload docx
         #- run: mkdir -p path/to/artifact
         #- run: echo hello > /world.txt
-        - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
           with:
            name: pfaff_corpus-class-overview
            path: ./pages/pfaff_corpus-class-overview.docx
