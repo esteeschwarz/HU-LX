@@ -2,7 +2,7 @@ name: build mdbook+docx of mdbook/workflow/src
 on:
   push:
     paths: ['mdbook/workflow/src/**.md']
-    branches: [ pages ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 #14056.f1
