@@ -1,8 +1,8 @@
-name: run cache check+install deps+process rmd
+name: build mdbook+docx of mdbook/workflow/src
 on:
   push:
-   # paths: ['**workflow/src']
-    branches: [ main ]
+    paths: ['mdbook/workflow/src/**.md']
+    branches: [ pages ]
   pull_request:
     branches: [ main ]
 #name: R-CMD-check
@@ -50,7 +50,11 @@ jobs:
       #        install.packages('xfun',lib="rlibs",repos = 'https://cloud.r-project.org')
       #   shell: Rscript {0}  
       - uses: r-lib/actions/setup-pandoc@v2
-      
+      # - name: Install mdBook
+      #   uses: extractions/setup-crate@v1
+      #   with:
+      #     owner: rust-lang
+      #     name: mdBook
       - name: Cache R packages
         id: cache-r
 #        if: runner.os != 'Windows'
@@ -66,7 +70,7 @@ jobs:
           key: cache-r-dep-${{ runner.os }}-r-3.6.1-${{ hashFiles('rdependencies.csv') }}
        #   key: cache-r-dep-Linux-r-3.6.1-2f051200a682436eb92484a70968b5860b38b9e609a371c0c297dfe45be58d5c # #where to look for changes
           restore-keys: |
-               cache-r-dep-Linux-r-3.6.1-2f051200a682436eb92484a70968b5860b38b9e609a371c0c297dfe45be58d5c
+               cache-r-dep-Linux-r-3.6.1-a42cab0d5f45dd1ec15252ed75c2477318577804254598d0694e53a4a2ef819a
                cache-r-dep-${{ runner.os }}-r-3.6.1-
     
     #  - if: ${{ steps.cache-r.outputs.cache-hit != 'true' }}
@@ -93,6 +97,11 @@ jobs:
         shell: Rscript {0}
       - name: show libs after installing
         run: ls rlibs
+      # - name: Install mdBook
+      #   uses: extractions/setup-crate@v1
+      #   with:
+      #     owner: rust-lang
+      #     name: mdBook
 
 #       - name: Cache R packages
 #         id: cache-r
@@ -129,12 +138,29 @@ jobs:
       - name: build pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: build text
+      
+      # - name: build book
+      #   run: mdbook build -d ./book  
+      - name: build texdocx
         run: |
              test<-"testartifact"
-             writeLines(test,"pages/testart.md")
-             #source("scripts/overview_render-docx.R")
+             test<-(list.files())
+             writeLines(test,"./pages/testart.md")
+             print(list.files("pages"))
+             source("./overview_render-docx.R")
         shell: Rscript {0}
+      - run: |
+           ls ./docx
+           ls ./pages
+           echo "build"
+           ls ./pages/_book
+      # - name: upload docx
+      #   #- run: mkdir -p path/to/artifact
+      #   #- run: echo hello > /world.txt
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #      name: pfaff_corpus-class-overview
+      #      path: ./pages/pfaff_corpus-class-overview.docx
       - name: getlibs
         run: |
              print("libs da?")
@@ -147,10 +173,14 @@ jobs:
       #      source("pages/knitpagesrmd.R")
       #   shell: Rscript {0} 
       
-      - name: Upload artifact
+      # - name: Upload mdbook
+      #   uses: actions/upload-pages-artifact@v2
+      #   with:
+      #     path: ./mdbook/workflow/book
+      - name: Upload pages
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./pages
+          path: ./pages/_book
       # Deployment job
       - name: Check
         run: |
