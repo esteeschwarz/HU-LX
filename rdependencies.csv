@@ -7,5 +7,6 @@ xfun,xxx,0
 jsonlite,xxx,1
 quanteda.textplots,xxx,1
 quanteda,xxx,1
-googlesheets4,xxx,0
+googlesheets4,xxx,1
 xml2,xxx,1
+bookdown,xxx,0

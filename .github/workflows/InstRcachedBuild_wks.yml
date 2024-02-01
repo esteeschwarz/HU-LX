@@ -2,7 +2,7 @@ name: build mdbook+docx of mdbook/workflow/src
 on:
   push:
     paths: ['mdbook/workflow/src/**.md']
-   # branches: [ main ]
+    branches: [ pages ]
   pull_request:
     branches: [ main ]
 #name: R-CMD-check
@@ -50,11 +50,11 @@ jobs:
       #        install.packages('xfun',lib="rlibs",repos = 'https://cloud.r-project.org')
       #   shell: Rscript {0}  
       - uses: r-lib/actions/setup-pandoc@v2
-      - name: Install mdBook
-        uses: extractions/setup-crate@v1
-        with:
-          owner: rust-lang
-          name: mdBook
+      # - name: Install mdBook
+      #   uses: extractions/setup-crate@v1
+      #   with:
+      #     owner: rust-lang
+      #     name: mdBook
       - name: Cache R packages
         id: cache-r
 #        if: runner.os != 'Windows'
@@ -139,14 +139,28 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
-      - name: build book
-        run: mdbook build -d ./book  
+      # - name: build book
+      #   run: mdbook build -d ./book  
       - name: build texdocx
         run: |
              test<-"testartifact"
              test<-(list.files())
              writeLines(test,"./pages/testart.md")
              print(list.files("pages"))
+             source("./overview_render-docx.R")
+        shell: Rscript {0}
+      - run: |
+           ls ./docx
+           ls ./pages
+           echo "build"
+           ls ./pages/_book
+      # - name: upload docx
+      #   #- run: mkdir -p path/to/artifact
+      #   #- run: echo hello > /world.txt
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #      name: pfaff_corpus-class-overview
+      #      path: ./pages/pfaff_corpus-class-overview.docx
              source("scripts/overview_render-docx.R")
         shell: Rscript {0}
       - run: |
@@ -155,13 +169,6 @@ jobs:
            cp ./pages/* ./book/
            echo "copied"
            ls ./book
-      - name: upload docx
-        #- run: mkdir -p path/to/artifact
-        #- run: echo hello > /world.txt
-        uses: actions/upload-artifact@v4
-        with:
-           name: pfaff_corpus-class-overview
-           path: ./pages/pfaff_corpus-class-overview.docx
       - name: getlibs
         run: |
              print("libs da?")
@@ -178,10 +185,10 @@ jobs:
       #   uses: actions/upload-pages-artifact@v2
       #   with:
       #     path: ./mdbook/workflow/book
-      - name: Upload docx
+      - name: Upload pages
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./book
+          path: ./pages/_book
       # Deployment job
       - name: Check
         run: |
