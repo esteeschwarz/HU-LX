@@ -1,5 +1,5 @@
 # meta
-version: 20240121(07.21)  
+version: 20240128(09.45)  
 authored: st. schwarz, FUB
 
 #### content
@@ -20,6 +20,6 @@ to make sure you are viewing the most recent version of the wrap up, reload the 
 
 for trouble with technical terms/expressions used please consult the [glossary][3] at the end.
 
-[1]:	https://box.fu-berlin.de/s/Hr7Fad5bTjSmtKT
+[1]:	https://esteeschwarz.github.io/HU-LX/pfaff_corpus-class-overview.docx
 [2]:	https://pinghook.dh-index.org?page=pfaff-corpusclass-overview
 [3]:	z1_annex.md
