@@ -5,6 +5,7 @@ on:
     branches: [ pages ]
   pull_request:
     branches: [ main ]
+#14056.f1
 #name: R-CMD-check
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -161,14 +162,6 @@ jobs:
       #   with:
       #      name: pfaff_corpus-class-overview
       #      path: ./pages/pfaff_corpus-class-overview.docx
-             source("scripts/overview_render-docx.R")
-        shell: Rscript {0}
-      - run: |
-           ls ./book
-           ls ./pages
-           cp ./pages/* ./book/
-           echo "copied"
-           ls ./book
       - name: getlibs
         run: |
              print("libs da?")
