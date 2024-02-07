@@ -1,6 +1,9 @@
 library(readr)
+library(writexl)
 inv<-read.csv("LLDM_inventory.txt",sep = "/",header = T)
-
+inv<-read.csv("/Users/guhl/boxHKW/21S/DH/local/HU-LX/alii/inventoryWS2023earlier.csv",sep = "/",header = F)
+inv<-inv[2:length(inv$V1),]
+write_xlsx(inv,"/Users/guhl/boxHKW/21S/DH/local/HU-LX/alii/box_inventory_WS2023-24-earlier.xlsx")
 #inv.txt<-readLines("boxHU/inventory.txt")
 
 # m<-grep("\\.exb",inv[,1:5])
@@ -205,3 +208,6 @@ for(k in 1:length(p.df.c$participant)){
   }
 typeof(values)
 values
+
+
+

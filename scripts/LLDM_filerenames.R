@@ -38,3 +38,16 @@ f
 ns.new
 length(f)
 length(ns.new)
+
+### LLDM rename boxfiles
+f<-list.files()
+f
+library(tools)
+f.ext<-file_ext(f)
+e1<-c("exb","cha","txt")
+m<-f.ext%in%e1
+f.rn<-f[m]
+f.rn
+load("~/boxHU/work/particip.df.cpt_all-p-onecolumn.RData")
+####
+
