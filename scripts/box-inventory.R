@@ -4,6 +4,8 @@ inv<-read.csv("LLDM_inventory.txt",sep = "/",header = T)
 inv<-read.csv("/Users/guhl/boxHKW/21S/DH/local/HU-LX/alii/inventoryWS2023earlier.csv",sep = "/",header = F)
 inv<-inv[2:length(inv$V1),]
 write_xlsx(inv,"/Users/guhl/boxHKW/21S/DH/local/HU-LX/alii/box_inventory_WS2023-24-earlier.xlsx")
+inv<-read.csv("/Volumes/EXT/boxHKW/21S/DH/local/HU-LX/alii/inventoryWS2023earlier.txt",sep = "/",header = F)
+
 #inv.txt<-readLines("boxHU/inventory.txt")
 
 # m<-grep("\\.exb",inv[,1:5])
@@ -211,3 +213,9 @@ values
 
 
 
+##################
+## WS2023 and earlier
+
+#inv<-inv[2:length(inv$V1),]
+library(writexl)
+write_xlsx(inv, "/Volumes/EXT/boxHKW/21S/DH/local/HU-LX/alii/20240131(17.19)_box-inventory_WS2023andearlier.xlsx")
