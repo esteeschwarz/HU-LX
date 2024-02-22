@@ -1,6 +1,7 @@
 #20231206(16.15)
 #HU-LX batch file rename
 ########################
+tempfun<-function(){
 f<-list.files()
 library(stringi)
 ns<-stri_split_regex(f,"-")
@@ -48,6 +49,8 @@ e1<-c("exb","cha","txt")
 m<-f.ext%in%e1
 f.rn<-f[m]
 f.rn
+}
+##########################################################
 load("~/boxHU/work/particip.df.cpt_all-p-onecolumn.RData")
 ####
 #14085.rename LLDM
