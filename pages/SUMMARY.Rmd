@@ -32,7 +32,7 @@ visualised:
 
 
 ### small significance testing:
-script source: [https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R][1]  
+script source: [https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R][25-1]  
 
 the applied lmer (linear mixed effects regression model) [^1] formula is:  
 `count ~ feature + (1 | L1)`  
@@ -90,10 +90,10 @@ with this assumption a significance of `p < 0.05` was tested at 0AR (zero articl
 | featureNVC  | 0        | 3,872      | 333 | 0       | 1                                        |     |     |
 
 
-[^1]:	Bates u. a., „Fitting Linear Mixed-Effects Models Using lme4“. 2015. [doi: 10.18637/jss.v067.i01][2]
+[^1]:	Bates u. a., „Fitting Linear Mixed-Effects Models Using lme4“. 2015. [doi: 10.18637/jss.v067.i01][25-2]
 
-[1]:	https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R
-[2]:	10.18637/jss.v067.i01
+[25-1]:	https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R
+[25-2]:	10.18637/jss.v067.i01
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20corpus.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20kids.png

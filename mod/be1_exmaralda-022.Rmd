@@ -2,9 +2,9 @@
 note: for this method some technical skills are needed, but you definitely save effort transcribing.   
 
 ### preliminary
-- open the original .pdf you want to transcribe and a simple text editor, rather not word, use [this one (VS Code)][1] for example. 
+- open the original .pdf you want to transcribe and a simple text editor, rather not word, use [this one (VS Code)][4-1] for example. 
 - best is to have a parallel view of the .pdf and the editor in horizontal split
-- download the template \<LLDM\_exmaralda\_basictemplate.exb\> from the HU box or [here][2]   
+- download the template \<LLDM\_exmaralda\_basictemplate.exb\> from the HU box or [here][4-2]   
 
 ### transcription
 - transcribe (type) the text as is is written in the .pdf into a plain text file in the editor
@@ -110,9 +110,9 @@ print("voila:")
 print("dont forget to save your work!")
 ```
 
-[1]:	https://code.visualstudio.com
-[2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
-[3]:	be1_exmaralda-041.md
+[4-1]:	https://code.visualstudio.com
+[4-2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
+[4-3]:	be1_exmaralda-041.md
 
 [image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22a.png
 [image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_22b.png

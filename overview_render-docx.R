@@ -21,9 +21,11 @@ mdf.d<-paste0(srcpath,mdf)
 dir.create("./mod")
 for(k in 1:length(mdf)){
   md<-readLines(mdf.d[k])
-  m<-grep("([0-9]{1,2}\\])",md)
+  #lookaround
+  regx19i<-"((?<=<castList>)((Personen.)(.*)){1,7}(?=</castList>))"
+  m<-grep("(\\[[0-9]{1,2}\\])",md)
   rep<-paste0(k,"-\\1")
-  fig<-gsub("([0-9]{1,2}\\])",rep,md[m])
+  fig<-gsub("((?<=\\[)([0-9]{1,2})(?=\\]))",rep,md[m],perl = T)
   md[m]<-fig
   mdns<-paste0("./mod/",mdf[k])
   mdns.docx<-paste0("./mod/",mdf.cl[k],".Rmd")
