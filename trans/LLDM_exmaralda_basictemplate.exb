@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- http://www.exmaralda.org -->
 <basic-transcription>
 <head>
 <meta-information><project-name>LLDM</project-name><transcription-name>--add filename like: SESB-12_MIM_DE-WN</transcription-name><referenced-file url=""/><ud-meta-information><ud-information attribute-name="project">LLDM multilit</ud-information><ud-information attribute-name="school">--SESB/OSZ/RKO</ud-information><ud-information attribute-name="year"></ud-information><ud-information attribute-name="source transcript">--CHAT / pdf / exb</ud-information><ud-information attribute-name="original filename">--add complete filename of pdf/exb/cha--</ud-information><ud-information attribute-name="transcript category">--WN/WE</ud-information><ud-information attribute-name="transcript language">--DE/EN</ud-information><ud-information attribute-name="source location">--add e.g. box library folder</ud-information><ud-information attribute-name="data collection site"></ud-information><ud-information attribute-name="originally transcribed/date">--add initials if available</ud-information><ud-information attribute-name="transcriber/date">--add your initials--</ud-information><ud-information attribute-name="annotator/date">--add initials--</ud-information></ud-meta-information><comment></comment><transcription-convention></transcription-convention></meta-information><speakertable><speaker id="SPK0">
@@ -9,7 +8,7 @@
 <l1></l1>
 <l2></l2>
 <ud-speaker-information>
-<ud-information attribute-name="pseudonym"></ud-information><ud-information attribute-name="code"></ud-information><ud-information attribute-name="sex"></ud-information><ud-information attribute-name="age"></ud-information><ud-information attribute-name="date of birth"></ud-information><ud-information attribute-name="place of birth"></ud-information><ud-information attribute-name="father place of birth"></ud-information><ud-information attribute-name="mother place of birth"></ud-information></ud-speaker-information>
+<ud-information attribute-name="CHAT:Role">interviewer/participant</ud-information><ud-information attribute-name="CHAT:Full Name">pseudonym</ud-information><ud-information attribute-name="CHAT:ID">participant code</ud-information><ud-information attribute-name="sex"></ud-information><ud-information attribute-name="age"></ud-information><ud-information attribute-name="date of birth"></ud-information><ud-information attribute-name="place of birth"></ud-information><ud-information attribute-name="father place of birth"></ud-information><ud-information attribute-name="mother place of birth"></ud-information></ud-speaker-information>
 <comment></comment>
 </speaker>
 </speakertable></head>
