@@ -56,7 +56,7 @@ render("./docx/overview.md.child_FIRST.Rmd")
 #writeLines(tmd,"./pages/pfaff_corpus-class-overview.Rmd")
 
 print(list.files("./pages"))
-render("./docx/pfaff_corpus-class-overview.Rmd")
+render("./docx/pfaff_corpusclass-overview.Rmd")
 render_book(input = "./pages")
-file.copy("./docx/pfaff_corpus-class-overview.docx","./pages/_book/pfaff_corpusclass-overview.docx",overwrite = T)
+file.copy("./docx/pfaff_corpusclass-overview.docx","./pages/_book/pfaff_corpusclass-overview.docx",overwrite = T)
 
