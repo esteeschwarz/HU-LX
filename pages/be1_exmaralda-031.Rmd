@@ -14,25 +14,25 @@
 - name the file with a .txt extension (to conveniently open it in a texteditor
 	- this is not obligatory, you could also save it with the .cha (CHAT) file extension since the document structure is CHAT format, it doesnt matter, you can open .cha files in a texteditor also...)
 
-![][image-1]
+![][6-image-1]
 
-![][image-2]
+![][6-image-2]
 
-![][image-3]
+![][6-image-3]
 
-![][image-4]
+![][6-image-4]
 
 ---- 
 
 #### the 2 versions view:
 
-![partitur editor view of .exb file][image-5]
+![partitur editor view of .exb file][6-image-5]
 
-![texteditor view of CHAT file][image-6]
+![texteditor view of CHAT file][6-image-6]
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_01.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_02.png
-[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_03.png
-[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_04.png
-[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_05.png
-[image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_6.png
+[6-image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_01.png
+[6-image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_02.png
+[6-image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_03.png
+[6-image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_04.png
+[6-image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_05.png
+[6-image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_6.png

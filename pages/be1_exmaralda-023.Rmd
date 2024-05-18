@@ -26,25 +26,25 @@ aber man sollte mit#nonstandard# Personen nach dem Charakter beurteilen und wenn
 - paste the text into the segment labeled \<1\>
 - **important:** save the transcription now according to the scheme
 
-![][image-1]
+![][5-image-1]
 
-![][image-2]
+![][5-image-2]
 
 
 ### tokenisation, pos-tagging, lemmatization
 -  open the weblicht interface of exmaralda
 
-![][image-3]
+![][5-image-3]
 
 - get you an API key from the website to fill in the key
 
-![][image-4]
+![][5-image-4]
 
 - if something goes wrong, try to clean up the transcription with \<transcription\>\<clean up\> before applying the weblicht tool. that will remove any unused segments.
 
 if everything works well the transcription should now include a lemma and pos-tag tier.
 
-![][image-5]
+![][5-image-5]
 
 ### merge with basic template and edit metadata
 follow the steps in [section 3.3][5-3] to get the annotation tiers and metadata scheme into your transcription and to edit the metadata/speakertable and assign the speakers.
@@ -53,8 +53,8 @@ follow the steps in [section 3.3][5-3] to get the annotation tiers and metadata 
 [5-2]:	https://code.visualstudio.com
 [5-3]:	exmaralda-workflowtranscription-by-merge-imported-text-and-template.html
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1a.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1b.png
-[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_11b.png
-[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1c.png
-[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1e.png
+[5-image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1a.png
+[5-image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1b.png
+[5-image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_11b.png
+[5-image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1c.png
+[5-image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_3_1e.png

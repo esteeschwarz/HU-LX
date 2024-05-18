@@ -9,13 +9,13 @@ roughly: the number of occurences of one (coded nonstandard) feature over the nu
 
 workflow:
 
-![filter out #INT speaker][image-1]
+![filter out #INT speaker][24-image-1]
 
-![filter after token schnee][image-2]
+![filter after token schnee][24-image-2]
 
-![analyse turn (manually)][image-3]
+![analyse turn (manually)][24-image-3]
 
-![set evaluation column to 1=TRUE if nonstandard occurence (context)][image-4]
+![set evaluation column to 1=TRUE if nonstandard occurence (context)][24-image-4]
 
 1. filter out #INT speaker
 2. filter after token [schnee]
@@ -29,7 +29,7 @@ workflow:
 
 [^1]:	Labov, William. Sociolinguistic Patterns / William Labov. 1. publ. Oxford: Blackwell, 1972. Print.
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-INT.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee.png
-[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee2.png
-[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee3.png
+[24-image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-INT.png
+[24-image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee.png
+[24-image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee2.png
+[24-image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/sesdb004-schnee3.png

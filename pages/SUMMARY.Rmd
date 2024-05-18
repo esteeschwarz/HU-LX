@@ -26,9 +26,9 @@ this outputs all occuring codes over the transcripts and associates them to the 
 | NNS         | GCB   | 11    |
 
 visualised:
-![][image-1]
+![][25-image-1]
 
-![][image-2]
+![][25-image-2]
 
 
 ### small significance testing:
@@ -95,5 +95,5 @@ with this assumption a significance of `p < 0.05` was tested at 0AR (zero articl
 [25-1]:	https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R
 [25-2]:	10.18637/jss.v067.i01
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20corpus.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20kids.png
+[25-image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20corpus.png
+[25-image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/coded%20features%20over%20kids.png

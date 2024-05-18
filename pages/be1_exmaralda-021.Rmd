@@ -9,9 +9,9 @@ note: this method is demanding fewer technical skills, but takes longer to trans
 ### speakertable
 - edit the speakertable to relabel the tiers:
 
-![][image-1]
+![][3-image-1]
 
-![][image-2]
+![][3-image-2]
 
 - here you insert the speaker abbreviation as label from the .pdf (e.g. MIM), the language used in the transcript and the L1/L2 if named in the questionaire.
 - then fill in the values of the template attributes for the speaker with the corresponding values of the transcript (from the questionaire)
@@ -20,9 +20,9 @@ note: this method is demanding fewer technical skills, but takes longer to trans
 ### metadata
 - edit the transcript metadata:
 
-![][image-3]
+![][3-image-3]
 
-![][image-4]
+![][3-image-4]
 
 - like above fill in the values of the template attributes for the metadata with the corresponding values of the transcript (from the questionaire)
 	- left is the attribute name, right the value which is to adapt
@@ -36,13 +36,13 @@ note: this method is demanding fewer technical skills, but takes longer to trans
 			- note: in each after these steps automatically opened new segment you have to type the first character twice, since the input is possible only when you started typing. you will see what is meant by trying...
 		- repeat for every word (AND punctuation mark!)
 
-![][image-5]
+![][3-image-5]
 
 if you need to insert an empty segment in the middle of the transcript (because you forgot to transcribe a word e.g.) you can split an event which creates an empty segment.
 
-![][image-6]
+![][3-image-6]
 
-![][image-7]
+![][3-image-7]
 
 you can also write the whole sentence into on segment an then split like above the segments where you want by positioning your cursor at the right position. the new segment will be created exactly where your cursor is, that would be after the whitespace between 2 words if you place it there. if there was a word after the whitespace, then that would be the content of the next segment (including every word which followed, you have to repeat the step for each word in the sentence.)  
 the reverse operation (combining segments) is also possible; mark the segments you want to combine (like cells in an excel table, not with SHIFT-hold, but by moving over them mouse-clicked) and choose \<event:merge\>.
@@ -52,10 +52,10 @@ the reverse operation (combining segments) is also possible; mark the segments y
 [3-1]:	exmaralda-workflow.html#transcription-by-merge-imported-text-and-template
 [3-2]:	https://github.com/esteeschwarz/HU-LX/blob/main/trans/LLDM_exmaralda_basictemplate.exb
 
-[image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
-[image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
-[image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7a.png
-[image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
-[image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4.png
-[image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4bb.png
-[image-7]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4cc.png
+[3-image-1]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_1.png
+[3-image-2]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
+[3-image-3]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7a.png
+[3-image-4]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_7d.png
+[3-image-5]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4.png
+[3-image-6]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4bb.png
+[3-image-7]:	https://ada-sub.dh-index.org/school/api/png/ses-overview/exm_2_4cc.png
