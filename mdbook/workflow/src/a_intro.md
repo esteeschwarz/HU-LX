@@ -22,4 +22,4 @@ for trouble with technical terms/expressions used please consult the [glossary][
 
 [1]:	https://esteeschwarz.github.io/HU-LX/pfaff_corpus-class-overview.docx
 [2]:	https://pinghook.dh-index.org?page=pfaff-corpusclass-overview
-[3]:	z1_annex.md
+[3]:	glossaryannex-on-a-funny-note.html#to-avoid-further-confusion
