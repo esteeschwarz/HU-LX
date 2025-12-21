@@ -104,7 +104,7 @@ get.q<-function(q,df,column,type){
 #mc<-get.q("keywords",df,T)
 print(r_files[1:20])
 #inv.db<-save.db(r_files)
-load(paste0(Sys.getenv("HKW_TOP"),"/R/R-scripts-DB.RData"))
+load(paste0(Sys.getenv("HKW_TOP"),"/sys/filesHKW_DB.RData"))
 colnames(inv.db)
 inv.db[1:10,]
 ##########################################
