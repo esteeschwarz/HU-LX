@@ -1,0 +1,16 @@
+---
+title: HU-LX poster
+subtitle: 
+author: st. schwarz
+date: '2021-12-24'
+categories: linguistics
+layout: page
+tags: [corpusLX,multiLX,learner corpora,L2]
+teaser:
+class:
+task: 
+site_link_text:
+site_link:
+ids:
+description:
+---
