@@ -23,11 +23,11 @@ jobs:
     #  env: 
      #  testcacher
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
      # Cache R binaries and libraries (R installation itself caching is limited; we use setup-r action)
       - name: Cache R system
-        uses: actions/cache@v4
         id: cache-r-system
+        uses: actions/cache@v4
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-system-
