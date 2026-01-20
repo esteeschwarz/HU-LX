@@ -3,6 +3,7 @@ open the database *SES\_database\_by\_tokens.xlsx* in excel or numbers (the data
 in general you would prefer e.g. [OpenRefine][9-1] instead of excel or numbers for best working with the table.
 
 to filter the table rows for specific tokens, speakers etc:
+
 - open *Daten \> Filter*
 - click the dropdown arrow in the column you want to filter in, e.g. p\_speaker
 - deselect the „select all“ button (click on it; by default its selected with a häkchen)

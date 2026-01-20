@@ -29,17 +29,17 @@ jobs:
         uses: actions/configure-pages@v4
       - name: build texdocx
         run: |
-             test<-"testartifact"
-             test<-(list.files())
-             writeLines(test,"./pages/testart.md")
+             #  test<-"testartifact"
+             #  test<-(list.files())
+             #  writeLines(test,"./testart.md")
              print(list.files("pages"))
              source("./overview_render-docx.R")
         shell: Rscript {0}
       - run: |
-           ls ./docx
-           ls ./pages
+           #ls ./docx
+           #ls ./pages
            echo "build"
-           ls ./pages/_book
+           #ls ./pages/_book
       - name: getlibs
         run: |
              print("libs da?")
