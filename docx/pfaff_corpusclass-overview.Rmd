@@ -13,7 +13,7 @@ snc:child.doc1.Rmd
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
  #knitr::opts_knit$set(root.dir = normalizePath("/users/guhl/documents/github/dh_essais/pub/hu-lx"))
-knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
+#knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX"))
 
 ```
 
