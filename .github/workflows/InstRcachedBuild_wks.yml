@@ -24,8 +24,9 @@ jobs:
       image: ghcr.io/${{ github.repository_owner }}/quarto-r-tex:latest
     
     steps:
-      - name: build pages
-        id: pages
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: build texdocx
         run: |
