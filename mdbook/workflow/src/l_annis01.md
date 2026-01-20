@@ -1,8 +1,11 @@
 # ANNIS framework
-find your way through: [https://corpus-tools.org/annis/][1], install ANNIS on your system and try to import the zipped ANNIS SES corpus you find in the HU-box. \> folder: `sketch engine Work`, namescheme of latest zip: `[datestamp]_SES_annis_tagged_corpus.zip `
+find your way through: [https://corpus-tools.org/annis/][1], install ANNIS on your system and try to import the zipped ANNIS SES corpus you find in the HU-box. 
+
+\> folder: `sketch engine Work`, namescheme of latest zip: `[datestamp]_SES_annis_tagged_corpus.zip `
 
 ## SES sample procedure to create ANNIS corpus
 **the following is just for documentation of the process; you wont have to follow these steps, just follow above instructions to install ANNIS on your system and import the zipped corpus.**
+
 - upload files in HU box folder `version without header for SketchEngine upload` to SketchEngine \> *create new corpus*
 -  *expert compiler settings* \> adapt `docscheme` to \> `sesCPT` 
 	- with that done you can already explore the SES corpus in the SketchEngine GUI using the built in CQL (corpus query language) commands.
