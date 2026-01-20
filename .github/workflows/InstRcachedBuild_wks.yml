@@ -30,7 +30,7 @@ jobs:
         id: cache-r-system
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-system- }}
+          key: ${{ runner.os }}-r-system-
           restore-keys: |
             ${{ runner.os }}-r-system
 
