@@ -46,8 +46,9 @@ rsnc:ref
 #   mdns<-paste0("mdbook/workflow/md/",mdf[k])
 #   writeLines(md,mdns)
 # }
-mdf<-list.files("./mod")
-mdf<-paste0("mod/",mdf)
+mdf<-list.files("mod",full.names = T)
+print(mdf)
+#mdf<-paste0("mod/",mdf)
 #mdf
 
 ```
