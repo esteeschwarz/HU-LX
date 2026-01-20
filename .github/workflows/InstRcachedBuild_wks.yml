@@ -5,9 +5,7 @@ on:
        - mdbook/workflow/src/**.md
        - .github/workflows/*
        - overview_render-docx.R
-       - pages/*
        - docx/*
-       - mod/*
     branches: [ main ]
   pull_request:
     branches: [ main ]
