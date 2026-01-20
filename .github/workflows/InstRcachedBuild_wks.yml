@@ -32,8 +32,8 @@ jobs:
              #  test<-"testartifact"
              #  test<-(list.files())
              #  writeLines(test,"./testart.md")
-             print(list.files("pages"))
-             source("./overview_render-docx.R")
+             print(list.files())
+             source("overview_render-docx.R")
         shell: Rscript {0}
       - run: |
            #ls ./docx
