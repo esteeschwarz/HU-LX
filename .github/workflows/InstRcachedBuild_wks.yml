@@ -4,6 +4,7 @@ on:
     paths: 
        - mdbook/workflow/src/**.md
        - .github/workflows/*
+       - overview_render-docx.R
     branches: [ main ]
   pull_request:
     branches: [ main ]
