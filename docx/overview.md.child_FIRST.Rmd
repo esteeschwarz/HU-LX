@@ -48,6 +48,7 @@ rsnc:ref
 # }
 mdf<-list.files("mod",full.names = T)
 print(mdf)
+print(list.files(getwd(),full.names = T))
 #mdf<-paste0("mod/",mdf)
 #mdf
 
