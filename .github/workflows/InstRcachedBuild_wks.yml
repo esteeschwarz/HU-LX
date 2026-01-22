@@ -29,7 +29,7 @@ jobs:
       - name: Checkout HULX
         uses: actions/checkout@v4
       - name: checkout school
-      - uses: actions/checkout@v4  # HU-LX at workspace root after mv
+        uses: actions/checkout@v4  # HU-LX at workspace root after mv
         #- uses: actions/checkout@v4  # STORE-repo at ./STORE-repo/
         with:
           repository: esteeschwarz/school  
