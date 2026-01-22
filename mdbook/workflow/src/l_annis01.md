@@ -10,7 +10,7 @@ find your way through: [https://corpus-tools.org/annis/][1], install ANNIS on yo
 -  *expert compiler settings* \> adapt `docscheme` to \> `sesCPT` 
 	- with that done you can already explore the SES corpus in the SketchEngine GUI using the built in CQL (corpus query language) commands.
 - download corpus (vertical)
-	- corpus is now a database of token, PoS, lemma; tagged according to the *GermanRF tagset*[^1] used by SketchEngine
+	- corpus is now a database of token, PoS, lemma; tagged according to the [*GermanRF tagset*][^1] used by SketchEngine
 - process database in: [conc-essai.R][2]
 	- splits PoS tag (scheme: `x.x.x.x.x`) into seperate columns defining classes of PoS tags
 	- writes single .xlsx files for each kid into folder

@@ -10,28 +10,41 @@ library(bookdown)
 ### get mds clean
 srcpath<-"./mdbook/workflow/src/"
 mdf<-list.files(srcpath)
-mdf.cl<-gsub("\\..*","",mdf)
-mdf.rmd<-paste0(mdf.cl,".Rmd")
 #mdf
 #mdtemp<-tempdir("tmd")
 k<-1
 #sort(mdf)
-m<-grepl("SUMMARY",mdf)
+#m<-grepl("SUMMARY",mdf)
+#rm(mdf.cl)
+m<-grepl("^_",mdf)
 mdf<-mdf[!m]
 mdf.d<-paste0(srcpath,mdf)
 #mdf.cl<-gsub("\\..*","",mdf)
 dir.create("./mod")
+dir.create("./pages")
+#dir.create("./")
+mdf.cl<-gsub("\\..*","",mdf)
+mdf.rmd<-paste0(mdf.cl,".Rmd")
 for(k in 1:length(mdf)){
   md<-readLines(mdf.d[k])
   #lookaround
   #regx19i<-"((?<=<castList>)((Personen.)(.*)){1,7}(?=</castList>))"
+  regx.foot<-"\\[\\^([0-9]{1,2})\\]"
+  m3<-grep(regx.foot,md)
+  md[m3]
+  #gsub("\\\\\\[([a-zA-Z.]{1,9})\\\\\\]","[\\1]",tmd[m])
+  # md[m2]<-gsub("\\\\\\[([a-zA-Z.]{1,12})\\\\\\]","[\\1]",md[m2]) # replace relative image links ![][image-1] with abs
+  # 
+  repl.foot<-paste0("[^",k,"-\\1]")
+  md[m3]<-gsub(regx.foot,repl.foot,md[m3],perl = T) # replace relative image links ![][image-1] with abs
   m<-grep("(\\[[0-9]{1,2}\\])",md)
   rep<-paste0(k,"-\\1")
   fig<-gsub("((?<=\\[)([0-9]{1,2})(?=\\]))",rep,md[m],perl = T) # make links unique over global doc by adding section number
   md[m]<-fig
-  mdns<-paste0("./mod/",mdf[k])
-  mdns.docx<-paste0("./mod/",mdf.cl[k],".Rmd")
-  mdns.pages<-paste0("./pages/",mdf.cl[k],".Rmd")
+  mdns<-paste0("./mod/",mdf.cl[k])
+  mdns<-paste0("./overview-rmd/",mdf.cl[k])
+#  mdns.docx<-paste0("./docx/",mdf.cl[k],".Rmd")
+  mdns.pages<-paste0(mdns,".Rmd")
   # m2<-grep("\\\\\\[[a-zA-Z.]{1,12}\\\\\\]",md)
   regx.img<-"\\[(image-)"
   m2<-grep(regx.img,md)
@@ -41,13 +54,14 @@ for(k in 1:length(mdf)){
   # 
   repl.img<-paste0("[",k,"-\\1")
   md[m2]<-gsub("\\[(image-)",repl.img,md[m2],perl = T) # replace relative image links ![][image-1] with abs
+
   
   #mdns<-mdf.rmd[k]
-  writeLines(md,mdns.docx)
+ # writeLines(md,mdns.docx)
   writeLines(md,mdns.pages)
 }
 ###
-#getwd()
+getwd()
 #render("./docx/overview.md.child_FIRST.Rmd")
 # tmd<-readLines("./docx/overview.md.child_FIRST.md")
 # m<-grep("\\\\\\[[a-zA-Z.]{1,12}\\\\\\]",tmd)
@@ -61,6 +75,8 @@ cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
+?file.copy
+
 render_site(input = "./overview-rmd")
 render("./docx/pfaff_corpusclass-overview-doc.Rmd")
 
