@@ -34,7 +34,7 @@ jobs:
         with:
           repository: esteeschwarz/school  
           path: school
-      - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
+        run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
