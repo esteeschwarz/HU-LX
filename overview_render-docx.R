@@ -62,7 +62,7 @@ cat("---- > docx:",list.files("./docx","\n"))
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
 render_site(input = "./overview-rmd")
-render("./overview-rmd/_pfaff_corpusclass-overview-doc.Rmd")
+render("./docx/pfaff_corpusclass-overview-doc.Rmd")
 
-#file.copy("./docx/_pfaff_corpusclass-overview.docx","./overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)
+file.copy("./docx/pfaff_corpusclass-overview-doc.docx","./overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)
 
