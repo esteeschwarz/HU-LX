@@ -36,8 +36,12 @@ jobs:
           path: school
           ref: main
           token: ${{ secrets.TARGET_REPO_PAT }}
-      # - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
-
+        # shell: bash
+        # run: |
+        #   cd STORE-repo
+        #   git sparse-checkout init --cone
+        #   git sparse-checkout set api/png/ses-overview
+        #   git checkout main
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: build texdocx

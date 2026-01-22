@@ -1,6 +1,5 @@
 # EXMARALDA export
 ## how to export .exb (EXMARALDA-files) to .txt CHAT format
-
 - open .exb file in partitur editor
 	- this is only relevant if you dont have the exported file (with which you work in the moment and that you want to export) opened in exmaralda.
 - open the export dialogue:

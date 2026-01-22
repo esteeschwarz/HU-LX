@@ -1,0 +1,66 @@
+---
+title: "overview"
+author: "esteeschwarz"
+date: "`r Sys.Date()`"
+output:
+   md_document:
+    variant: markdown_github
+#  html_document:
+    #self_contained: false
+    toc: true
+    number_sections: true
+   # keep_md: true
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_knit$set(root.dir = normalizePath("/users/guhl/documents/github/dh_essais/pub/hu-lx"))
+#knitr::opts_knit$set(root.dir = normalizePath("/Users/guhl/Documents/GitHub/HU-LX"))
+#knitr::opts_knit$set(root.dir = normalizePath("/home/runner/work/HU-LX/HU-LX")) # critical
+
+```
+
+rsnc:ref
+
+```{r echo=F,warning=F}
+# #plot(pressure)
+# mdf<-list.files("mdbook/workflow/src")
+# print(mdf)
+# #mdtemp<-tempdir("tmd")
+# k<-1
+# #sort(mdf)
+# m<-grepl("SUMMARY",mdf)
+# mdf<-mdf[!m]
+# mdf.d<-paste0("mdbook/workflow/src/",mdf)
+# #print(getwd())
+# #print(mdf.d)
+# #md<-readLines(mdf.d[2])
+# #print(md)
+# dir.create("mdbook/workflow/md")
+# for(k in 1:length(mdf)){
+#   md<-readLines(mdf.d[k])
+#   m<-grep("([0-9]{1,2}\\])",md)
+#   rep<-paste0(k,"-\\1")
+#   fig<-gsub("([0-9]{1,2}\\])",rep,md[m])
+#   md[m]<-fig
+#   mdns<-paste0("mdbook/workflow/md/",mdf[k])
+#   writeLines(md,mdns)
+# }
+mdf<-list.files("mod",full.names = T)
+print(mdf)
+print(list.files(getwd(),full.names = T))
+#mdf<-paste0("mod/",mdf)
+#mdf
+
+```
+
+
+```{r, child=c(mdf)}
+```
+
+```{r, echo=FALSE}
+# res <- knitr::knit_child('hu-lx/a_intro.md', quiet = TRUE)
+# cat(res, sep = '\n')
+```
+
+

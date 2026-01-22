@@ -1,5 +1,7 @@
 ## transcription: from audio
 ### preliminary
+** this workflow is for simplifying reasons not representative for the regular exmaralda audio transcription pipeline where you would import and navigate your audio directly in exmaralda for CHAT or similar segmentation according to official transcription conventions. keep that in mind if you want to transfer the following process to another project (not the CWP class) where these conventions have to be followed.**
+
 - download the audio you want to transcribe from the box
 - **NOTE:** generally the audio has to be anonymised in another step, see [sec. 6][5-1] 
 - open the audio preferably in audacity, but you can use any player that plays .mp3 files and enables you to navigate conveniently in the timeline of the audio

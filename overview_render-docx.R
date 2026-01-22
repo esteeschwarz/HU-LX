@@ -48,7 +48,7 @@ for(k in 1:length(mdf)){
 }
 ###
 #getwd()
-render("./docx/overview.md.child_FIRST.Rmd")
+#render("./docx/overview.md.child_FIRST.Rmd")
 # tmd<-readLines("./docx/overview.md.child_FIRST.md")
 # m<-grep("\\\\\\[[a-zA-Z.]{1,12}\\\\\\]",tmd)
 # tmd[m]
@@ -59,8 +59,10 @@ render("./docx/overview.md.child_FIRST.Rmd")
 
 cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
-render("./docx/pfaff_corpusclass-overview.Rmd")
+# render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
 render_site(input = "./overview-rmd")
-file.copy("./docx/pfaff_corpusclass-overview.docx","./pages/_book/pfaff_corpusclass-overview.docx",overwrite = T)
+render("./overview-rmd/_pfaff_corpusclass-overview-doc.Rmd")
+
+#file.copy("./docx/_pfaff_corpusclass-overview.docx","./overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)
 
