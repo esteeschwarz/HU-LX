@@ -15,7 +15,4 @@ to filter the table rows for specific tokens, speakers etc:
 - if you want to filter in the token column, you can put in/search for a free text token and then select what matches your search
 - if you want to turn filters off you have to be again in the dropdown filter option of the column and remove the filter there, \> *filter entfernen*
 
-#### snc 
-- 16034
-
 [9-1]:	https://openrefine.org/docs/manual/installing

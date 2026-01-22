@@ -1,5 +1,5 @@
 # EXMARALDA coding
-#### how to annotate the transcript
+## how to annotate the transcript
 ## normalisation
 if you have finished transcribing the primary text, it is necessary to add further tiers (rows) for annotation.  
 you will first add a tier, with a normalised version of the text as content. for that:

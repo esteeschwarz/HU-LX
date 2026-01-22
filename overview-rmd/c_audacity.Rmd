@@ -1,5 +1,5 @@
 # how to anonymise/combine audios using audacity
-#### prerequisites
+## prerequisites
 - download and install [audacity][8-1]
 - if you will using headphones to listen, make sure to FIRST plug in the headphones and THEN start audacity. that will enable your core audio to use the headphones as standard output.
 
