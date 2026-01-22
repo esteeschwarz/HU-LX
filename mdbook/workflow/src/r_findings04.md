@@ -1,11 +1,11 @@
-## principle of accountability [^1]
-roughly: the number of occurences of one (coded nonstandard) feature over the number of total instances of the feature (including standard + nonstandard realisations). e.g.:
+## principle of accountability
+roughly: the number of occurences of one (coded nonstandard) feature over the number of total instances of the feature (including standard + nonstandard realisations).[^1], e.g.:
 
 | token  | instances | standard       | nonstandard                | normalised                 |
 | ------ | --------- | -------------- | -------------------------- | -------------------------- |
 | schnee | 54        | 33             | 21                         | 38.8888889                 |
 |        |           |                |                            |                            |
-|        | all       | coded "FALSCH" | coded "1" (feature = TRUE) | percent (D2/B2\\\\\\\*100) |
+|        | all       | coded "FALSCH" | coded "1" (feature = TRUE) | percent (D2/B2*100) |
 
 workflow:
 
