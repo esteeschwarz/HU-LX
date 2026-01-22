@@ -34,6 +34,7 @@ jobs:
         with:
           repository: esteeschwarz/school  
           path: school
+          ref: main
       - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
 
       - name: Setup Pages
