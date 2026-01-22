@@ -6,6 +6,7 @@ on:
        - .github/workflows/*
        - overview_render-docx.R
        - docx/*
+       - overview-rmd/*
     branches: [ main ]
   pull_request:
     branches: [ main ]
