@@ -17,11 +17,11 @@ local store_root
 local gh_runner = os.getenv("GITHUB_ACTIONS") == "true"
 if gh_runner then
   -- GitHub Actions runner
-  store_root = '../..'
+  store_root = '../../..'
 else
   -- Local desktop (adjust path to your local STORE-repo)
   -- store_root = '/Users/yourusername/repos/STORE-repo/img'  -- macOS example
-  store_root = '../..'  -- relative to workspace root where render.R runs
+  store_root = '../../..'  -- relative to workspace root where render.R runs
 
   -- or: store_root = '/home/yourusername/STORE-repo/img'   -- Linux
 end

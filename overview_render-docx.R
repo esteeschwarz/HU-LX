@@ -20,8 +20,9 @@ m<-grepl("^_",mdf)
 mdf<-mdf[!m]
 mdf.d<-paste0(srcpath,mdf)
 #mdf.cl<-gsub("\\..*","",mdf)
-dir.create("./mod")
+#dir.create("./mod")
 dir.create("./pages")
+file.copy("./overview-rmd/","./pages/",overwrite = T,recursive = T)
 #dir.create("./")
 mdf.cl<-gsub("\\..*","",mdf)
 mdf.rmd<-paste0(mdf.cl,".Rmd")
@@ -42,7 +43,7 @@ for(k in 1:length(mdf)){
   fig<-gsub("((?<=\\[)([0-9]{1,2})(?=\\]))",rep,md[m],perl = T) # make links unique over global doc by adding section number
   md[m]<-fig
   mdns<-paste0("./mod/",mdf.cl[k])
-  mdns<-paste0("./overview-rmd/",mdf.cl[k])
+  mdns<-paste0("./pages/overview-rmd/",mdf.cl[k])
 #  mdns.docx<-paste0("./docx/",mdf.cl[k],".Rmd")
   mdns.pages<-paste0(mdns,".Rmd")
   # m2<-grep("\\\\\\[[a-zA-Z.]{1,12}\\\\\\]",md)
@@ -75,10 +76,11 @@ cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
-?file.copy
 
-render_site(input = "./overview-rmd")
+
+render_site(input = "./pages/overview-rmd")
+doc.child<-"../pages/overview-rmd/_book/pfaff_corpusclass-overview.md"
 render("./docx/pfaff_corpusclass-overview-doc.Rmd")
 
-file.copy("./docx/pfaff_corpusclass-overview-doc.docx","./overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)
+file.copy("./docx/pfaff_corpusclass-overview-doc.docx","./pages/overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)
 
