@@ -60,6 +60,7 @@ render("./docx/overview.md.child_FIRST.Rmd")
 cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
 render("./docx/pfaff_corpusclass-overview.Rmd")
-render_book(input = "./pages")
+#render_book(input = "./pages")
+render_site(input = "./overview-rmd")
 file.copy("./docx/pfaff_corpusclass-overview.docx","./pages/_book/pfaff_corpusclass-overview.docx",overwrite = T)
 

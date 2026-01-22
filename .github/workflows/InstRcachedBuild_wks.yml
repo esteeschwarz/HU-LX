@@ -26,11 +26,21 @@ jobs:
       image: ghcr.io/${{ github.repository_owner }}/quarto-r-tex:latest
     
     steps:
-      - name: Checkout
+      - name: Checkout HULX
         uses: actions/checkout@v4
+      - name: checkout school
+      - uses: actions/checkout@v4  # HU-LX at workspace root after mv
+        #- uses: actions/checkout@v4  # STORE-repo at ./STORE-repo/
+        with:
+          repository: esteeschwarz/school  
+            path: school
+      - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: build texdocx
+        env:
+           GITHUB_ACTIONS: true
         run: |
              #  test<-"testartifact"
              #  test<-(list.files())

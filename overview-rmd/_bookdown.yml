@@ -1,0 +1,22 @@
+book_filename: hulx-overview
+repo: https://github.com/esteeschwarz/HU-LX/
+# output_dir: _book
+output_dir: _book
+#clean: [packages.bib]
+# rmd_files: ["index.Rmd","poster-ext.Rmd","testpages.Rmd"]
+# rmd_files: ["index.Rmd","~/Documents/GitHub/SPUND-LX/psych/HA/paper/poster-ext.Rmd","~/Documents/GitHub/SPUND-LX/psych/HA/paper/draftpaper-ul.md","testpages.Rmd"]
+# rmd_files: ["~/Documents/GitHub/open-lx/content/LX-psych/index.Rmd","~/Documents/GitHub/SPUND-LX/psych/HA/paper/prelim.Rmd","~/Documents/GitHub/SPUND-LX/psych/HA/paper/draft-paper-UL.Rmd","~/Documents/GitHub/SPUND-LX/psych/HA/paper/poster-ext.Rmd"]
+# language:
+#   label:
+#     fig: "FIGURE "
+#     tab: "TABLE "
+#   ui:
+#     chapter_name: "Chapter "
+#delete_merged_file: true
+new_session: no
+delete_merged_file: false
+keep_md: true
+language:
+  ui:
+    chapter_name: ""
+
