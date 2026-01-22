@@ -34,7 +34,7 @@ visualised:
 ### small significance testing:
 script source: [https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R][25-1]  
 
-the applied lmer (linear mixed effects regression model) [^1] formula is:  
+the applied lmer (linear mixed effects regression model) [^2] formula is:  
 `count ~ feature + (1 | L1)`  
 in words: *we posited a main effect of feature  and random effects of L1*.
 with this assumption a significance of `p < 0.05` was tested at 0AR (zero article), i.e. the coding of this feature (here) depends significant on the L1 use of the target child.   **IMPORTANT:** this does not allow general statements about the relation of 0AR feature and L1 since the transcript corpus was not coded/annotated until every instance of each feature.
@@ -90,7 +90,7 @@ with this assumption a significance of `p < 0.05` was tested at 0AR (zero articl
 | featureNVC  | 0        | 3,872      | 333 | 0       | 1                                        |     |     |
 
 
-[^1]:	Bates u. a., „Fitting Linear Mixed-Effects Models Using lme4“. 2015. [doi: 10.18637/jss.v067.i01][25-2]
+[^2]:	Bates u. a., „Fitting Linear Mixed-Effects Models Using lme4“. 2015. [doi: 10.18637/jss.v067.i01][25-2]
 
 [25-1]:	https://github.com/esteeschwarz/HU-LX/blob/main/scripts/distribution-analysis.R
 [25-2]:	10.18637/jss.v067.i01
