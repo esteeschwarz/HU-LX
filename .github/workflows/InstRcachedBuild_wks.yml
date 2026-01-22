@@ -36,7 +36,7 @@ jobs:
           path: school
           ref: main
           token: ${{ secrets.TARGET_REPO_PAT }}
-      - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
+      # - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
