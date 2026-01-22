@@ -33,7 +33,7 @@ jobs:
         #- uses: actions/checkout@v4  # STORE-repo at ./STORE-repo/
         with:
           repository: esteeschwarz/school  
-            path: school
+          path: school
       - run: mv HU-LX/* . && rmdir HU-LX  # flatten to root
 
       - name: Setup Pages
