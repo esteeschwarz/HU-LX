@@ -17,7 +17,7 @@ local store_root
 local gh_runner = os.getenv("GITHUB_ACTIONS") == "true"
 if gh_runner then
   -- GitHub Actions runner
-  store_root = '../../..'
+  store_root = '../..'
 else
   -- Local desktop (adjust path to your local STORE-repo)
   -- store_root = '/Users/yourusername/repos/STORE-repo/img'  -- macOS example
