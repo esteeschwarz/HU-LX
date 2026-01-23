@@ -11,6 +11,7 @@
 .vscode
 ~$*
 *.pdf
+**/*.docx
 **/_book
 **/*.log
 #pages

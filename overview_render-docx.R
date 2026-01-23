@@ -74,6 +74,8 @@ getwd()
 
 cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
+cat("\n")
+system("pandoc --version")
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
 
