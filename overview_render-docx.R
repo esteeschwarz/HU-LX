@@ -75,7 +75,7 @@ getwd()
 cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
 cat("\n")
-system("pandoc --version")
+system("pandoc --version") # lapsi: 3.8.2.1 # brew upgrade: 3.8.3, runner: 2.9.2.1
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
 
