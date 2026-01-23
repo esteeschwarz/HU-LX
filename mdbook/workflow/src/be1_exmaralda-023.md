@@ -1,6 +1,6 @@
 ## transcription: from audio
 ### preliminary
-** this workflow is for simplifying reasons not representative for the regular exmaralda audio transcription pipeline where you would import and navigate your audio directly in exmaralda for CHAT or similar segmentation according to official transcription conventions. keep that in mind if you want to transfer the following process to another project (not the CWP class) where these conventions have to be followed.**
+*this workflow is for simplifying reasons not representative for the regular exmaralda audio transcription pipeline where you would import and navigate your audio directly in exmaralda for CHAT or similar segmentation according to official transcription conventions. keep that in mind if you want to transfer the following process to another project (not the CWP class) where these conventions have to be observed.*
 
 - download the audio you want to transcribe from the box
 - **NOTE:** generally the audio has to be anonymised in another step, see [sec. 6][1] 
