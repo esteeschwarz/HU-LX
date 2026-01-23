@@ -76,6 +76,19 @@ cat("---- > pages:",list.files("./pages","\n"))
 cat("---- > docx:",list.files("./docx","\n"))
 cat("\n")
 system("pandoc --version") # lapsi: 3.8.2.1 # brew upgrade: 3.8.3, runner: 2.9.2.1
+# rmarkdown::install_pandoc_cli(version = '3.8.3')
+# rmarkdown::pandoc_exec()
+# library(pandoc)
+# pandoc::pandoc_installed_versions()
+# pandoc::pandoc_version("2.9.2.1")
+# pandoc_system_version()
+# pandoc_rstudio_version()
+# pandoc_install("2.9.2.1")
+#pandoc_activate("2.9.2.1")  # matches your runner
+# pandoc_activate("3.8.3")  # matches your runner
+
+#rmarkdown::find_pandoc(version = "2.9.2.1")
+
 # render("./docx/pfaff_corpusclass-overview.Rmd")
 #render_book(input = "./pages")
 
