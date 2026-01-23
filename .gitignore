@@ -13,3 +13,5 @@
 *.pdf
 **/_book
 **/*.log
+#pages
+#mod

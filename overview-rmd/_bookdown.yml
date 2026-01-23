@@ -14,7 +14,7 @@ output_dir: _book
 #     chapter_name: "Chapter "
 #delete_merged_file: true
 new_session: no
-delete_merged_file: false
+delete_merged_file: true
 keep_md: true
 language:
   ui:

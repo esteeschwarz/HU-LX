@@ -79,7 +79,10 @@ cat("---- > docx:",list.files("./docx","\n"))
 
 
 render_site(input = "./pages/overview-rmd")
+# render_book(input = "./pages/overview-rmd")
+cat("------ > processed site....\n")
 doc.child<-"../pages/overview-rmd/_book/pfaff_corpusclass-overview.md"
+# doc.child<-"../pages/overview-rmd/pfaff_corpusclass-overview.Rmd"
 render("./docx/pfaff_corpusclass-overview-doc.Rmd")
 
 file.copy("./docx/pfaff_corpusclass-overview-doc.docx","./pages/overview-rmd/_book/pfaff_corpusclass-overview.docx",overwrite = T)

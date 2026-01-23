@@ -1,7 +1,0 @@
-bookdown::pdf_document2:
-  pandoc_args:
-    - "--variable=classoption=oneside"
-    - "--variable=geometry:margin=2.5cm"
-    - "--variable=fontsize=12pt"
-    - "--lua-filter=direct-store.lua"
-  

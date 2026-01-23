@@ -19,5 +19,5 @@ knitr::opts_chunk$set(echo = TRUE)
 #cat("----- > docx:",list.files("docx"),"\n")
 ```
 
-```{r, child=c("../overview-rmd/_book/pfaff_corpusclass-overview.md")}
+```{r, child=c(doc.child)}
 ```
