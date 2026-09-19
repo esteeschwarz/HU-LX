@@ -25,7 +25,7 @@ head(c1)
 basedf<-lapply(dirs,function(x){
   l<-conc(x)
 })
-save(basedf,file=paste0(Sys.getenv("HKW_TOP"),"/HU-LX/EKMAUS/2026/ekmaus.basedf.RData"))
+save(basedf,file=paste0(Sys.getenv("GIT_TOP"),"/local/ocr/run/ekmaus/ekmaus.basedf.RData"))
 #### wks.
 #########
 ## remove codes
@@ -33,8 +33,10 @@ basemod<-basedf
 basemod[[1]]
 pdir<-paste0(Sys.getenv("GIT_TOP"),"/local/ocr/run/ekmaus/transcripts-p")
 dir.create(pdir)
-sdir<-paste0(Sys.getenv("HKW_TOP"),"/HU-LX/EKMAUS/2026/transcripts_sanscodes_anon")
+sdir<-paste0(Sys.getenv("GIT_TOP"),"/local/ocr/run/ekmaus/transcripts_sanscodes_anon")
+cdir<-paste0(Sys.getenv("HKW_TOP"),"/HU-LX/EKMAUS/2026/transcripts_sanscodes_anon")
 dir.create(sdir)
+dir.create(cdir)
 x<-basemod[[1]]
 bm<-lapply(basemod,function(x){
 t<-x[[1]]$t
@@ -52,7 +54,7 @@ head(bm[[1]])
 length(bm)
 library(abind)
 mdf<-data.frame(abind(bm,along=1))
-save(mdf,file=paste0(Sys.getenv("HKW_TOP"),"/HU-LX/EKMAUS/2026/ekmaus.mdf.RData"))
+save(mdf,file=paste0(Sys.getenv("GIT_TOP"),"/local/ocr/run/ekmaus/ekmaus.mdf.RData"))
 #### wks.
 #########
 ## writetext
